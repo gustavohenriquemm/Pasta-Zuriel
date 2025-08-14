@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Hino 137</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+   <a href="..\index.html" class="botao_voltar">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+    <div class="central_letra">
+    <h1 class="Titulo_Hino">Leva-me a Ti</h1>
+    <p class="Letra_hino">
+      Leva-me a ti<br>
+      Quero te adorar<br>
+      Mesmo se fraco eu estiver<br>
+      Quero ouvir sua doce voz<br>
+      És o meu querer<br>
+      Ninguém mais será<br>
+      Nem tomará o teu lugar<br>
+      No meu coração, Senhor<br>
+      Quero te encontrar<br><br>
+
+      Leva-me a ti<br>
+      És meu querer<br>
+      Tu és o que eu preciso<br>
+      <strong class="destaque_coro">És meu querer<br>
+      Eu necessito de ti</strong><br><br>
+
+      <strong class="destaque_repeti">Final</strong><br>
+      <strong class="destaque_repeti">Eu necessito de ti (2x)</strong><br>
+      Eu necessito de ti
+    </p>
+  </div>
+  <div class="butons_redireciona">
+  <a class="Buton_2" href="https://youtu.be/Tp0pd4dM1Ec" target="_blank">Youtube</a>
+   <a class="Buton_20" href="javascript:void(0);" onclick="compartilharWhatsApp()">WhatsApp</a>
+
+  </div>
+  <script>
+function compartilharWhatsApp() {
+    let linkPagina = window.location.href; // Link da página atual
+      let mensagem = encodeURIComponent("Segue o link do Hino ensaiado.\n\n" + linkPagina);
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
+</script>
+
+</body>
+</html>

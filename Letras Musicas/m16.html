@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="..\letra.css">
+  <title>Ele é…</title> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+   <a href="..\index.html" class="botao_voltar">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+  <div class="central_letra">
+  <h1 class="Titulo_Hino">Ele é…</h1>
+  <p class="Letra_hino">
+    Ele é a luz que ilumina meu ser<br>
+    Ele faz se dissipar toda escuridão<br>
+    Ele é Jesus<br>
+    Meu Salvador<br>
+    Por toda vida, Ele está <strong class="destaque_repeti">(2x)</strong><br><br>
+
+    Tristeza e solidão, não tem lugar;<br>
+    Na vida de quem coberto está<br>
+    Pelo Seu amor derramado na cruz<br>
+    Que nos enche de graça e luz <strong class="destaque_repeti">(2x)</strong><br><br>
+
+    <strong class="destaque">(Volta ao início)</strong> <strong class="destaque_repeti">(2x cada estrofe)</strong><br><br>
+
+    Ele é<br>
+    Ele faz<br>
+    Ele é, Ele faz...<br>
+    Ele é, Ele faz, Ele é <strong class="destaque_repeti">(3x)</strong><br>
+    Ele é
+  </p>
+</div>
+<div class="butons_redireciona">
+  <a class="Buton_2" href="https://www.youtube.com/watch?v=kRo_EUFMf6Q"  target="_blank" >Youtube</a>
+ <a class="Buton_20" href="javascript:void(0);" onclick="compartilharWhatsApp()">WhatsApp</a>
+
+  </div>
+  <script>
+function compartilharWhatsApp() {
+    let linkPagina = window.location.href; // Link da página atual
+      let mensagem = encodeURIComponent("Segue o link do Hino ensaiado.\n\n" + linkPagina);
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
+</script>
+
+</body>
+</html>

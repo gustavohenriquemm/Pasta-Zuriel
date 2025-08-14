@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Vem Espírito Santo</title><link rel="stylesheet" href="..\letra.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+   <a href="..\index.html" class="botao_voltar">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+  <div class="central_letra">
+  <h1 class="Titulo_Hino">Vem Espírito Santo</h1>
+  <p class="Letra_hino">
+    Espírito de Deus eis me aqui<br>
+    Toca-me com brasas do altar<br>
+    Me enche com a tua unção<br>
+    Faz transbordar<br>
+    Estendo a ti as minhas mãos<br>
+    Do teu óleo quero mais<br>
+    No rio do teu poder eu<br>
+    Quero navegar<br><br>
+
+    Vem, Vem<br>
+    Espírito Santo vem<br>
+    Vem, Vem<br>
+    Unção derramar
+  </p>
+ </div>
+  <div class="butons_redireciona">
+    <a class="Buton_2" href="https://www.youtube.com/watch?v=SnG-ZYcsltw" target="_blank" rel="noopener noreferrer">Youtube</a>
+ <a class="Buton_20" href="javascript:void(0);" onclick="compartilharWhatsApp()">WhatsApp</a>
+
+  </div>
+  <script>
+function compartilharWhatsApp() {
+    let linkPagina = window.location.href; // Link da página atual
+      let mensagem = encodeURIComponent("Segue o link do Hino ensaiado.\n\n" + linkPagina);
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
+</script>
+
+
+</body>
+</html>

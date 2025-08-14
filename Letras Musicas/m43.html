@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Preço da Cruz</title><link rel="stylesheet" href="..\letra.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+   <a href="..\index.html" class="botao_voltar">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+<div class="central_letra">
+  <h1 class="Titulo_Hino">Preço da Cruz</h1>
+  <p class="Letra_hino">
+    Tentei te explicar, mas não consegui<br>
+    É tão fácil achar razões para prosseguir<br>
+    Sei que é difícil tantas coisas tentam me impedir<br>
+    Também vivi assim, pensei com tudo acabar<br>
+    Mas uma voz me disse, filho eu te ajudo a caminhar<br>
+    Conheço seus problemas vou te ajudar<br>
+    Mas com Jesus e o seu amor me remi,<br>
+    Eu sei foi tão difícil, mas consegui <strong class="destaque_coro"> (coral)</strong><br><br>
+
+    O preço que Jesus pagou na cruz,<br>
+    Nenhum homem teve ou tem a capacidade de pagar<br>
+    Quão incomparável é Jesus<br>
+    Pra sempre és a nossa luz<br><br>
+
+    Também vivi assim, pensei com tudo acabar<br>
+    Mas uma voz me disse, filho eu te ajudo a caminhar<br>
+    Conheço seus problemas vou te ajudar<br>
+    Mas com Jesus e o seu amor me remi,<br>
+    Eu sei foi tão difícil, mas consegui <strong class="destaque_coro">(coral)</strong>
+  </p>
+</div>
+<div class="butons_redireciona">
+  <a class="Buton_20" href="javascript:void(0);" onclick="alert('Este hino não está disponível no YouTube.')" >Youtube</a>
+ <a class="Buton_20" href="javascript:void(0);" onclick="compartilharWhatsApp()">WhatsApp</a>
+
+  </div>
+  <script>
+function compartilharWhatsApp() {
+    let linkPagina = window.location.href; // Link da página atual
+      let mensagem = encodeURIComponent("Segue o link do Hino ensaiado.\n\n" + linkPagina);
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
+</script>
+</body>
+</html>

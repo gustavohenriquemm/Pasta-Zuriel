@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Eu vou vencer</title><link rel="stylesheet" href="..\letra.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+   <a href="..\index.html" class="botao_voltar">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+  <div class="central_letra">
+  <h1 class="Titulo_Hino">Eu vou vencer</h1>
+  <p class="Letra_hino">
+    Sobre os montes existe o amor do Pai<br>
+    Que se entregou para morrer por mim<br>
+    Único amor perfeito é do Senhor<br>
+    Nunca falhou, Ele me amou enfim<br><br>
+
+    Toda glória a Ti, pois venceu por mim na cruz<br>
+    Jesus digno de honra e glória<br>
+    Digno de toda terra, és grande Deus<br>
+    Jesus tens o poder para sempre<br><br>
+
+    Maravilhoso Rei, és grande Deus<br><br>
+
+    Eu vou vencer, Seu amor é completo<br>
+    Como prova, sou testemunho<br>
+    Vou vencer para Ti
+  </p>
+</div>
+  <div class="butons_redireciona">
+    <a class="Buton_2" href="https://www.youtube.com/watch?v=t7MUxj5nqeM" target="_blank">Youtube</a>
+   <a class="Buton_20" href="javascript:void(0);" onclick="compartilharWhatsApp()">WhatsApp</a>
+
+  </div>
+  <script>
+function compartilharWhatsApp() {
+    let linkPagina = window.location.href; // Link da página atual
+      let mensagem = encodeURIComponent("Segue o link do Hino ensaiado.\n\n" + linkPagina);
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>DEUS TUDO PAGOU </title> <link rel="stylesheet" href="..\letra.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+   <a href="..\index.html" class="botao_voltar">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+  <div class="central_letra">
+  <h1 class="Titulo_Hino">DEUS TUDO PAGOU</h1>
+  <p class="Letra_hino">
+    DEUS TUDO PAGOU<br>
+    TUDO EM SEU AMOR<br><br>
+
+    TODA MANCHA ME LIMPOU<br>
+    POIS FOI ELE QUEM PAGOU<br>
+    E ALVO COMO A NEVE EU SOU<br>
+    (<strong class="destaque_repeti">EU SOU</strong>), (<strong class="destaque_repeti">PURO</strong>) EU, EU SOU - 2X<br><br>
+
+    <strong class="destaque_solo">E ALVO - SOLO</strong><br>
+    (E ALVO)<br>
+    <strong class="destaque_solo">COMO A NEVE EU SOU - SOLO</strong><br>
+    (COMO A NEVE EU SOU)<br><br>
+
+    NANA, NANA NA<br>
+  </p>
+</div>
+<div class="butons_redireciona">
+  <a class="Buton_20" href="javascript:void(0);" onclick="alert('Este hino não está disponível no YouTube.')" >Youtube</a>
+   <a class="Buton_20" href="javascript:void(0);" onclick="compartilharWhatsApp()">WhatsApp</a>
+
+  </div>
+  <script>
+function compartilharWhatsApp() {
+    let linkPagina = window.location.href; // Link da página atual
+      let mensagem = encodeURIComponent("Segue o link do Hino ensaiado.\n\n" + linkPagina);
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
+</script>
+</body>
+</html>

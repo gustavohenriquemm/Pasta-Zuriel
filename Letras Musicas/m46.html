@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Reina o Senhor</title><link rel="stylesheet" href="..\letra.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+   <a href="..\index.html" class="botao_voltar">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+  <div class="central_letra">
+  <h1 class="Titulo_Hino">Reina o Senhor</h1>
+  <p class="Letra_hino">
+    Reina o Senhor sobre as nações<br>
+    Celebrem todos os povos<br>
+    De geração em geração<br>
+    O Senhor reina, reina<br><br>
+
+    Vem reinar em mim<br>
+    Sobre a minha casa<br>
+    Sobre os sonhos meus<br>
+    Reina com poder<br>
+    Dá-me um coração de servo<br>
+    Pra que eu possa ver (Pra que eu possa ver)<br>
+    Teu reino<br><br>
+
+    <strong class="destaque_repeti">Reina (7x)</strong><br>
+  </p>
+</div>
+<div class="butons_redireciona">
+  <a class="Buton_2" href="https://www.youtube.com/watch?v=HQuwQhTOLho" target="_blank">Youtube</a>
+ <a class="Buton_20" href="javascript:void(0);" onclick="compartilharWhatsApp()">WhatsApp</a>
+
+  </div>
+  <script>
+function compartilharWhatsApp() {
+    let linkPagina = window.location.href; // Link da página atual
+      let mensagem = encodeURIComponent("Segue o link do Hino ensaiado.\n\n" + linkPagina);
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
+</script>
+
+</body>
+</html>

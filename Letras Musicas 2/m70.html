@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Soberano</title> <link rel="stylesheet" href="..\letra.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+   <a href="..\index.html" class="botao_voltar">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+<div class="central_letra">
+  <h1 class="Titulo_Hino">Soberano</h1>
+  <p class="Letra_hino">
+    Vejo o céu e sua glória<br>
+    Que manifestam seu poder<br>
+    Sem linguagem e sem fala<br>
+    Ouço a sua voz a falar a mim<br><br>
+
+    Quando olho o firmamento<br>
+    Que declaram seu poder<br>
+    O universo e as estrelas<br>
+    No céu as mantém pelo seu poder<br><br>
+
+    Soberano, Rei e Senhor<br>
+    Pai eterno, meu criador<br>
+    Rosa de Saron, Estrela da manhã<br>
+    El Shaday, Adonai, El Elyon, Rei dos reis.<br><br>
+
+    Muitas são suas promessas<br>
+    Foram feitas para nós<br>
+    As cumprirá no tempo certo<br>
+    Nada impossível é para o nosso Deus<br><br>
+
+    Nada impossível é para o nosso Deus
+  </p>
+</div>
+  <div class="butons_redireciona">
+    <a class="Buton_2" href="https://www.youtube.com/watch?v=JojxYL6S_QY" target="_blank">Youtube</a>
+  <a class="Buton_20" href="javascript:void(0);" onclick="compartilharWhatsApp()">WhatsApp</a>
+
+  </div>
+  <script>
+function compartilharWhatsApp() {
+    let linkPagina = window.location.href; // Link da página atual
+      let mensagem = encodeURIComponent("Segue o link do Hino ensaiado.\n\n" + linkPagina);
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
+</script>
+
+</body>
+</html>

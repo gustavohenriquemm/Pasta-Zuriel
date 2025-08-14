@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Só tú és digno de glória</title><link rel="stylesheet" href="..\letra.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+   <a href="..\index.html" class="botao_voltar">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+  <div class="central_letra">
+  <h1 class="Titulo_Hino">Só Tu És Digno</h1>
+  <p class="Letra_hino">
+    Só tu és digno de glória<br>
+    Só tu és digno de louvor<br>
+    Pois tu és santo<br>
+    Justo, onipotente, forte<br>
+    Alfa, ômega, redentor salvador<br>
+    Adorarei ao Senhor por tudo que fez por mim<br>
+    Eu entrego todo meu louvor<br>
+    Tudo que tenho e sou no calvário conquistou por mim<br><br>
+
+    Te damos glória, só tu és<br>
+    Pertence a ti<br>
+    Aleluia<br>
+    Pertence a ti..<br>
+    Glóriaaa....
+  </p>
+</div>
+<div class="butons_redireciona">
+  <a class="Buton_20" href="javascript:void(0);" onclick="alert('Este hino não está disponível no YouTube.')" >Youtube</a>
+ <a class="Buton_20" href="javascript:void(0);" onclick="compartilharWhatsApp()">WhatsApp</a>
+
+  </div>
+  <script>
+function compartilharWhatsApp() {
+    let linkPagina = window.location.href; // Link da página atual
+      let mensagem = encodeURIComponent("Segue o link do Hino ensaiado.\n\n" + linkPagina);
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
+</script>
+
+</body>
+</html>

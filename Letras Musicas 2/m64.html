@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Sou um Milagre</title><link rel="stylesheet" href="..\letra.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+   <a href="..\index.html" class="botao_voltar">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+  <div class="central_letra">
+  <h1 class="Titulo_Hino">Sou um Milagre</h1>
+  <p class="Letra_hino">
+    Nunca houve noite que pudesse impedir o<br>
+    nascer do sol, a esperança e não há<br>
+    problema que possa impedir as mãos de<br>
+    Jesus pra me ajudar.<br><br>
+
+    Haverá um milagre dentro de mim, vem<br>
+    descendo o rio pra me dar à vida, este rio<br>
+    que emana lá da cruz ao lado de Jesus.<br><br>
+
+    Aquilo que parecia impossível, aquilo que<br>
+    parecia não ter saída, aquilo que parecia<br>
+    ser minha morte mas Jesus mudou minha<br>
+    sorte, sou um milagre, estou aqui. <strong class="destaque_repeti">(2x)</strong><br><br>
+
+    Usa-me, sou o teu milagre<br>
+    Usa-me, eu quero te servir<br>
+    Usa-me, sou a tua imagem<br>
+    Usa-me, ó filho de Davi.<br>
+  </p>
+</div>
+<div class="butons_redireciona">
+  <a class="Buton_2" href="https://www.youtube.com/watch?v=goD_XyGY5PM" target="_blank">Youtube</a>
+ <a class="Buton_20" href="javascript:void(0);" onclick="compartilharWhatsApp()">WhatsApp</a>
+
+  </div>
+  <script>
+function compartilharWhatsApp() {
+    let linkPagina = window.location.href; // Link da página atual
+      let mensagem = encodeURIComponent("Segue o link do Hino ensaiado.\n\n" + linkPagina);
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
+</script>
+
+</body>
+</html>

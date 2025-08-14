@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Na tua Presença</title><link rel="stylesheet" href="..\letra.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+   <a href="..\index.html" class="botao_voltar">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+<div class="central_letra">
+  <h1 class="Titulo_Hino">Na tua Presença</h1>
+  <p class="Letra_hino">
+    Na tua presença Senhor<br>
+    Eu quero ser digno de permanecer<br>
+    Purifica-me<br><br>
+
+    Em santidade Senhor<br>
+    Quero encontrar teu mover<br>
+    Para sempre estar<br>
+    Sempre estar<br>
+    Com serafins, querubins<br>
+    Na presença dos anjos ser<br>
+    Transformado<br>
+    No espírito receber<br>
+    Do sentimento que habita em ti.....<br>
+    Jesus<br><br>
+
+    Alfa, Leão de Judá<br>
+    Digno do selo abrir<br>
+    Minha vida sempre te dar<br>
+    Com toda força em louvor<br><br>
+
+    A ti a honra<br>
+    Glória, força e poder<br>
+    Toda riqueza<br>
+    Majestade e louvor
+  </p>
+</div>
+<div class="butons_redireciona">
+ <a class="Buton_20" href="javascript:void(0);" onclick="compartilharWhatsApp()">WhatsApp</a>
+
+  </div>
+  <script>
+function compartilharWhatsApp() {
+    let linkPagina = window.location.href; // Link da página atual
+      let mensagem = encodeURIComponent("Segue o link do Hino ensaiado.\n\n" + linkPagina);
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
+</script>
+
+
+</body>
+</html>

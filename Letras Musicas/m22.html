@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Graças te Damos
+</title>
+<link rel="stylesheet" href="..\letra.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+   <a href="..\index.html" class="botao_voltar">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+<div class="central_letra">
+  <h1 class="Titulo_Hino">Graças te Damos</h1>
+  <p class="Letra_hino">
+    Por tudo que és<br>
+    Por tudo que tens feito<br>
+    Tua presença e direção<br>
+    Nossas vidas transformadas<br>
+    por Tua graça e poder<br>
+    És muito além do que eu posso<br>
+    entender<br><br>
+
+    Obrigado, Senhor<br><br>
+
+    Graças te damos<br>
+    Todos os dias<br>
+    Graças te damos<br>
+    Por tudo que nos faz viver<br><br>
+
+    Pela família<br>
+    Por toda cura<br>
+    Pela conquista de tuas promessas<br>
+    Pelo teu grande amor por mim
+  </p>
+</div>
+<div class="butons_redireciona">
+  <a class="Buton_2" href="https://www.youtube.com/watch?v=2KADvaGEd_Y" target="_blank">Youtube</a>
+ <a class="Buton_20" href="javascript:void(0);" onclick="compartilharWhatsApp()">WhatsApp</a>
+
+  </div>
+  <script>
+function compartilharWhatsApp() {
+    let linkPagina = window.location.href; // Link da página atual
+      let mensagem = encodeURIComponent("Segue o link do Hino ensaiado.\n\n" + linkPagina);
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
+</script>
+
+
+</body>
+</html>

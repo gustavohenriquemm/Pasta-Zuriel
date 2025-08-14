@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Faz Chover</title> <link rel="stylesheet" href="..\letra.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+   <a href="..\index.html" class="botao_voltar">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+<div class="central_letra">
+  <h1 class="Titulo_Hino">Faz Chover</h1>
+  <p class="Letra_hino">
+    Olhar pro céu e nas estrelas<br>
+    ver o teu poder, poder que já enxerguei.<br>
+    Levanto pra viver as tuas promessas<br>
+    e andar de novo em teu glorioso mover.<br>
+    Tenho sede, quero mais de ti Senhor.<br><br>
+
+    Manda tua nuvem que traz tua chuva,<br>
+    chuva que cura e faz renascer,<br>
+    faz meu deserto um jardim de milagres<br>
+    pra que a tua colheita eu possa viver. <strong class="destaque_repeti">(2x)</strong><br><br>
+
+    Faz chover<br>
+    Faz chover<br>
+    Faz chover<br>
+    Faz chover<br><br>
+
+    Manda tua ... <strong class="destaque_repeti">(2x)</strong><br><br>
+
+    Faz chover <strong class="destaque_repeti">(4x)</strong><br>
+    Com poder <strong class="destaque_repeti">(4x)</strong>
+  </p>
+</div>
+<div class="butons_redireciona">
+  <a class="Buton_2" href="https://www.youtube.com/watch?v=cb7v7FFHNt4" target="_blank">Youtube</a>
+   <a class="Buton_20" href="javascript:void(0);" onclick="compartilharWhatsApp()">WhatsApp</a>
+
+  </div>
+  <script>
+function compartilharWhatsApp() {
+    let linkPagina = window.location.href; // Link da página atual
+      let mensagem = encodeURIComponent("Segue o link do Hino ensaiado.\n\n" + linkPagina);
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Faça morada</title><link rel="stylesheet" href="..\letra.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+   <a href="..\index.html" class="botao_voltar">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+<div class="central_letra">
+  <h1 class="Titulo_Hino">Faça Morada</h1>
+  <p class="Letra_hino">
+    Eis-me aqui Tantas fraquezas,<br>
+    Diante da tua grandeza,<br>
+    O que se vê o coração sente,<br>
+    O corpo responde minha alma não mente<br><br>
+
+    Sonda agora este coração<br>
+    Veja senhor, se não tenho razão<br>
+    Mas eu não quero ser tão racional<br>
+    Espírito santo pode se achegar!<br><br>
+
+    E fazer morada, e fazer morada<br>
+    Espírito santo, mora em mim!<br>
+    O meu coração é o teu lugar, faça morada<br>
+    Eu te convido a nunca mais me deixar aqui<br><br>
+
+    Faça morada em mim<br>
+    Faça morada em mim<br>
+    Faça morada em mim
+  </p>
+</div>
+  <div class="butons_redireciona">
+    <a class="Buton_2" href="https://www.youtube.com/watch?v=tVQ5qQULtS0" target="_blank">Youtube</a>
+    <a class="Buton_20" href="javascript:void(0);" onclick="compartilharWhatsApp()">WhatsApp</a>
+
+  </div>
+  <script>
+function compartilharWhatsApp() {
+    let linkPagina = window.location.href; // Link da página atual
+      let mensagem = encodeURIComponent("Segue o link do Hino ensaiado.\n\n" + linkPagina);
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
+</script>
+
+
+
+</body>
+</html>

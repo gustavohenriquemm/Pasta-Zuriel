@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Ensina-me</title><link rel="stylesheet" href="..\letra.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+   <a href="..\index.html" class="botao_voltar">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+  <div class="central_letra">
+    <h1 class="Titulo_Hino">Ensina-me</h1>
+  <p class="Letra_hino">
+    Ensina-me a seguir teus passos senhor<br>
+    Cada dia em meu viver<br>
+    Por tuas bênçãos peço te oh pai<br>
+    Ensina-me a seguir teus passos sim<br>
+    Ensina-me a seguir teus passos sim<br>
+    Não só de ouvir falar Deus<br><br>
+
+    <strong class='destaque_negri'>Mas de contigo andar<br>
+    Ensina-me a servir-te e só em ti confiar<br>
+    O mundo eu sei que muda<br>
+    Mas meu Deus tu sempre será<br>
+    Ensina-me pai a te adorar<br><br> </strong>
+
+    Ensina-me a pregar com amor<br>
+    Ensina-me a falar com amor<br>
+    Ensina-me a viver teu amor<br>
+    Ensina-me a louvar com amor<br>
+    Ensina-me a ouvir o senhor<br>
+    Ensina-me a viver teu amor<br>
+    Oh pai te entrego o meu viver<br>
+    Te adorarei com todo meu ser<br>
+    És Senhor, És Senhor<br><br>
+
+    Ensina-me a seguir teus passos sim
+  </p>
+</div>
+<div class="butons_redireciona">
+  <a class="Buton_2" href="https://www.youtube.com/watch?v=RyTFhEZbmSU" target="_blank">Youtube</a>
+ <a class="Buton_20" href="javascript:void(0);" onclick="compartilharWhatsApp()">WhatsApp</a>
+
+  </div>
+  <script>
+function compartilharWhatsApp() {
+    let linkPagina = window.location.href; // Link da página atual
+      let mensagem = encodeURIComponent("Segue o link do Hino ensaiado.\n\n" + linkPagina);
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Em todos lugares que vou</title> <link rel="stylesheet" href="..\letra.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+   <a href="..\index.html" class="botao_voltar">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+ <div class="central_letra">
+  <h1 class="Titulo_Hino">Em todos lugares que vou</h1>
+  <p class="Letra_hino">
+    Eu pertenço a ti, e você a mim<br>
+    Deus sou guardado em todos lugares que vou<br>
+    Contigo eu irei e o mal não temerei jamais<br>
+    Sou guardado em todos lugares que vou<br>
+    Sou teu, e tu és meu.<br><br>
+
+    Comigo estás, não me deixarás.<br>
+    Comigo estás, não desistirei.<br>
+    Pois creio em ti, justo e fiel.<br>
+    Salvou-me, guardou o Senhor.<br>
+    Em todos lugares que vou<br><br>
+
+    Oh meu Senhor livrou-me<br>
+    Em todos lugares que vou <strong class="destaque_repeti">(5x)</strong><br><br>
+
+    Tua graça e amor livrou-me<br>
+    Em todos lugares que vou
+  </p>
+</div>
+  <div class="butons_redireciona">
+    <a class="Buton_2" href="https://www.youtube.com/" target="_blank">Youtube</a>
+ <a class="Buton_20" href="javascript:void(0);" onclick="compartilharWhatsApp()">WhatsApp</a>
+
+  </div>
+  <script>
+function compartilharWhatsApp() {
+    let linkPagina = window.location.href; // Link da página atual
+      let mensagem = encodeURIComponent("Segue o link do Hino ensaiado.\n\n" + linkPagina);
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
+</script>
+
+
+</body>
+</html>

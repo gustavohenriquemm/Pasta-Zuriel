@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Envolve-me Senhor</title><link rel="stylesheet" href="..\letra.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+   <a href="..\index.html" class="botao_voltar">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+  <div class="central_letra">
+  <h1 class="Titulo_Hino">Envolve-me Senhor</h1>
+  <p class="Letra_hino">
+    Em teu amor, mas perto estou de Ti.<br>
+    Sentir-te o Deus é o desejo que há em mim.<br>
+    E o desejo que há em mim.<br>
+    E hoje eu sei, sei que posso me prostrar.<br>
+    Purificar, o meu ser está em Ti.<br>
+    Perto estou perto estou de Ti<br><br>
+
+    Vem Senhor me envolver!<br>
+    Envolve-me Senhor<br>
+    Envolve-me Senhor<br>
+    Envolve-me Senhor<br><br>
+
+    Me leva junto a Ti, Pai<br>
+    Ao lugar secreto<br>
+    Perto quero estar<br>
+    Viver pra te adorar, Pai<br><br>
+
+    Envolve-me Senhor<br>
+    Envolve-me Senhor<br>
+    Envolve-me Senhor
+  </p>
+  <div class="butons_redireciona">
+    <a class="Buton_2" href="https://www.youtube.com/watch?v=VoEXAREy_GY" target="_blank">Youtube</a>
+  <a class="Buton_20" href="javascript:void(0);" onclick="compartilharWhatsApp()">WhatsApp</a>
+
+  </div>
+  <script>
+function compartilharWhatsApp() {
+    let linkPagina = window.location.href; // Link da página atual
+      let mensagem = encodeURIComponent("Segue o link do Hino ensaiado.\n\n" + linkPagina);
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Te Adoramos</title><link rel="stylesheet" href="..\letra.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+   <a href="..\index.html" class="botao_voltar">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+  <div class="central_letra">
+  <h1 class="Titulo_Hino">Te Adoramos Senhor</h1>
+  <p class="Letra_hino">
+    Em humilde adoração<br>
+    Nos curvamos ante a Ti<br>
+    E diante da Tua face<br>
+    Nos prostramos, Senhor<br>
+    Nossas vozes levantamos<br>
+    Como oferta de louvor<br>
+    Pois Tú és o Rei da Glória<br>
+    E pra sempre cantaremos:<br><br>
+
+    Te adoramos SENHOR... <strong class='destaque_repeti'>(7x)</strong><br><br>
+
+    Em humilde adoração<br>
+    Nos curvamos ante a Ti<br>
+    E diante da Tua face<br>
+    Nos prostramos, Senhor<br>
+    Nossas vozes levantamos<br>
+    Como oferta de louvor<br>
+    Pois Tú és o Rei da Glória<br>
+    E pra sempre cantaremos:<br><br>
+
+    Te adoramos SENHOR... <strong class='destaque_repeti'>(8x)</strong><br><br>
+
+    Te adoramos SENHOR... <strong class='destaque_repeti'>(8x)</strong><br>
+  </p>
+</div>
+<div class="butons_redireciona">
+  <a class="Buton_2" href="https://www.youtube.com/watch?v=vXt8J2ddCko" target="_blank">Youtube</a>
+ <a class="Buton_20" href="javascript:void(0);" onclick="compartilharWhatsApp()">WhatsApp</a>
+
+  </div>
+  <script>
+function compartilharWhatsApp() {
+    let linkPagina = window.location.href; // Link da página atual
+      let mensagem = encodeURIComponent("Segue o link do Hino ensaiado.\n\n" + linkPagina);
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
+</script>
+
+</body>
+</html>

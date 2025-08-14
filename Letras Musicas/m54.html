@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Pertence a ti</title><link rel="stylesheet" href="..\letra.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+   <a href="..\index.html" class="botao_voltar">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+  <div class="central_letra">
+  <h1 class="Titulo_Hino">Pertence a ti</h1>
+  <p class="Letra_hino">
+
+    Só Tu és digno de glória<br>
+    Só Tu és digno de louvor<br>
+    Pois Tu és santo<br>
+    Justo<br>
+    Consolador<br>
+    E protetor<br>
+    Alfa<br>
+    O Ômega<br>
+    Redentor<br>
+    Salvador<br><br>
+
+    E hoje grato estou por tudo que fez por mim<br>
+    E rendo a Ti todo meu louvor<br>
+    Tudo que sou vem de Ti, graças à vitória na cruz<br>
+    E toda a glória<br>
+    Pertence a Ti<br><br>
+
+    <strong class="destaque_coro">Aleluia, Aleluia, Aleluia.</strong><br>
+
+  </p>
+</div>
+<div class="butons_redireciona">
+    <a class="Buton_20" href="javascript:void(0);" onclick="alert('Este hino não está disponível no YouTube.')" >Youtube</a>
+  <a class="Buton_20" href="javascript:void(0);" onclick="compartilharWhatsApp()">WhatsApp</a>
+
+  </div>
+  <script>
+function compartilharWhatsApp() {
+    let linkPagina = window.location.href; // Link da página atual
+      let mensagem = encodeURIComponent("Segue o link do Hino ensaiado.\n\n" + linkPagina);
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
+</script>
+</body>
+</html>

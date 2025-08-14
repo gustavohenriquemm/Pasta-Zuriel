@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Reina</title><link rel="stylesheet" href="..\letra.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+   <a href="..\index.html" class="botao_voltar">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+  <div class="central_letra">
+  <h1 class="Titulo_Hino">Reina sobre Mim</h1>
+  <p class="Letra_hino">
+    Lançou minha coroa em Teu altar, para Te<br>
+    adorar Senhor,<br>
+    Tu és digno de receber a glória, seja a Ti<br>
+    meu louvor,<br>
+    Toda honra, glória e poder<br>
+    Pertencem ao Senhor, todo o domínio está<br>
+    em Suas mãos, vem e reina sobre mim.<br><br>
+
+    <strong class='destaque_coro'>Coro</strong><br>
+    Reina sobre mim <strong class='destaque_repeti'>(bis)</strong><br>
+    Senhor reina sobre mim<br>
+    Reina sobre mim<br>
+    Senhor reina sobre mim<br>
+    Toda honra, glória e poder pertencem ao<br>
+    Senhor,<br>
+    Todo o domínio está em Suas mãos,<br>
+    Senhor reina sobre mim.<br><br>
+
+    <strong class='destaque_coro'>Coro</strong><br>
+    Reina sobre mim <strong class='destaque_repeti'>(bis)</strong><br>
+    Senhor reina sobre mim<br>
+    Reina, reina, reina sobre mim<br>
+    Reina, reina, reina sobre mim <strong class='destaque_repeti'>(5x)</strong><br>
+  </p>
+</div>
+
+<div class="butons_redireciona">
+  <a class="Buton_2" href="https://www.youtube.com/watch?v=MHRlye8zLBk" target="_blank">Youtube</a>
+  <a class="Buton_20" href="javascript:void(0);" onclick="compartilharWhatsApp()">WhatsApp</a>
+
+  </div>
+  <script>
+function compartilharWhatsApp() {
+    let linkPagina = window.location.href; // Link da página atual
+      let mensagem = encodeURIComponent("Segue o link do Hino ensaiado.\n\n" + linkPagina);
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
+</script>
+
+</body>
+</html>

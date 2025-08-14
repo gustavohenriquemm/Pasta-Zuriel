@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Tudo Posso</title><link rel="stylesheet" href="..\letra.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+   <a href="..\index.html" class="botao_voltar">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+ <div class="central_letra">
+  <h1 class="Titulo_Hino">Tudo Posso</h1>
+  <p class="Letra_hino">
+    Não te desanimes<br>
+    Não temas mal algum<br>
+    A luta logo passa<br>
+    E a alegria cedo vem<br><br>
+    
+    Tem alguém chamado Cristo<br>
+    Sempre vai te consolar<br>
+    Se o coração está ferido<br>
+    Levante as mãos e diz:<br><br>
+    
+    Eu sei que tudo posso<br>
+    Eu posso suportar<br>
+    Não importa o que me aconteça<br>
+    Estou em Tuas mãos<br><br>
+    
+    Com Cristo tudo posso<br>
+    Eu posso suportar<br>
+    Não importa o que me aconteça<br>
+    Estou em Tuas mãos<br><br>
+    
+    E quando a luta vem<br>
+    Parecendo não ter fim<br>
+    E logo seus amigos<br>
+    Querem te abandonar<br><br>
+    
+    Tem alguém chamado Cristo<br>
+    Sempre vai te consolar<br>
+    Se o coração está ferido<br>
+    Levante as mãos e diz:
+  </p>
+</div>
+  <div class="butons_redireciona">
+    <a class="Buton_2" href="https://www.youtube.com/watch?v=FW6VzCE9iQc" target="_blank">Youtube</a>
+  <a class="Buton_20" href="javascript:void(0);" onclick="compartilharWhatsApp()">WhatsApp</a>
+
+  </div>
+  <script>
+function compartilharWhatsApp() {
+    let linkPagina = window.location.href; // Link da página atual
+      let mensagem = encodeURIComponent("Segue o link do Hino ensaiado.\n\n" + linkPagina);
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
+</script>
+
+</body>
+</html>

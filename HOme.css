@@ -1,0 +1,124 @@
+body {
+   margin: 0;
+  padding: 0;
+  background-image: url("img/Fundo pasta mocidade.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+ 
+    
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#intro-video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#intro-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.conteudo-principal {
+  position: relative;
+  z-index: 1;
+  color: white;
+  text-align: center;
+  margin-top: 30vh;
+}
+
+.Central_pasta {
+  width: 350px;
+ background-color: rgba(14, 12, 12, 0.692);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  box-sizing: border-box;
+    background-image: url('img/IMG mocidade.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 80% auto; /* ou 'contain' dependendo do que quiser */
+  
+  background-attachment: fixed; /* para manter fixo enquanto rola */
+  
+}
+
+.Titulo_Hino_mocidade {
+  display: flex;
+  justify-content: center;
+  color: #ddd;
+  font-size: 1rem;
+  
+}
+
+
+input#barra-pesquisa {
+  width: 18rem;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px; /* <- Isso impede o zoom automático no mobile */
+}
+
+
+
+/* Lista de hinos com rolagem interna */
+.lista_hinos {
+  max-height: 300px;     /* define a altura do quadrado */
+  overflow-y: auto;      /* ativa rolagem vertical */
+  overflow-x: hidden;    /* impede rolagem horizontal */
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.lista_hinos a {
+  display: block;
+  text-decoration: none;
+  color: #ffffff;
+  padding: 5px 0;
+  word-wrap: break-word;
+}
+
+.lista_hinos a:hover {
+  color: #000000;
+  text-decoration: underline;
+  background-color: yellow;
+  text-decoration: none;
+}
+
+/* Leyout Letra de hino  */
+
+
+.central_letra {
+  text-align: center;
+}
+
+.Titulo_Hino {
+  font-size: 28px;
+  color: #333;
+}
+
+
+
+
+
+
+
+
+

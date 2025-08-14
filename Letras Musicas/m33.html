@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Maranata</title> <link rel="stylesheet" href="..\letra.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+   <a href="..\index.html" class="botao_voltar">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+  <div class="central_letra">
+  <h1 class="Titulo_Hino">Maranata</h1>
+  <p class="Letra_hino">
+    Maranata vem, maranata vem<br>
+    Maranata vem o Rei, o Rei Jesus<br>
+    Maranata vem, maranata vem<br>
+    Maranata vem o Rei, o Rei Jesus <strong class="destaque_repeti">(2x)</strong><br><br>
+
+    Todo joelho se dobrará<br>
+    Toda língua confessará<br>
+    Jesus é o Rei dos Reis<br>
+    <strong class="destaque_repeti">(2x)</strong><br><br>
+
+    Vem com poder e autoridade<br>
+    Vem pra levar o que é seu<br>
+    O que na cruz conquistou<br>
+    Vem com poder e autoridade<br>
+    Vem pra levar o que é seu<br>
+    O que na cruz conquistou<br>
+    <strong class="destaque_repeti">(4x)</strong><br><br>
+
+    Maranata, maranata<br>
+    Ora vem Senhor Jesus<br>
+    <strong class="destaque_repeti">(4x)</strong>
+  </p>
+</div>
+<div class="butons_redireciona">
+  <a class="Buton_2" href="https://www.youtube.com/watch?v=P3dWwwQ-0Dc" target="_blank">Youtube</a>
+ <a class="Buton_20" href="javascript:void(0);" onclick="compartilharWhatsApp()">WhatsApp</a>
+
+  </div>
+  <script>
+function compartilharWhatsApp() {
+    let linkPagina = window.location.href; // Link da página atual
+      let mensagem = encodeURIComponent("Segue o link do Hino ensaiado.\n\n" + linkPagina);
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
+</script>
+
+</body>
+</html>

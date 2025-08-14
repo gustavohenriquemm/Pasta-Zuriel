@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Escudo</title> <link rel="stylesheet" href="..\letra.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+   <a href="..\index.html" class="botao_voltar">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+ <div class="central_letra">
+  <h1 class="Titulo_Hino">Escudo</h1>
+  <p class="Letra_hino">
+    Muitos são aqueles que zombam de mim<br>
+    Muitos são os que se levantam contra mim<br>
+    Muitos dizem da minh'alma<br>
+    Não há socorro em Deus<br><br>
+
+    <strong class="destaque_repeti"></strong>Tu Senhor, és escudo pra mim<br>
+    Tua glória é o que sustenta minha vida<br>
+    Tu Senhor és o escudo para mim<br>
+    Tua glória é o que sustenta minha vida (2x)</strong><br><br>
+
+    Clamei ao Senhor em alta voz<br>
+    Ele me ouviu apesar da sua grandeza<br>
+    Eu me deitei, dormi e acordei<br>
+    Pois o Senhor me guardou<br>
+    Pois o Senhor me guardou<br><br>
+
+    <strong class="destaque_negri">Tu Senhor, és escudo pra mim<br>
+    Tua glória é o que sustenta minha vida<br>
+    Tu Senhor és o escudo para mim<br>
+    Tua glória é o que sustenta minha vida<br>
+    Minha vida<br><br></strong>
+
+    O meu, o Senhor é o escudo, És escudo, para mim<br>
+    Tua glória é o que sustenta minha vida<br>
+    Mas tu, Oh Senhor, é o escudo, És escudo, para mim<br>
+    Tua glória é o que sustenta minha vida
+  </p>
+</div>
+<div class="butons_redireciona">
+   <a class="Buton_20" href="javascript:void(0);" onclick="alert('Este hino não está disponível no YouTube.')" >Youtube</a>
+   <a class="Buton_20" href="javascript:void(0);" onclick="compartilharWhatsApp()">WhatsApp</a>
+
+  </div>
+  <script>
+function compartilharWhatsApp() {
+    let linkPagina = window.location.href; // Link da página atual
+      let mensagem = encodeURIComponent("Segue o link do Hino ensaiado.\n\n" + linkPagina);
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
+</script>
+
+
+</body>
+</html>

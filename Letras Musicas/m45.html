@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Quero Louvar</title><link rel="stylesheet" href="..\letra.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+   <a href="..\index.html" class="botao_voltar">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+ <div class="central_letra">
+  <h1 class="Titulo_Hino">Quero Louvar</h1>
+  <p class="Letra_hino">
+    Por tudo que és adorarei<br>
+    Por me libertar <strong class="destaque">(3x)</strong><br>
+    Pois lá no calvário<br>
+    Morreu em meu lugar <strong class="destaque">(2x)</strong><br><br>
+
+    Meu deu vida, vitória<br>
+    Hoje eu vivo em glória<br>
+    Vida, vitória, hoje eu vivo em glória<br><br>
+
+    <strong class="destaque_coro">Coro</strong><br>
+    Eu quero louvar <strong class="destaque_masculino">(H)</strong><br>
+    Ao meu Senhor Jesus<br>
+    E ao seu grande amor <strong class="destaque_feminino">(M)</strong><br><br>
+
+    Seu nome todo dia eu louvarei<br>
+    Louvarei<br>
+    Para sempre cantarei<br>
+    Sua glória, minha vitória
+  </p>
+
+  <div class="butons_redireciona">
+    <a class="Buton_2" href="https://www.youtube.com/watch?v=ov683pN8ZXE" target="_blank" rel="noopener noreferrer">Youtube</a>
+  <a class="Buton_20" href="javascript:void(0);" onclick="compartilharWhatsApp()">WhatsApp</a>
+
+  </div>
+  <script>
+function compartilharWhatsApp() {
+    let linkPagina = window.location.href; // Link da página atual
+      let mensagem = encodeURIComponent("Segue o link do Hino ensaiado.\n\n" + linkPagina);
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
+</script>
+
+
+</body>
+</html>

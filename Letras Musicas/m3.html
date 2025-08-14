@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>A Coroa</title> <link rel="stylesheet" href="..\letra.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+   <a href="..\index.html" class="botao_voltar">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+  <div class="central_letra">
+    <h1 class="Titulo_Hino">A Coroa</h1>
+    <p class="Letra_hino">
+      A coroa que ele usou não era de ouro<br>
+      Apesar de o coroarem como rei<br>
+      Não era de rubi ou diamantes<br>
+      Mas era feita só de espinhos vis<br>
+      <br>
+      Por que tratar um Rei desta maneira<br>
+      E por que fazê-lo usar coroa tal?<br>
+      Ele nunca foi forçado a usá-la<br>
+      Mas por amor deixou seu lar real<br>
+      <br>
+      <strong class="destaque_coro">Coro:</strong><br>
+      A coroa que Jesus usou na cruz,<br>
+      Fora feita para mim<br>
+      Ele a trocou pela minha salvação<br>
+      E jamais terá de usá-la outra vez.<br>
+      <br>
+      O inimigo não desiste facilmente<br>
+      Ele quer fazê-lo usar coroa tal<br>
+      Mas tenha isto sempre em sua mente<br>
+      No calvário o bem venceu o mal<br>
+    </p>
+ </div>
+  <div class="butons_redireciona">
+    <a class="Buton_2" href="https://www.youtube.com/watch?v=yTkHWwBz1VA">Youtube</a>
+     <a class="Buton_20" href="javascript:void(0);" onclick="compartilharWhatsApp()">WhatsApp</a>
+
+  </div>
+  <script>
+function compartilharWhatsApp() {
+    let linkPagina = window.location.href; // Link da página atual
+      let mensagem = encodeURIComponent("Segue o link do Hino ensaiado.\n\n" + linkPagina);
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
+</script>
+</body>
+</html>

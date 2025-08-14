@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Graça</title> <link rel="stylesheet" href="..\letra.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+   <a href="..\index.html" class="botao_voltar">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+  <div class="central_letra">
+  <h1 class="Titulo_Hino">Graça</h1>
+  <p class="Letra_hino">
+    Quando lembro de tudo que já<br>
+    Dos caminhos estreitos que percorri<br>
+    E das setas que lançaram pra me atingir<br>
+    Dos gigantes que tive que derrubar<br>
+    E os espinhos que tentaram me machucar<br>
+    Me fazer desistir, desacreditar<br>
+    Mas o teu manto me cobriu<br>
+    Tua voz acalmou meu coração<br><br>
+
+    <strong class="destaque_coro"><br>
+    Graça, Tua doce graça que me basta<br>
+    Graça, trago em mim as Tuas marcas<br>
+    Graça, maior prova de amor meu Senhor<br><br></strong>
+
+    Eu não sei mais viver longe de Ti<br>
+    O Teu sentimento habita em mim<br>
+    Vou continuar até o fim<br>
+    És minha inspiração de amor<br>
+  </p>
+</div>
+<div class="butons_redireciona">
+  <a class="Buton_2" href="https://www.youtube.com/watch?v=L85UlD78HbM" target="_blank">Youtube</a>
+ <a class="Buton_20" href="javascript:void(0);" onclick="compartilharWhatsApp()">WhatsApp</a>
+
+  </div>
+  <script>
+function compartilharWhatsApp() {
+    let linkPagina = window.location.href; // Link da página atual
+      let mensagem = encodeURIComponent("Segue o link do Hino ensaiado.\n\n" + linkPagina);
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
+</script>
+</body>
+</html>

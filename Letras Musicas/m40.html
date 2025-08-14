@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Nós te adoramos</title><link rel="stylesheet" href="..\letra.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+   <a href="..\index.html" class="botao_voltar">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+<div class="central_letra">
+  <h1 class="Titulo_Hino">Nós te adoramos</h1>
+  <p class="Letra_hino">
+    Eu quero sentir sua glória<br>
+    E teu poder, teu Espírito se mover<br>
+    E pra te adorar vou erguer minha voz<br>
+    Levantar as minhas mãos<br><br>
+
+    Quero ouvir a voz<br>
+    Do Santo Espírito de Deus<br>
+    Que faz o coração se quebrantar<br>
+    E voar, voar nas asas do louvor<br>
+    Entregar meu ser em adoração, pois...<br><br>
+
+    <strong class="destaque_coro">Coro</strong><br><br>
+
+    Nós te adoramos<br>
+    Nós te adoramos
+  </p>
+</div>
+<div class="butons_redireciona">
+  <a class="Buton_2" href="https://www.youtube.com/watch?v=qOch1Mz2c9c" target="_blank">Youtube</a>
+ <a class="Buton_20" href="javascript:void(0);" onclick="compartilharWhatsApp()">WhatsApp</a>
+
+  </div>
+  <script>
+function compartilharWhatsApp() {
+    let linkPagina = window.location.href; // Link da página atual
+      let mensagem = encodeURIComponent("Segue o link do Hino ensaiado.\n\n" + linkPagina);
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
+</script>
+
+
+</body>
+</html>

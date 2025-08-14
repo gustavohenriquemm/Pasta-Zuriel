@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="img/apple-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-startup-image" href="img/splash.png" />
+    <meta name="theme-color" content="#0d6efd">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasta Mocidade</title>
+    <link rel="stylesheet" href="HOme.css">
+</head>
+<body>
+    <section class="Central_central">
+                    <div id="intro-video-container" style="visibility: hidden; opacity: 0; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; background-color: black; transition: opacity 0.5s;">
+                        <video id="intro-video" autoplay muted playsinline style="width: 100%; height: 100%; object-fit: cover;">
+                            <source src="img/videozurel.mp4" type="video/mp4">
+                            Seu navegador não suporta o vídeo.
+                        </video>
+                    </div>
+                <section class="Central_pasta">
+                    <main>
+                        <div style="display: flex;flex-direction: column; align-items: center; gap: 10px; padding-bottom: 1rem;">
+                        <h1 class="Titulo_Hino_mocidade">Hinos Mocidade Zuriel</h1>
+                        <input type="text" id="barra-pesquisa" onkeyup="pesquisar()" placeholder="Digite para pesquisar...">
+                        </div>
+                        <div class="lista_hinos">
+                            <a href="Letras Musicas/m1.html">Alcancei a Salvação</a><br>
+                            <a href="Letras Musicas/m2.html">A Guerra Já Está Ganhada</a><br>
+                            <a href="Letras Musicas/m3.html">A Coroa</a><br>
+                            <a href="Letras Musicas/m4.html">Cristo é Tudo para Mim</a><br>
+                            <a href="Letras Musicas/m5.html">Creio em Ti</a><br>
+                            <a href="Letras Musicas/m6.html">Cristo é Tudo para Mim</a><br>
+                            <a href="Letras Musicas/m7.html">Comprometido</a><br>
+                            <a href="Letras Musicas/m8.html">Dor Especial</a><br>
+                            <a href="Letras Musicas/m9.html">Deus Tudo Pagou</a><br>
+                            <a href="Letras Musicas/m10.html">Oceanos</a><br>
+                            <a href="Letras Musicas/m11.html">Ele Virá</a><br>
+                            <a href="Letras Musicas/m12.html">E Dá Poder, Pra Vencer</a><br>
+                            <a href="Letras Musicas/m13.html">Eu Deixo a Tristeza</a><br>
+                            <a href="Letras Musicas/m14.html">Eu Clamei</a><br>
+                            <a href="Letras Musicas/m15.html">Em Tua Presença Senhor</a><br>
+                            <a href="Letras Musicas/m16.html">Ele é…</a><br>
+                            <a href="Letras Musicas/m17.html">Estou Pronto</a><br>
+                            <a href="Letras Musicas/m18.html">Eli, Eli Lama Sabactani</a><br>
+                            <a href="Letras Musicas/m19.html">Escudo</a><br>
+                            <a href="Letras Musicas/m20.html">Fala Comigo</a><br>
+                            <a href="Letras Musicas/m21.html">Faz Chover</a><br>
+                            <a href="Letras Musicas/m22.html">Graças Te Damos</a><br>
+                            <a href="Letras Musicas/m23.html">Graça</a><br>
+                            <a href="Letras Musicas/m24.html">Jesus</a><br>
+                            <a href="Letras Musicas/m25.html">Já Está Consumado</a><br>
+                            <a href="Letras Musicas/m26.html">Jesus Meu Guia é</a><br>
+                            <a href="Letras Musicas/m27.html">Levar-me a Ti</a><br>
+                            <a href="Letras Musicas/m28.html">Louvemos</a><br>
+                            <a href="Letras Musicas/m29.html">Louvaremos</a><br>
+                            <a href="Letras Musicas/m30.html">Meu Novo Lar</a><br>
+                            <a href="Letras Musicas/m31.html">Mãos Furadas</a><br>
+                            <a href="Letras Musicas/m32.html">Meu Senhor Jesus Cristo</a><br>
+                            <a href="Letras Musicas/m33.html">Maranta</a><br>
+                            <a href="Letras Musicas/m34.html">Meu Desejo</a><br>
+                            <a href="Letras Musicas/m35.html">Meu Refúgio</a><br>
+                            <a href="Letras Musicas/m36.html">Milagre no Altar</a><br>
+                            <a href="Letras Musicas/m37.html">Na Força de Louvor</a><br>
+                            <a href="Letras Musicas/m38.html">Não Há Outro Lugar</a><br>
+                            <a href="Letras Musicas/m39.html">Não Há Impossível para Deus</a><br>
+                            <a href="Letras Musicas/m40.html">Nós Te Adoramos</a><br>
+                            <a href="Letras Musicas/m41.html">Na Tua Presença</a><br>
+                            <a href="Letras Musicas/m42.html">Profetiza</a><br>
+                            <a href="Letras Musicas/m43.html">Preço da Cruz</a><br>
+                            <a href="Letras Musicas/m44.html">Por Tudo Que Tu És</a><br>
+                            <a href="Letras Musicas/m45.html">Quero Louvar</a><br>
+                            <a href="Letras Musicas/m46.html">Reina o Senhor</a><br>
+                            <a href="Letras Musicas/m47.html">Deus Toma Teu Santo Trono</a><br>
+                            <a href="Letras Musicas/m48.html">Vem Espírito Santo</a><br>
+                            <a href="Letras Musicas/m49.html">Deus Tu És Santo</a><br>
+                        
+                            <a href="Letras Musicas/m51.html">Tempestade</a><br>
+                            <a href="Letras Musicas/m52.html">Tudo Posso</a><br>
+                            <a href="Letras Musicas/m53.html">O Adorado</a><br>
+                            <a href="Letras Musicas/m54.html">Pertence a Ti</a><br>
+                            <a href="Letras Musicas/m55.html">Deus Faz</a><br>
+                            <a href="Letras Musicas/m56.html">Em Todos os Lugares</a><br>
+                            <a href="Letras Musicas/m57.html">Te Adorarei</a><br>
+                            <a href="Letras Musicas 2/m58.html">Tudo Coopera para o Bem</a><br>
+                            <a href="Letras Musicas 2/m59.html">Te Adoramos</a><br>
+                            <a href="Letras Musicas 2/m60.html">Totalmente Teu</a><br>
+                            <a href="Letras Musicas 2/m61.html">Rei dos Reis</a><br>
+                            <a href="Letras Musicas 2/m62.html">Recebe Minha Adoração</a><br>
+                            <a href="Letras Musicas 2/m63.html">Sopra</a><br>
+                            <a href="Letras Musicas 2/m64.html">Sou um Milagre</a><br>
+                            <a href="Letras Musicas 2/m65.html">Ser Reconhecido de Deus</a><br>
+                            <a href="Letras Musicas 2/m66.html">Soberano Deus</a><br>
+                            <a href="Letras Musicas 2/m67.html">Se Liga</a><br>
+                            <a href="Letras Musicas 2/m68.html">Sou Feliz</a><br>
+                            <a href="Letras Musicas 2/m69.html">Santo Deus</a><br>
+                            <a href="Letras Musicas 2/m70.html">Soberano</a><br>
+                            <a href="Letras Musicas 2/m71.html">Reina</a><br>
+                            <a href="Letras Musicas 2/m72.html">Rocha Eterna</a><br>
+                            <a href="Letras Musicas 2/m73.html">Faça Morada</a><br>
+                            <a href="Letras Musicas 2/m74.html">Caminho no Deserto</a><br>
+                            <a href="Letras Musicas 2/m75.html">Adore ao Rei</a><br>
+                            <a href="Letras Musicas 2/m76.html">Sala do Trono</a><br>
+                            <a href="Letras Musicas 2/m77.html">24 Horas Fiel</a><br>
+                            <a href="Letras Musicas 2/m78.html">Aprendi a Confiar em Deus</a><br>
+                            <a href="Letras Musicas 2/m79.html">Foi a Cruz</a><br>
+
+                            <a href="Letras Musicas 2/m81.html">Minha Adoração</a><br>
+                            <a href="Letras Musicas 2/m82.html">Nada Temerei</a><br>
+                            <a href="Letras Musicas 2/m83.html">Mais Que Tudo Te Amarei</a><br>
+                            <a href="Letras Musicas 2/m84.html">Envolve-me</a><br>
+                            <a href="Letras Musicas 2/m85.html">Tua Graça</a><br>
+                            <a href="Letras Musicas 2/m86.html">Venceu</a><br>
+                            <a href="Letras Musicas 2/m87.html">Meu Deus é Grande</a><br>
+                            <a href="Letras Musicas 2/m88.html">Calvário</a><br>
+                            <a href="Letras Musicas 2/m89.html">Ele Voltará</a><br>
+                            <a href="Letras Musicas 2/m90.html">Tua Graça</a><br>
+                            <a href="Letras Musicas 2/m91.html">Vou com Jesus</a><br>
+                            <a href="Letras Musicas 2/m92.html">Ensina-me</a><br>
+                            <a href="Letras Musicas 2/m93.html">Me achego a Ti</a><br>
+                            <a href="Letras Musicas 2/m94.html">Sei que não sou Merecedor</a><br>
+                            <a href="Letras Musicas 2/m95.html">Marca da dor</a><br>
+                            <a href="Letras Musicas 2/m96.html">Grande eu sou</a><br>
+                            <a href="Letras Musicas 2/m99.html">Ele está aqui</a><br>
+                            <a href="Letras Musicas 2/m100.html">Escape</a><br>
+                            <a href="Letras Musicas 2/m102.html">Eu vou vencer</a><br>
+                            <a href="Letras Musicas 2/m103.html">E de coração</a><br>
+                            <a href="Letras Musicas 2/m104.html">Eu vou subir</a><br>
+                            <a href="Letras Musicas 2/m105.html">Deus é o foco</a><br>
+                            <a href="Letras Musicas 2/m106.html">Eu posso</a><br>
+                            <a href="Letras Musicas 2/m107.html">Maldição foi quebrado</a><br>
+                            <a href="Letras Musicas 2/m109.html">Não valeria</a><br>
+                            <a href="Letras Musicas 2/m110.html">Só tú és digno de glória</a><br>
+                            <a href="Letras Musicas 2/m111.html">Tua presença</a><br>
+
+
+
+
+                        </div>
+                    </main>
+                </section>
+                <script>
+                function pesquisar() {
+                    const filtro = document.getElementById('barra-pesquisa').value.toLowerCase();
+                    const lista = document.querySelector('.lista_hinos');
+                    const links = Array.from(lista.getElementsByTagName('a'));
+
+                    const queBatem = [];
+                    const queNaoBatem = [];
+
+                    // Separar os links conforme filtro
+                    links.forEach(link => {
+                        const texto = link.textContent.toLowerCase();
+                        if (texto.indexOf(filtro) > -1) {
+                            queBatem.push(link);
+                            link.style.display = ''; // mostra
+                        } else {
+                            queNaoBatem.push(link);
+                            link.style.display = 'none'; // esconde
+                        }
+                    });
+
+                    // Limpar lista original
+                    lista.innerHTML = '';
+
+                    // Re-adicionar primeiro os que batem, depois os que não batem
+                    queBatem.forEach(link => lista.appendChild(link));
+                    queNaoBatem.forEach(link => lista.appendChild(link));
+                }
+                   document.addEventListener('DOMContentLoaded', function () {
+    const container = document.getElementById('intro-video-container');
+    const video = document.getElementById('intro-video');
+
+    const introJaFoi = sessionStorage.getItem('introFoi');
+
+    if (!introJaFoi) {
+        container.style.visibility = 'visible';
+        container.style.opacity = '1';
+
+        video.play().catch(function (error) {
+            console.log('Erro ao tentar reproduzir o vídeo:', error);
+        });
+
+        setTimeout(() => {
+            container.style.opacity = '0';
+            setTimeout(() => container.style.visibility = 'hidden', 500);
+        }, 8000);
+
+        sessionStorage.setItem('introFoi', 'true');
+    }
+});
+
+                        if ('serviceWorker' in navigator) {
+                            navigator.serviceWorker.register('service-worker.js')
+                            .then(function(reg) {
+                                console.log('✅ Service Worker registrado:', reg.scope);
+                            }).catch(function(error) {
+                                console.log('❌ Erro ao registrar o Service Worker:', error);
+                            });
+                        }
+            </script>
+
+    </section>            
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Não valeria</title><link rel="stylesheet" href="..\letra.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+   <a href="..\index.html" class="botao_voltar">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+  <div class="central_letra">
+  <h1 class="Titulo_Hino">Não valeria</h1>
+  <p class="Letra_hino">
+    Nos dias de hoje o que falta é amor<br>
+    Pessoas vazias com ódio e rancor<br>
+    Sempre vencidas por seu próprio eu<br>
+    Amar uns aos outros, muito fala e não se faz<br>
+    Ooh, oh, oh! Ooh, oh, oh<br><br>
+
+    Mesmo que eu falasse a língua dos homens<br>
+    Que eu falasse a língua dos anjos<br>
+    Sem amor não valeria<br>
+    Sem amor não valeria<br><br>
+
+    Mesmo que eu falasse a língua dos homens<br>
+    Que eu falasse a língua dos anjos<br>
+    Sem amor não valeria<br>
+    Sem amor, não<br>
+    Não valeria, não valeria
+  </p>
+</div>
+<div class="butons_redireciona">
+  <a class="Buton_2" href="https://www.youtube.com/watch?v=yGkE_MZJtPA" target="_blank">Youtube</a>
+  <a class="Buton_20" href="javascript:void(0);" onclick="compartilharWhatsApp()">WhatsApp</a>
+
+  </div>
+  <script>
+function compartilharWhatsApp() {
+    let linkPagina = window.location.href; // Link da página atual
+      let mensagem = encodeURIComponent("Segue o link do Hino ensaiado.\n\n" + linkPagina);
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
+</script>
+
+</body>
+</html>

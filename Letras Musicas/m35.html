@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Meu Refúgio</title><link rel="stylesheet" href="..\letra.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+   <a href="..\index.html" class="botao_voltar">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+  <div class="central_letra">
+    <h1 class="Titulo_Hino">Meu Refúgio</h1>
+    <p class="Letra_hino">
+      Venho a ti entregar a minha vida em tuas mãos<br>
+      Meu coração, tudo de mim<br>
+      Vem agora e quebra minha vida oh Senhor<br>
+      Vaso novo eu quero ser<br>
+      És a minha rocha, meu refúgio<br>
+      Contigo sempre sei que estou seguro<br>
+      Mesmo se no abismo eu entrar,<br>
+      Cristo comigo vai estar.<br><br>
+
+      Quero entregar o meu viver<br>
+      Tudo que tenho, o meu ser<br>
+      Faz em mim aqui o teu querer<br>
+      Pois em tuas mãos há poder<br>
+      Vou trocar o meu fardo pelo teu que é bem melhor<br>
+      Quero sentir o teu perdão<br>
+      Vem agora, purifica os meus lábios pra adorar<br>
+      Te bendizer, pra sempre louvar<br><br>
+
+      Mesmo se eu chorar a noite inteira<br>
+      Sei que tua alegria vem pela manhã<br>
+      E se na fornalha eu tiver que entrar<br>
+      Sei que o quarto homem não vai me deixar<br>
+      Quando pelas águas eu tiver que passar<br>
+      Tua mão me guiará e eu não me afogarei<br>
+      Se o inimigo diz que não há força em mim<br>
+      <strong class="destaque_repeti">Eu grito bem alto: Sou forte em Jesus!</strong>
+    </p>
+  </div>
+
+  <div class="butons_redireciona">
+    <a class="Buton_20" href="javascript:void(0);" onclick="alert('Este hino não está disponível no YouTube.')">Youtube</a>
+    <a class="Buton_20" href="javascript:void(0);" onclick="compartilharWhatsApp()">WhatsApp</a>
+
+  </div>
+  <script>
+function compartilharWhatsApp() {
+    let linkPagina = window.location.href; // Link da página atual
+      let mensagem = encodeURIComponent("Segue o link do Hino ensaiado.\n\n" + linkPagina);
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
+</script>
+</body>
+</html>

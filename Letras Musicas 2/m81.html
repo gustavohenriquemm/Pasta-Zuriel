@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Minha adoração</title><link rel="stylesheet" href="..\letra.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+   <a href="..\index.html" class="botao_voltar">
+    <i class="fa-solid fa-arrow-left"></i> Voltar
+  </a>
+  <div class="central_letra">
+  <h1 class="Titulo_Hino">Cria em Mim</h1>
+  <p class="Letra_hino">
+    Cria em mim um puro coração<br>
+    E molda-me conforme o teu querer<br>
+    Que o teu espírito reine sobre mim<br>
+    Agora e para sempre<br>
+    Rei eterno, poderoso Deus<br>
+    Ergo minhas mãos pra te engradecer<br>
+    Só teu nome é santo e digno de louvor<br>
+    A minh'alma canta: "grande és tu, Senhor"<br><br>
+
+    Venho entregar, em sincera adoração<br>
+    Minha vida em tuas mãos<br>
+    Alfa, ômega, princípio e fim<br>
+    Cordeiro que venceu<br>
+    Povos, nações confessarão<br>
+    "Só tu és Deus"<br><br>
+
+    Venho entregar, em sincera adoração<br>
+    Minha vida em tuas mãos,<br>
+    Minha vida em tuas mãos<br>
+    Minha vida em tuas mãos
+  </p>
+  <div class="butons_redireciona">
+    <a class="Buton_2" href="https://www.youtube.com/watch?v=pPBwhG-586Y" target="_blank">Youtube</a>
+ <a class="Buton_20" href="javascript:void(0);" onclick="compartilharWhatsApp()">WhatsApp</a>
+
+  </div>
+  <script>
+function compartilharWhatsApp() {
+    let linkPagina = window.location.href; // Link da página atual
+      let mensagem = encodeURIComponent("Segue o link do Hino ensaiado.\n\n" + linkPagina);
+    window.open("https://wa.me/?text=" + mensagem, "_blank");
+}
+</script>
+
+</body>
+</html>
