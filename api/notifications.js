@@ -1,14 +1,10 @@
-const crypto = require('node:crypto');
+import crypto from 'node:crypto';
+import { cert, getApps, initializeApp } from 'firebase-admin/app';
+import { getAuth } from 'firebase-admin/auth';
+import { FieldValue, getFirestore } from 'firebase-admin/firestore';
+import { getMessaging } from 'firebase-admin/messaging';
 
-let cert;
-let getApps;
-let initializeApp;
-let getAuth;
-let FieldValue;
-let getFirestore;
-let getMessaging;
-
-module.exports = async function handler(request, response) {
+export default async function handler(request, response) {
   response.setHeader('Cache-Control', 'no-store');
   if (request.method !== 'POST') {
     response.setHeader('Allow', 'POST');
@@ -33,7 +29,7 @@ module.exports = async function handler(request, response) {
       diagnostic: status >= 500 ? getSafeDiagnostic(error) : undefined,
     });
   }
-};
+}
 
 async function registerToken(request, response, rawToken) {
   const token = validateToken(rawToken);
@@ -112,7 +108,6 @@ async function broadcast(notification) {
 }
 
 function ensureFirebaseAdmin() {
-  loadFirebaseAdminModules();
   if (getApps().length) return;
   const projectId = String(process.env.FIREBASE_PROJECT_ID || '').trim();
   const clientEmail = String(process.env.FIREBASE_CLIENT_EMAIL || '').trim();
@@ -121,14 +116,6 @@ function ensureFirebaseAdmin() {
     throw new Error('Firebase Admin não configurado.');
   }
   initializeApp({ credential: cert({ projectId, clientEmail, privateKey }) });
-}
-
-function loadFirebaseAdminModules() {
-  if (getApps) return;
-  ({ cert, getApps, initializeApp } = require('firebase-admin/app'));
-  ({ getAuth } = require('firebase-admin/auth'));
-  ({ FieldValue, getFirestore } = require('firebase-admin/firestore'));
-  ({ getMessaging } = require('firebase-admin/messaging'));
 }
 
 function getConfigurationHealth() {
