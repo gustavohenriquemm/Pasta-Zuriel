@@ -1,4 +1,5 @@
-import { getFirebase } from '../authentication/firebase.js?v=20260713-13';
+import { getFirebase } from '../authentication/firebase.js?v=20260713-19';
+import { sendPushNotification } from '../src/services/pushApiService.js?v=20260713-19';
 
 export async function signInAdmin(email, password) {
   const firebase = await getFirebase();
@@ -134,8 +135,10 @@ export async function saveCalendarEvent(event) {
     const batch = writeBatch(firebase.db);
     batch.set(doc(collection(firebase.db, 'calendarEvents'), id), { ...event, id, updatedAt });
     const notification = buildEventNotification({ ...event, id, updatedAt }, isNew);
-    batch.set(doc(collection(firebase.db, 'notices'), createNotificationId(updatedAt)), notification);
+    const notificationId = createNotificationId(updatedAt);
+    batch.set(doc(collection(firebase.db, 'notices'), notificationId), notification);
     await batch.commit();
+    return { notificationSent: await deliverPush({ id: notificationId, ...notification }) };
   } catch (error) {
     throw new Error(getFriendlyFirestoreError(error));
   }
@@ -150,9 +153,8 @@ export async function deleteCalendarEvent(id) {
     const snapshot = await getDoc(eventRef);
     const event = snapshot.exists() ? { id, ...snapshot.data() } : { id, title: 'Evento' };
     const updatedAt = Date.now();
-    const batch = writeBatch(firebase.db);
-    batch.delete(eventRef);
-    batch.set(doc(collection(firebase.db, 'notices'), createNotificationId(updatedAt)), {
+    const notificationId = createNotificationId(updatedAt);
+    const notification = {
       title: isRehearsalEvent(event) ? 'Ensaio cancelado' : 'Evento cancelado',
       body: event.title || 'Um evento foi removido do calendário.',
       type: isRehearsalEvent(event) ? 'rehearsal' : 'event',
@@ -161,8 +163,12 @@ export async function deleteCalendarEvent(id) {
       link: '/#calendar',
       updatedAt,
       notificationOnly: true,
-    });
+    };
+    const batch = writeBatch(firebase.db);
+    batch.delete(eventRef);
+    batch.set(doc(collection(firebase.db, 'notices'), notificationId), notification);
     await batch.commit();
+    return { notificationSent: await deliverPush({ id: notificationId, ...notification }) };
   } catch (error) {
     throw new Error(getFriendlyFirestoreError(error));
   }
@@ -175,20 +181,26 @@ export async function saveNotice(notice) {
   const isNew = !notice.id;
   const id = notice.id || `notice-${Date.now()}`;
   const updatedAt = Date.now();
+  const notificationId = createNotificationId(updatedAt);
+  const notification = {
+    title: isNew ? 'Novo aviso' : 'Aviso atualizado',
+    body: `${notice.title || 'Aviso'}: ${notice.message || ''}`.trim(),
+    type: 'notice',
+    sourceType: 'notice',
+    sourceId: id,
+    link: '/#home',
+    updatedAt,
+    notificationOnly: true,
+  };
   try {
     const batch = writeBatch(firebase.db);
     batch.set(doc(collection(firebase.db, 'notices'), id), { ...notice, id, updatedAt });
-    batch.set(doc(collection(firebase.db, 'notices'), createNotificationId(updatedAt)), {
-      title: isNew ? 'Novo aviso' : 'Aviso atualizado',
-      body: `${notice.title || 'Aviso'}: ${notice.message || ''}`.trim(),
-      type: 'notice',
-      sourceType: 'notice',
-      sourceId: id,
-      link: '/#home',
-      updatedAt,
-      notificationOnly: true,
-    });
+    batch.set(doc(collection(firebase.db, 'notices'), notificationId), notification);
     await batch.commit();
+    const notificationSent = notice.active === false
+      ? null
+      : await deliverPush({ id: notificationId, ...notification });
+    return { notificationSent };
   } catch (error) {
     throw new Error(getFriendlyFirestoreError(error));
   }
@@ -203,9 +215,8 @@ export async function deleteNotice(id) {
     const snapshot = await getDoc(noticeRef);
     const notice = snapshot.exists() ? snapshot.data() : {};
     const updatedAt = Date.now();
-    const batch = writeBatch(firebase.db);
-    batch.delete(noticeRef);
-    batch.set(doc(collection(firebase.db, 'notices'), createNotificationId(updatedAt)), {
+    const notificationId = createNotificationId(updatedAt);
+    const notification = {
       title: 'Aviso removido',
       body: notice.title || 'Um aviso foi removido.',
       type: 'notice',
@@ -214,8 +225,12 @@ export async function deleteNotice(id) {
       link: '/#home',
       updatedAt,
       notificationOnly: true,
-    });
+    };
+    const batch = writeBatch(firebase.db);
+    batch.delete(noticeRef);
+    batch.set(doc(collection(firebase.db, 'notices'), notificationId), notification);
     await batch.commit();
+    return { notificationSent: await deliverPush({ id: notificationId, ...notification }) };
   } catch (error) {
     throw new Error(getFriendlyFirestoreError(error));
   }
@@ -256,6 +271,16 @@ function formatDateKey(value) {
 
 function createNotificationId(timestamp) {
   return `notification-${timestamp}-${Math.random().toString(36).slice(2, 8)}`;
+}
+
+async function deliverPush(notification) {
+  try {
+    await sendPushNotification(notification);
+    return true;
+  } catch (error) {
+    console.error('A alteração foi salva, mas o push não foi enviado:', error);
+    return false;
+  }
 }
 
 function getFriendlyAuthError(error) {

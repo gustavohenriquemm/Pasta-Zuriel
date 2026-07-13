@@ -11,7 +11,7 @@ import {
   saveNotice,
   signInAdmin,
   signOutAdmin,
-} from '../database/firestore.js?v=20260713-32';
+} from '../database/firestore.js?v=20260713-33';
 import { getHymns } from '../src/services/hymnService.js';
 
 const DEFAULT_REHEARSAL = {
@@ -362,7 +362,7 @@ function renderEditor(content, user) {
       return;
     }
     try {
-      await saveCalendarEvent({
+      const result = await saveCalendarEvent({
         id: forms.event.querySelector('#event-id').value,
         title: forms.event.querySelector('#event-title').value.trim(),
         date,
@@ -377,7 +377,9 @@ function renderEditor(content, user) {
         color: forms.event.querySelector('#event-color').value,
       });
       closeModal(screen, forms);
-      showToast('Evento salvo.');
+      showToast(result?.notificationSent === false
+        ? 'Evento salvo, mas a notificação não foi enviada. Verifique a configuração da Vercel.'
+        : 'Evento salvo e notificação enviada.');
     } catch (error) {
       showToast(error.message || 'Nao foi possivel salvar o evento.');
     }
@@ -387,8 +389,10 @@ function renderEditor(content, user) {
     const id = forms.event.querySelector('#event-id').value;
     if (!id) return;
     confirmDelete(screen, forms, state, 'Excluir este evento?', async () => {
-      await deleteCalendarEvent(id);
-      showToast('Evento excluido.');
+      const result = await deleteCalendarEvent(id);
+      showToast(result?.notificationSent === false
+        ? 'Evento excluído, mas a notificação não foi enviada.'
+        : 'Evento excluído e notificação enviada.');
     });
   });
 
@@ -419,7 +423,7 @@ function renderEditor(content, user) {
   forms.notice.addEventListener('submit', async (event) => {
     event.preventDefault();
     try {
-      await saveNotice({
+      const result = await saveNotice({
         id: forms.notice.querySelector('#notice-id').value,
         title: forms.notice.querySelector('#notice-title').value.trim(),
         message: forms.notice.querySelector('#notice-message').value.trim(),
@@ -428,7 +432,11 @@ function renderEditor(content, user) {
         expiresAt: '',
       });
       closeModal(screen, forms);
-      showToast('Aviso salvo.');
+      showToast(result?.notificationSent === false
+        ? 'Aviso salvo, mas a notificação não foi enviada. Verifique a configuração da Vercel.'
+        : result?.notificationSent === true
+          ? 'Aviso salvo e notificação enviada.'
+          : 'Aviso salvo.');
     } catch (error) {
       showToast(error.message || 'Nao foi possivel salvar o aviso.');
     }
@@ -438,8 +446,10 @@ function renderEditor(content, user) {
     const id = forms.notice.querySelector('#notice-id').value;
     if (!id) return;
     confirmDelete(screen, forms, state, 'Excluir este aviso?', async () => {
-      await deleteNotice(id);
-      showToast('Aviso excluido.');
+      const result = await deleteNotice(id);
+      showToast(result?.notificationSent === false
+        ? 'Aviso excluído, mas a notificação não foi enviada.'
+        : 'Aviso excluído e notificação enviada.');
     });
   });
 

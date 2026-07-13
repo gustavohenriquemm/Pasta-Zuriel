@@ -1,5 +1,5 @@
 import { getEventsForDate, getMonthDays, toDateKey, formatDate, watchCalendarEvents } from '../services/calendarService.js?v=20260713-12';
-import { listenNotices } from '../../database/firestore.js?v=20260713-32';
+import { listenNotices } from '../../database/firestore.js?v=20260713-33';
 import { icon } from '../components/icons.js?v=20260713-8';
 import { openEventDetails, renderEventDetailsHost } from '../components/EventDetailsModal.js?v=20260713-12';
 

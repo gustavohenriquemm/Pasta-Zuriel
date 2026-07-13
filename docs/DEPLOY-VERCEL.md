@@ -2,9 +2,11 @@
 
 1. Envie o projeto para um repositorio Git.
 2. Na Vercel, importe o repositorio.
-3. Use as configuracoes padrao de projeto estatico.
-4. Nao configure comando de build.
-5. O diretorio de saida deve ser a raiz do projeto.
-6. Depois do deploy, teste Biblia, Harpa, Mocidade e Painel.
+3. Use as configurações padrão de projeto estático.
+4. Não configure comando de build.
+5. O diretório de saída deve ser a raiz do projeto.
+6. Configure as três variáveis secretas descritas em `docs/NOTIFICACOES.md`.
+7. Depois do deploy, teste Bíblia, Harpa, Mocidade, Painel e notificações.
 
-O Firebase usado pelo navegador nao exige servidor proprio. As chaves do arquivo `config/firebase-config.js` sao publicas por natureza; a protecao real fica nas regras do Firestore.
+As chaves do arquivo `config/firebase-config.js` são públicas por natureza. A
+chave privada do Firebase Admin deve existir somente nas variáveis da Vercel.

@@ -1,4 +1,4 @@
-import { firebaseConfig } from '../config/firebase-config.js?v=20260713-13';
+import { firebaseConfig } from '../config/firebase-config.js?v=20260713-19';
 
 const FIREBASE_CDN = 'https://www.gstatic.com/firebasejs/10.12.5';
 
@@ -17,4 +17,16 @@ export async function getFirebase() {
 
   firebase = { app, auth, db, authModule, firestoreModule };
   return firebase;
+}
+
+export async function getFirebaseMessaging() {
+  const base = await getFirebase();
+  if (!base) return null;
+  const messagingModule = await import(`${FIREBASE_CDN}/firebase-messaging.js`);
+  if (!(await messagingModule.isSupported())) return null;
+  return {
+    ...base,
+    messaging: messagingModule.getMessaging(base.app),
+    messagingModule,
+  };
 }

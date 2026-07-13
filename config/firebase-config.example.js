@@ -6,3 +6,5 @@ export const firebaseConfig = {
   messagingSenderId: '000000000000',
   appId: '1:000000000000:web:xxxxxxxxxxxxxxxxxxxxxx',
 };
+
+export const firebaseVapidKey = 'COLE_AQUI_A_CHAVE_PUBLICA_WEB_PUSH';

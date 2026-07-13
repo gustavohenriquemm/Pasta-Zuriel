@@ -1,12 +1,12 @@
 import { icon } from './icons.js?v=20260713-8';
-import { listenNotices, listenNotifications } from '../../database/firestore.js?v=20260713-32';
+import { listenNotices, listenNotifications } from '../../database/firestore.js?v=20260713-33';
 import {
   enableNotifications,
   getNotificationsLastSeen,
   getNotificationStatus,
   markNotificationsRead,
   showSiteNotification,
-} from '../services/notificationService.js?v=20260713-15';
+} from '../services/notificationService.js?v=20260713-19';
 
 let noticesUnsubscribe;
 let notificationsUnsubscribe;
@@ -146,7 +146,7 @@ function bindNotices(root) {
       <article class="notification-permission-card permission-entry-card">
         <div>
           <strong>Receba as atualizações da igreja</strong>
-          <p data-notification-permission-status>Permita as notificações para receber avisos de ensaios, hinos e eventos na barra do seu celular ou computador enquanto o site estiver aberto.</p>
+          <p data-notification-permission-status>Permita as notificações para receber avisos de ensaios, hinos e eventos na barra do seu celular ou computador, mesmo com o aplicativo fechado.</p>
         </div>
       </article>
       <div class="form-actions">
@@ -204,7 +204,7 @@ function renderNotificationPermission() {
   return `
     <article class="notification-permission-card">
       <div>
-        <strong>Avisos com o site aberto</strong>
+        <strong>Avisos no seu aparelho</strong>
         <p data-notification-permission-status>${escapeHtml(status.message)}</p>
       </div>
       <button class="primary-button" type="button" data-enable-notifications ${canEnable ? '' : 'disabled'}>${enabled ? 'Notificações ativadas' : 'Ativar notificações'}</button>

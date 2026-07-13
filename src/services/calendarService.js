@@ -1,4 +1,4 @@
-import { listenCalendarEvents } from '../../database/firestore.js?v=20260713-32';
+import { listenCalendarEvents } from '../../database/firestore.js?v=20260713-33';
 import { SUNDAY_SCHOOL_LESSONS } from '../data/sundaySchoolLessons.js?v=20260713-12';
 
 const SUNDAY_EVENTS = [
