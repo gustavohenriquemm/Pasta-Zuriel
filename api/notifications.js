@@ -16,8 +16,9 @@ module.exports = async function handler(request, response) {
   }
 
   try {
-    ensureFirebaseAdmin();
     const body = parseBody(request.body);
+    if (body.action === 'health') return response.status(200).json(getConfigurationHealth());
+    ensureFirebaseAdmin();
     if (body.action === 'register') return registerToken(request, response, body.token);
     if (body.action === 'unregister') return unregisterToken(response, body.token);
     if (body.action === 'send') return sendNotification(request, response, body.notification);
@@ -25,10 +26,8 @@ module.exports = async function handler(request, response) {
   } catch (error) {
     console.error('Notification API error:', error);
     const status = Number(error.statusCode || 500);
-    const message = status >= 500
-      ? 'O serviço de notificações ainda não foi configurado na Vercel.'
-      : error.message;
-    return response.status(status).json({ error: message });
+    const publicError = status >= 500 ? classifyServerError(error) : { message: error.message };
+    return response.status(status).json({ error: publicError.message, code: publicError.code });
   }
 };
 
@@ -126,6 +125,49 @@ function loadFirebaseAdminModules() {
   ({ getAuth } = require('firebase-admin/auth'));
   ({ FieldValue, getFirestore } = require('firebase-admin/firestore'));
   ({ getMessaging } = require('firebase-admin/messaging'));
+}
+
+function getConfigurationHealth() {
+  const projectId = String(process.env.FIREBASE_PROJECT_ID || '').trim();
+  const clientEmail = String(process.env.FIREBASE_CLIENT_EMAIL || '').trim();
+  const privateKey = String(process.env.FIREBASE_PRIVATE_KEY || '').replace(/\\n/g, '\n').trim();
+  const privateKeyFormat = privateKey.startsWith('-----BEGIN PRIVATE KEY-----')
+    && privateKey.endsWith('-----END PRIVATE KEY-----');
+  return {
+    function: true,
+    configuration: {
+      projectId: Boolean(projectId),
+      clientEmail: Boolean(clientEmail),
+      privateKey: Boolean(privateKey),
+      privateKeyFormat,
+    },
+  };
+}
+
+function classifyServerError(error) {
+  const message = String(error?.message || '');
+  if (message.includes('Firebase Admin não configurado')) {
+    return {
+      code: 'missing-environment-variable',
+      message: 'Uma ou mais variáveis do Firebase não foram encontradas na Vercel.',
+    };
+  }
+  if (/private key|private_key|PEM|DECODER|secretOrPrivateKey/i.test(message)) {
+    return {
+      code: 'invalid-private-key',
+      message: 'A chave FIREBASE_PRIVATE_KEY está em um formato inválido na Vercel.',
+    };
+  }
+  if (/cannot find module|module not found/i.test(message)) {
+    return {
+      code: 'firebase-module-error',
+      message: 'A dependência de notificações não foi carregada pela Vercel.',
+    };
+  }
+  return {
+    code: 'notification-server-error',
+    message: 'O servidor não conseguiu iniciar o Firebase para enviar a notificação.',
+  };
 }
 
 function validateToken(value) {
