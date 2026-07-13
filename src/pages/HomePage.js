@@ -7,7 +7,7 @@ let homeEventsUnsubscribe;
 export function renderHome(root, navigate) {
   const cards = [
     { route: 'mocidade', image: '/img/mocidade.png?v=4', icon: icon('music'), titleTop: 'Hinos da', titleMain: 'MOCIDADE' },
-    { combined: true, image: '/img/harpa.png?v=4', icon: icon('book'), titleTop: 'Bíblia Sagrada', titleMain: 'HARPA CRISTÃ' },
+    { combined: true, image: '/img/biblia.png?v=5', icon: icon('book'), titleTop: 'Bíblia Sagrada', titleMain: 'HARPA CRISTÃ' },
     { route: 'ebd', image: '/img/Escolinhadominical.png?v=5', icon: icon('book'), titleTop: 'Escola Bíblica', titleMain: 'DOMINICAL' },
     { route: 'calendar', image: '/img/calendario.png?v=4', icon: icon('calendar'), titleTop: 'Calendário', titleMain: 'ZURIEL' },
   ];
@@ -31,8 +31,8 @@ export function renderHome(root, navigate) {
             <div class="quick-copy combined-copy">
               <strong><span>${card.titleTop}</span><b>${card.titleMain}</b></strong>
               <div class="quick-split-actions">
-                <button type="button" data-route="bible">Abrir Bíblia</button>
-                <button type="button" data-route="harpa">Abrir Harpa</button>
+                <button type="button" data-route="bible">Ver Bíblia</button>
+                <button type="button" data-route="harpa">Ver Harpa</button>
               </div>
             </div>
           </article>

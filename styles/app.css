@@ -368,12 +368,15 @@ button {
 
 .quick-split-actions {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
+  width: 100%;
   gap: 8px;
 }
 
 .quick-split-actions button {
+  flex: 1 1 0;
+  min-width: 0;
   min-height: 38px;
   border: 1px solid var(--brand);
   border-radius: 999px;
@@ -382,6 +385,7 @@ button {
   padding: 7px 12px;
   font-size: 0.78rem;
   font-weight: 800;
+  white-space: nowrap;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
 }
 
@@ -1718,13 +1722,22 @@ button {
     font-size: 1.08rem;
   }
 
+  .combined-card {
+    padding-inline: 10px;
+  }
+
+  .combined-card .combined-copy {
+    gap: 9px;
+    padding: 66px 8px 18px;
+  }
+
   .quick-split-actions {
     gap: 6px;
   }
 
   .quick-split-actions button {
-    padding: 7px 9px;
-    font-size: 0.7rem;
+    padding: 7px 3px;
+    font-size: 0.64rem;
   }
 
   .quick-copy small {
