@@ -12,5 +12,15 @@ export function registerServiceWorker() {
     return;
   }
 
-  navigator.serviceWorker.register('service-worker.js').catch(() => {});
+  const wasControlled = Boolean(navigator.serviceWorker.controller);
+  let refreshing = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (!wasControlled || refreshing) return;
+    refreshing = true;
+    location.reload();
+  });
+
+  navigator.serviceWorker.register('service-worker.js', { updateViaCache: 'none' })
+    .then((registration) => registration.update())
+    .catch(() => {});
 }

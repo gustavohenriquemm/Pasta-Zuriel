@@ -1,4 +1,4 @@
-import { icon } from '../components/icons.js?v=20260708-5';
+import { icon } from '../components/icons.js?v=20260713-8';
 import { getHymns, watchHymns } from '../services/hymnService.js';
 
 export async function renderHymnal(root, collection, navigate, route = collection) {

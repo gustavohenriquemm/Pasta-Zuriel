@@ -1,21 +1,21 @@
-import { icon } from '../components/icons.js?v=20260713-7';
-import { getUpcomingEvents, watchCalendarEvents } from '../services/calendarService.js?v=20260713-11';
-import { openEventDetails, renderEventDetailsHost } from '../components/EventDetailsModal.js?v=20260713-11';
+import { icon } from '../components/icons.js?v=20260713-8';
+import { getUpcomingEvents, watchCalendarEvents } from '../services/calendarService.js?v=20260713-12';
+import { openEventDetails, renderEventDetailsHost } from '../components/EventDetailsModal.js?v=20260713-12';
 
 let homeEventsUnsubscribe;
 
 export function renderHome(root, navigate) {
   const cards = [
-    { route: 'mocidade', image: '/img/mocidade.png?v=4', icon: icon('music'), titleTop: 'Hinos da', titleMain: 'MOCIDADE' },
-    { combined: true, image: '/img/biblia.png?v=5', icon: icon('book'), titleTop: 'Bíblia Sagrada', titleMain: 'HARPA CRISTÃ' },
-    { route: 'ebd', image: '/img/Escolinhadominical.png?v=5', icon: icon('book'), titleTop: 'Escola Bíblica', titleMain: 'DOMINICAL' },
-    { route: 'calendar', image: '/img/calendario.png?v=4', icon: icon('calendar'), titleTop: 'Calendário', titleMain: 'ZURIEL' },
+    { route: 'mocidade', image: '/img/mocidade-card.jpg', icon: icon('music'), titleTop: 'Hinos da', titleMain: 'MOCIDADE' },
+    { combined: true, image: '/img/biblia-card.jpg', icon: icon('book'), titleTop: 'Bíblia Sagrada', titleMain: 'HARPA CRISTÃ' },
+    { route: 'ebd', image: '/img/escola-dominical-card.jpg', icon: icon('book'), titleTop: 'Escola Bíblica', titleMain: 'DOMINICAL' },
+    { route: 'calendar', image: '/img/calendario-card.jpg', icon: icon('calendar'), titleTop: 'Calendário', titleMain: 'ZURIEL' },
   ];
 
   root.innerHTML = `
     <section class="home-premium fade-in">
       <div class="banner-card">
-        <img src="img/bannerzuriel.png" alt="Banner Mocidade Zuriel">
+        <img src="img/banner-home.jpg" alt="Banner Mocidade Zuriel" width="1200" height="800" fetchpriority="high" decoding="async">
       </div>
 
       <div class="quick-title">

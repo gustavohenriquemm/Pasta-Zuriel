@@ -1,5 +1,5 @@
-import { listenCalendarEvents } from '../../database/firestore.js?v=20260708-21';
-import { SUNDAY_SCHOOL_LESSONS } from '../data/sundaySchoolLessons.js?v=20260713-11';
+import { listenCalendarEvents } from '../../database/firestore.js?v=20260713-32';
+import { SUNDAY_SCHOOL_LESSONS } from '../data/sundaySchoolLessons.js?v=20260713-12';
 
 const SUNDAY_EVENTS = [
   {

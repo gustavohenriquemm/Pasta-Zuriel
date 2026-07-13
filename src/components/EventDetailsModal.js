@@ -1,4 +1,4 @@
-import { icon } from './icons.js?v=20260713-7';
+import { icon } from './icons.js?v=20260713-8';
 
 export function renderEventDetailsHost() {
   return `

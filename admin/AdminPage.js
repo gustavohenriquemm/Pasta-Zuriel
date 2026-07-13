@@ -11,7 +11,7 @@ import {
   saveNotice,
   signInAdmin,
   signOutAdmin,
-} from '../database/firestore.js?v=20260713-31';
+} from '../database/firestore.js?v=20260713-32';
 import { getHymns } from '../src/services/hymnService.js';
 
 const DEFAULT_REHEARSAL = {

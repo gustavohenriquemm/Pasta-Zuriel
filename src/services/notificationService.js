@@ -45,8 +45,8 @@ export async function showSiteNotification(notification) {
     const registration = await navigator.serviceWorker.ready;
     await registration.showNotification(title, {
       body,
-      icon: '/img/logo.png',
-      badge: '/img/logo.png',
+      icon: '/img/logo-192.png',
+      badge: '/img/logo-192.png',
       data: { link: notification.link || '/#home' },
       tag: notification.id || notification.type || 'zuriel-update',
     });

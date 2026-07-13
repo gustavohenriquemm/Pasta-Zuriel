@@ -1,80 +1,75 @@
-const CACHE_NAME = 'igreja-zuriel-v47';
-const STATIC_FILES = [
-  '/',
+const CACHE_PREFIX = 'igreja-zuriel-';
+const CACHE_NAME = `${CACHE_PREFIX}v48`;
+const APP_SHELL = [
   '/index.html',
   '/manifest.json',
   '/css/style.css',
-  '/js/script.js',
-  '/styles/app.css',
-  '/src/app.js',
-  '/src/components/Layout.js',
-  '/src/components/icons.js',
-  '/src/components/EventDetailsModal.js',
-  '/src/pages/HomePage.js',
-  '/src/pages/BiblePage.js',
-  '/src/pages/HymnalPage.js',
-  '/src/pages/CalendarPage.js',
-  '/src/pages/SundaySchoolPage.js',
-  '/src/data/sundaySchoolLessons.js',
-  '/src/services/calendarService.js',
-  '/src/services/bibleService.js',
-  '/src/services/hymnService.js',
-  '/src/services/notificationService.js',
-  '/src/utils/cache.js',
-  '/src/utils/pwa.js',
-  '/src/hooks/useTheme.js',
-  '/authentication/firebase.js',
-  '/database/firestore.js',
-  '/admin/AdminPage.js',
-  '/config/firebase-config.js',
-  '/data/hymns/mocidade.seed.json',
-  '/img/i1.png',
-  '/img/i2.png',
-  '/img/logo.png',
-  '/img/bannerzuriel.png',
-  '/img/mocidade.jpg',
-  '/img/harpa.jpg',
-  '/img/biblia.jpg',
-  '/img/calendario.jpg',
-  '/img/mocidade.png',
-  '/img/harpa.png',
-  '/img/biblia.png',
-  '/img/calendario.png',
-  '/img/Escolinhadominical.png',
+  '/styles/app.css?v=20260713-13',
+  '/js/script.js?v=20260713-18',
+  '/img/logo-192.png',
 ];
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(STATIC_FILES))
-  );
+  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)));
   self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    caches.keys().then((names) => Promise.all(
-      names.filter((name) => name !== CACHE_NAME).map((name) => caches.delete(name))
-    ))
-  );
-  self.clients.claim();
+  event.waitUntil((async () => {
+    const names = await caches.keys();
+    const oldCaches = names.filter((name) => name.startsWith(CACHE_PREFIX) && name !== CACHE_NAME);
+    await Promise.all(oldCaches.map((name) => caches.delete(name)));
+    await self.clients.claim();
+    if (oldCaches.length) {
+      const windows = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
+      await Promise.all(windows.map((client) => client.navigate(client.url)));
+    }
+  })());
 });
 
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
+  const url = new URL(event.request.url);
+  if (url.origin !== self.location.origin) return;
 
-  event.respondWith(
-    caches.match(event.request).then((cached) => {
-      if (cached) return cached;
-      return fetch(event.request).then((response) => {
-        const copy = response.clone();
-        if (response.ok && new URL(event.request.url).origin === location.origin) {
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
-        }
-        return response;
-      });
-    })
-  );
+  if (event.request.mode === 'navigate') {
+    event.respondWith(networkFirst(event.request, '/index.html'));
+    return;
+  }
+
+  if (['script', 'style', 'worker', 'document'].includes(event.request.destination)) {
+    event.respondWith(networkFirst(event.request));
+    return;
+  }
+
+  event.respondWith(cacheFirst(event.request));
 });
+
+async function networkFirst(request, fallbackPath = '') {
+  try {
+    const response = await fetch(request, { cache: 'no-store' });
+    if (response.ok) {
+      const cache = await caches.open(CACHE_NAME);
+      await cache.put(request, response.clone());
+    }
+    return response;
+  } catch {
+    return (await caches.match(request))
+      || (fallbackPath ? await caches.match(fallbackPath) : undefined)
+      || Response.error();
+  }
+}
+
+async function cacheFirst(request) {
+  const cached = await caches.match(request);
+  if (cached) return cached;
+  const response = await fetch(request);
+  if (response.ok) {
+    const cache = await caches.open(CACHE_NAME);
+    await cache.put(request, response.clone());
+  }
+  return response;
+}
 
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
@@ -87,6 +82,6 @@ self.addEventListener('notificationclick', (event) => {
         return existing.focus();
       }
       return self.clients.openWindow(target);
-    })
+    }),
   );
 });
