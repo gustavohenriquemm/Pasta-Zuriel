@@ -1,8 +1,12 @@
 const crypto = require('node:crypto');
-const { cert, getApps, initializeApp } = require('firebase-admin/app');
-const { getAuth } = require('firebase-admin/auth');
-const { FieldValue, getFirestore } = require('firebase-admin/firestore');
-const { getMessaging } = require('firebase-admin/messaging');
+
+let cert;
+let getApps;
+let initializeApp;
+let getAuth;
+let FieldValue;
+let getFirestore;
+let getMessaging;
 
 module.exports = async function handler(request, response) {
   response.setHeader('Cache-Control', 'no-store');
@@ -105,6 +109,7 @@ async function broadcast(notification) {
 }
 
 function ensureFirebaseAdmin() {
+  loadFirebaseAdminModules();
   if (getApps().length) return;
   const projectId = String(process.env.FIREBASE_PROJECT_ID || '').trim();
   const clientEmail = String(process.env.FIREBASE_CLIENT_EMAIL || '').trim();
@@ -113,6 +118,14 @@ function ensureFirebaseAdmin() {
     throw new Error('Firebase Admin não configurado.');
   }
   initializeApp({ credential: cert({ projectId, clientEmail, privateKey }) });
+}
+
+function loadFirebaseAdminModules() {
+  if (getApps) return;
+  ({ cert, getApps, initializeApp } = require('firebase-admin/app'));
+  ({ getAuth } = require('firebase-admin/auth'));
+  ({ FieldValue, getFirestore } = require('firebase-admin/firestore'));
+  ({ getMessaging } = require('firebase-admin/messaging'));
 }
 
 function validateToken(value) {
