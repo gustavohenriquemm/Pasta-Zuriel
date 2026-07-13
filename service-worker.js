@@ -1,10 +1,10 @@
 const CACHE_PREFIX = 'igreja-zuriel-';
-const CACHE_NAME = `${CACHE_PREFIX}v50`;
+const CACHE_NAME = `${CACHE_PREFIX}v51`;
 const APP_SHELL = [
   '/index.html',
   '/manifest.json',
   '/css/style.css',
-  '/styles/app.css?v=20260713-14',
+  '/styles/app.css?v=20260713-15',
   '/js/script.js?v=20260713-19',
   '/img/logo-192.png',
 ];
