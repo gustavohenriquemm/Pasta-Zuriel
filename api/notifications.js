@@ -27,7 +27,11 @@ module.exports = async function handler(request, response) {
     console.error('Notification API error:', error);
     const status = Number(error.statusCode || 500);
     const publicError = status >= 500 ? classifyServerError(error) : { message: error.message };
-    return response.status(status).json({ error: publicError.message, code: publicError.code });
+    return response.status(status).json({
+      error: publicError.message,
+      code: publicError.code,
+      diagnostic: status >= 500 ? getSafeDiagnostic(error) : undefined,
+    });
   }
 };
 
@@ -167,6 +171,13 @@ function classifyServerError(error) {
   return {
     code: 'notification-server-error',
     message: 'O servidor não conseguiu iniciar o Firebase para enviar a notificação.',
+  };
+}
+
+function getSafeDiagnostic(error) {
+  return {
+    name: String(error?.name || 'Error').slice(0, 80),
+    code: String(error?.code || 'no-code').slice(0, 120),
   };
 }
 
