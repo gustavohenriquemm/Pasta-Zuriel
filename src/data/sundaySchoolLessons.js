@@ -1,0 +1,30 @@
+export const SUNDAY_SCHOOL_LESSONS = [
+  {
+    number: 1,
+    date: '2026-07-08',
+    title: 'Conhecendo os Livros Poéticos',
+    studyUrl: 'https://marcosandreclubdateologia.blogspot.com/2026/07/escola-dominical-betel-conectar-licao-1.html',
+  },
+  {
+    number: 2,
+    date: '2026-07-12',
+    title: 'O Livro de Jó',
+    studyUrl: 'https://marcosandreclubdateologia.blogspot.com/2026/07/escola-dominical-betel-licao-2-3-trim_01001359562.html',
+  },
+  {
+    number: 3,
+    date: '2026-07-19',
+    title: 'Jó, um Homem Reto e Temente a Deus',
+    studyUrl: 'https://marcosandreclubdateologia.blogspot.com/2026/07/escola-dominical-betel-conectar-licao-3.html',
+  },
+  { number: 4, date: '2026-07-26', title: 'As Acusações dos Amigos de Jó' },
+  { number: 5, date: '2026-08-02', title: 'Da Tempestade à Calmaria' },
+  { number: 6, date: '2026-08-09', title: 'O Livro de Salmos' },
+  { number: 7, date: '2026-08-16', title: 'A Pedagogia dos Salmos' },
+  { number: 8, date: '2026-08-23', title: 'Bom é Louvar ao Senhor' },
+  { number: 9, date: '2026-08-30', title: 'O Livro de Provérbios' },
+  { number: 10, date: '2026-09-06', title: 'O Chamado à Prudência' },
+  { number: 11, date: '2026-09-13', title: 'Aprendendo sobre Amizade, Lascívia e Ética' },
+  { number: 12, date: '2026-09-20', title: 'O Livro de Eclesiastes' },
+  { number: 13, date: '2026-09-27', title: 'Cantares de Salomão' },
+];

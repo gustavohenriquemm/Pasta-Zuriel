@@ -1,4 +1,4 @@
-import { getFirebase } from '../authentication/firebase.js';
+import { getFirebase } from '../authentication/firebase.js?v=20260713-13';
 
 export async function signInAdmin(email, password) {
   const firebase = await getFirebase();
@@ -66,8 +66,36 @@ export function listenNotices(callback) {
     const { collection, onSnapshot } = firebase.firestoreModule;
     const ref = collection(firebase.db, 'notices');
     unsubscribe = onSnapshot(ref, (snapshot) => {
-      callback(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
+      callback(snapshot.docs
+        .map((document) => ({ id: document.id, ...document.data() }))
+        .filter((item) => item.notificationOnly !== true));
     }, () => callback([]));
+  });
+  return () => unsubscribe?.();
+}
+
+export function listenNotifications(callback) {
+  let unsubscribe;
+  let initialized = false;
+  getFirebase().then((firebase) => {
+    if (!firebase) return callback([], [], false);
+    const { collection, onSnapshot } = firebase.firestoreModule;
+    const ref = collection(firebase.db, 'notices');
+    unsubscribe = onSnapshot(ref, (snapshot) => {
+      const items = snapshot.docs
+        .map((document) => ({ id: document.id, ...document.data() }))
+        .filter((item) => item.notificationOnly === true)
+        .sort((a, b) => Number(b.updatedAt || 0) - Number(a.updatedAt || 0))
+        .slice(0, 50);
+      const changes = initialized
+        ? snapshot.docChanges()
+          .filter((change) => change.type === 'added' || change.type === 'modified')
+          .map((change) => ({ id: change.doc.id, ...change.doc.data() }))
+          .filter((item) => item.notificationOnly === true)
+        : [];
+      callback(items, changes, initialized);
+      initialized = true;
+    }, () => callback([], [], initialized));
   });
   return () => unsubscribe?.();
 }
@@ -98,10 +126,16 @@ export async function deleteHymn(collectionName, id) {
 export async function saveCalendarEvent(event) {
   const firebase = await getFirebase();
   if (!firebase) throw new Error('Firebase ainda nao configurado.');
-  const { collection, doc, setDoc } = firebase.firestoreModule;
+  const { collection, doc, writeBatch } = firebase.firestoreModule;
+  const isNew = !event.id;
   const id = event.id || `event-${Date.now()}`;
+  const updatedAt = Date.now();
   try {
-    await setDoc(doc(collection(firebase.db, 'calendarEvents'), id), { ...event, id, updatedAt: Date.now() });
+    const batch = writeBatch(firebase.db);
+    batch.set(doc(collection(firebase.db, 'calendarEvents'), id), { ...event, id, updatedAt });
+    const notification = buildEventNotification({ ...event, id, updatedAt }, isNew);
+    batch.set(doc(collection(firebase.db, 'notices'), createNotificationId(updatedAt)), notification);
+    await batch.commit();
   } catch (error) {
     throw new Error(getFriendlyFirestoreError(error));
   }
@@ -110,9 +144,25 @@ export async function saveCalendarEvent(event) {
 export async function deleteCalendarEvent(id) {
   const firebase = await getFirebase();
   if (!firebase) throw new Error('Firebase ainda nao configurado.');
-  const { doc, deleteDoc } = firebase.firestoreModule;
+  const { collection, doc, getDoc, writeBatch } = firebase.firestoreModule;
   try {
-    await deleteDoc(doc(firebase.db, 'calendarEvents', id));
+    const eventRef = doc(firebase.db, 'calendarEvents', id);
+    const snapshot = await getDoc(eventRef);
+    const event = snapshot.exists() ? { id, ...snapshot.data() } : { id, title: 'Evento' };
+    const updatedAt = Date.now();
+    const batch = writeBatch(firebase.db);
+    batch.delete(eventRef);
+    batch.set(doc(collection(firebase.db, 'notices'), createNotificationId(updatedAt)), {
+      title: isRehearsalEvent(event) ? 'Ensaio cancelado' : 'Evento cancelado',
+      body: event.title || 'Um evento foi removido do calendário.',
+      type: isRehearsalEvent(event) ? 'rehearsal' : 'event',
+      sourceType: 'calendarEvent',
+      sourceId: id,
+      link: '/#calendar',
+      updatedAt,
+      notificationOnly: true,
+    });
+    await batch.commit();
   } catch (error) {
     throw new Error(getFriendlyFirestoreError(error));
   }
@@ -121,10 +171,24 @@ export async function deleteCalendarEvent(id) {
 export async function saveNotice(notice) {
   const firebase = await getFirebase();
   if (!firebase) throw new Error('Firebase ainda nao configurado.');
-  const { collection, doc, setDoc } = firebase.firestoreModule;
+  const { collection, doc, writeBatch } = firebase.firestoreModule;
+  const isNew = !notice.id;
   const id = notice.id || `notice-${Date.now()}`;
+  const updatedAt = Date.now();
   try {
-    await setDoc(doc(collection(firebase.db, 'notices'), id), { ...notice, id, updatedAt: Date.now() });
+    const batch = writeBatch(firebase.db);
+    batch.set(doc(collection(firebase.db, 'notices'), id), { ...notice, id, updatedAt });
+    batch.set(doc(collection(firebase.db, 'notices'), createNotificationId(updatedAt)), {
+      title: isNew ? 'Novo aviso' : 'Aviso atualizado',
+      body: `${notice.title || 'Aviso'}: ${notice.message || ''}`.trim(),
+      type: 'notice',
+      sourceType: 'notice',
+      sourceId: id,
+      link: '/#home',
+      updatedAt,
+      notificationOnly: true,
+    });
+    await batch.commit();
   } catch (error) {
     throw new Error(getFriendlyFirestoreError(error));
   }
@@ -133,12 +197,65 @@ export async function saveNotice(notice) {
 export async function deleteNotice(id) {
   const firebase = await getFirebase();
   if (!firebase) throw new Error('Firebase ainda nao configurado.');
-  const { doc, deleteDoc } = firebase.firestoreModule;
+  const { collection, doc, getDoc, writeBatch } = firebase.firestoreModule;
   try {
-    await deleteDoc(doc(firebase.db, 'notices', id));
+    const noticeRef = doc(firebase.db, 'notices', id);
+    const snapshot = await getDoc(noticeRef);
+    const notice = snapshot.exists() ? snapshot.data() : {};
+    const updatedAt = Date.now();
+    const batch = writeBatch(firebase.db);
+    batch.delete(noticeRef);
+    batch.set(doc(collection(firebase.db, 'notices'), createNotificationId(updatedAt)), {
+      title: 'Aviso removido',
+      body: notice.title || 'Um aviso foi removido.',
+      type: 'notice',
+      sourceType: 'notice',
+      sourceId: id,
+      link: '/#home',
+      updatedAt,
+      notificationOnly: true,
+    });
+    await batch.commit();
   } catch (error) {
     throw new Error(getFriendlyFirestoreError(error));
   }
+}
+
+function buildEventNotification(event, isNew) {
+  const rehearsal = isRehearsalEvent(event);
+  const schedule = formatEventSchedule(event);
+  const details = rehearsal
+    ? [schedule, event.conductor ? `Regente: ${event.conductor}` : '', event.rehearsalHymn ? `Hino: ${event.rehearsalHymn}` : ''].filter(Boolean).join(' · ')
+    : [event.title || 'Evento', schedule].filter(Boolean).join(' · ');
+  return {
+    title: rehearsal ? (isNew ? 'Novo ensaio' : 'Ensaio atualizado') : (isNew ? 'Novo evento' : 'Evento atualizado'),
+    body: details,
+    type: rehearsal ? 'rehearsal' : 'event',
+    sourceType: 'calendarEvent',
+    sourceId: event.id,
+    link: '/#calendar',
+    updatedAt: event.updatedAt,
+    notificationOnly: true,
+  };
+}
+
+function isRehearsalEvent(event) {
+  return event.eventType === 'rehearsal'
+    || String(event.title || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes('ensaio');
+}
+
+function formatEventSchedule(event) {
+  const date = event.recurrence === 'sundays' ? 'Todos os domingos' : formatDateKey(event.date);
+  return [date, event.time ? `às ${event.time}` : ''].filter(Boolean).join(' ');
+}
+
+function formatDateKey(value) {
+  const match = String(value || '').match(/^(\d{4})-(\d{2})-(\d{2})/);
+  return match ? `${match[3]}/${match[2]}/${match[1]}` : '';
+}
+
+function createNotificationId(timestamp) {
+  return `notification-${timestamp}-${Math.random().toString(36).slice(2, 8)}`;
 }
 
 function getFriendlyAuthError(error) {

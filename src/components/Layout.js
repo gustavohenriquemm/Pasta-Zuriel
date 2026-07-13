@@ -1,7 +1,15 @@
 import { icon } from './icons.js?v=20260708-5';
-import { listenNotices } from '../../database/firestore.js?v=20260708-30';
+import { listenNotices, listenNotifications } from '../../database/firestore.js?v=20260713-31';
+import {
+  enableNotifications,
+  getNotificationsLastSeen,
+  getNotificationStatus,
+  markNotificationsRead,
+  showSiteNotification,
+} from '../services/notificationService.js?v=20260713-14';
 
 let noticesUnsubscribe;
+let notificationsUnsubscribe;
 let activeNotices = [];
 let autoNoticeOpened = false;
 
@@ -25,6 +33,7 @@ export function renderLayout(root, activeRoute, navigate) {
         <button data-route="mocidade">${icon('music')} Hinos da Mocidade</button>
         <button data-route="harpa">${icon('harp')} Hinos da Harpa</button>
         <button data-route="bible">${icon('book')} Biblia</button>
+        <button data-route="ebd">${icon('book')} Escola Bíblica Dominical</button>
         <button data-route="calendar">${icon('calendar')} Calendario</button>
         <button data-route="admin">${icon('user')} Perfil/Admin</button>
       </aside>
@@ -66,30 +75,36 @@ function bindNotices(root) {
   const screen = root.querySelector('[data-public-modal-screen]');
   const modal = root.querySelector('[data-public-notice-modal]');
 
+  const getFeed = () => buildNotificationFeed([], activeNotices);
+  const getUnread = () => getFeed().filter((item) => Number(item.updatedAt || 0) > getNotificationsLastSeen());
   const renderBadge = () => {
-    badge.textContent = String(activeNotices.length);
-    badge.classList.toggle('hidden', activeNotices.length === 0);
-    button.classList.toggle('has-notices', activeNotices.length > 0);
-    button.setAttribute('aria-label', activeNotices.length ? `${activeNotices.length} aviso(s)` : 'Avisos');
+    const unreadCount = getUnread().length;
+    badge.textContent = String(unreadCount);
+    badge.classList.toggle('hidden', unreadCount === 0);
+    button.classList.toggle('has-notices', unreadCount > 0);
+    button.setAttribute('aria-label', unreadCount ? `${unreadCount} notificação(ões) não lida(s)` : 'Notificações');
   };
   const closeNotices = () => {
     screen.classList.add('hidden');
     document.body.classList.remove('modal-open');
   };
   const openNotices = () => {
+    const feed = getFeed();
     modal.innerHTML = `
       <header>
-        <h2>Aviso</h2>
+        <h2>Avisos</h2>
       </header>
       <div class="notice-list">
-        ${activeNotices.length ? activeNotices.map((notice) => `
+        ${feed.length ? feed.map((notice) => `
           <article>
-            <strong>${escapeHtml(notice.title || 'Aviso Importante')}</strong>
-            <time>${escapeHtml(formatNoticeDate(notice))}</time>
-            <p>${escapeHtml(notice.message || '')}</p>
+            <strong>${escapeHtml(notice.title || 'Atualização')}</strong>
+            <time>${escapeHtml(formatNotificationDate(notice))}</time>
+            <p>${escapeHtml(notice.body || notice.message || '')}</p>
+            ${notice.link ? `<button class="plain-button notification-link" type="button" data-notification-link="${escapeHtml(notice.link)}">Ver detalhes</button>` : ''}
           </article>
-        `).join('') : '<article><strong>Nenhum aviso ativo</strong><p>Quando houver um aviso da igreja, ele aparecera aqui.</p></article>'}
+        `).join('') : '<article><strong>Nenhum aviso ativo</strong><p>Os avisos cadastrados pela igreja aparecerão aqui.</p></article>'}
       </div>
+      ${renderNotificationPermission()}
       <div class="form-actions">
         <button class="plain-button" data-close-notice>Fechar</button>
         <button class="primary-button" data-close-notice>Entendi</button>
@@ -97,9 +112,66 @@ function bindNotices(root) {
     `;
     screen.classList.remove('hidden');
     document.body.classList.add('modal-open');
+    markNotificationsRead();
+    renderBadge();
     modal.querySelectorAll('[data-close-notice]').forEach((item) => item.addEventListener('click', () => {
       closeNotices();
     }));
+    modal.querySelectorAll('[data-notification-link]').forEach((item) => item.addEventListener('click', () => {
+      const route = String(item.dataset.notificationLink || '').split('#')[1] || 'home';
+      closeNotices();
+      navigate(route);
+    }));
+    const notificationButton = modal.querySelector('[data-enable-notifications]');
+    notificationButton?.addEventListener('click', async () => {
+      const status = modal.querySelector('[data-notification-permission-status]');
+      notificationButton.disabled = true;
+      status.textContent = 'Ativando notificações...';
+      try {
+        const result = await enableNotifications();
+        status.textContent = result.message;
+        notificationButton.textContent = 'Notificações ativadas';
+      } catch (error) {
+        status.textContent = error.message || 'Não foi possível ativar as notificações.';
+        notificationButton.disabled = false;
+      }
+    });
+  };
+  const openNotificationPermissionPrompt = () => {
+    sessionStorage.setItem('zuriel:notification-permission-prompt-shown', 'true');
+    modal.innerHTML = `
+      <header>
+        <h2>Ativar notificações?</h2>
+      </header>
+      <article class="notification-permission-card permission-entry-card">
+        <div>
+          <strong>Receba as atualizações da igreja</strong>
+          <p data-notification-permission-status>Permita as notificações para receber avisos de ensaios, hinos e eventos na barra do seu celular ou computador enquanto o site estiver aberto.</p>
+        </div>
+      </article>
+      <div class="form-actions">
+        <button class="plain-button" type="button" data-skip-notifications>Agora não</button>
+        <button class="primary-button" type="button" data-allow-notifications>Permitir notificações</button>
+      </div>
+    `;
+    screen.classList.remove('hidden');
+    document.body.classList.add('modal-open');
+    modal.querySelector('[data-skip-notifications]').addEventListener('click', closeNotices);
+    modal.querySelector('[data-allow-notifications]').addEventListener('click', async (event) => {
+      const allowButton = event.currentTarget;
+      const status = modal.querySelector('[data-notification-permission-status]');
+      allowButton.disabled = true;
+      status.textContent = 'Aguardando sua permissão...';
+      try {
+        const result = await enableNotifications();
+        status.textContent = result.message;
+        allowButton.textContent = 'Notificações ativadas';
+        setTimeout(closeNotices, 900);
+      } catch (error) {
+        status.textContent = error.message || 'Não foi possível ativar as notificações.';
+        allowButton.disabled = false;
+      }
+    });
   };
 
   screen.addEventListener('click', (event) => {
@@ -107,13 +179,37 @@ function bindNotices(root) {
   });
   button.addEventListener('click', () => openNotices());
   renderBadge();
-  if (shouldAutoOpenNotices(activeNotices)) openNotices();
   noticesUnsubscribe?.();
   noticesUnsubscribe = listenNotices((notices) => {
     activeNotices = notices.filter(isNoticeActive);
     renderBadge();
-    if (shouldAutoOpenNotices(activeNotices)) openNotices();
   });
+  notificationsUnsubscribe?.();
+  notificationsUnsubscribe = listenNotifications((notifications, changes, initialized) => {
+    if (initialized) changes.slice(0, 3).forEach((notification) => showSiteNotification(notification));
+    if (screen.classList.contains('hidden') && shouldAutoOpenNotices(getUnread())) openNotices();
+  });
+  if (
+    getNotificationStatus().state === 'available'
+    && sessionStorage.getItem('zuriel:notification-permission-prompt-shown') !== 'true'
+  ) {
+    openNotificationPermissionPrompt();
+  }
+}
+
+function renderNotificationPermission() {
+  const status = getNotificationStatus();
+  const canEnable = status.state === 'available';
+  const enabled = status.state === 'enabled';
+  return `
+    <article class="notification-permission-card">
+      <div>
+        <strong>Avisos com o site aberto</strong>
+        <p data-notification-permission-status>${escapeHtml(status.message)}</p>
+      </div>
+      <button class="primary-button" type="button" data-enable-notifications ${canEnable ? '' : 'disabled'}>${enabled ? 'Notificações ativadas' : 'Ativar notificações'}</button>
+    </article>
+  `;
 }
 
 function isNoticeActive(notice) {
@@ -128,6 +224,28 @@ function shouldAutoOpenNotices(notices) {
   if (!notices.length || autoNoticeOpened) return false;
   autoNoticeOpened = true;
   return true;
+}
+
+function buildNotificationFeed(notifications, notices) {
+  const coveredNoticeIds = new Set(
+    notifications.filter((item) => item.sourceType === 'notice').map((item) => item.sourceId),
+  );
+  const legacyNotices = notices
+    .filter((notice) => !coveredNoticeIds.has(notice.id))
+    .map((notice) => ({
+      id: `notice-${notice.id}`,
+      title: notice.title || 'Aviso importante',
+      body: notice.message || '',
+      type: 'notice',
+      sourceType: 'notice',
+      sourceId: notice.id,
+      link: '/#home',
+      updatedAt: Number(notice.updatedAt || 0),
+      startDate: notice.startDate,
+    }));
+  return [...notifications, ...legacyNotices]
+    .sort((a, b) => Number(b.updatedAt || 0) - Number(a.updatedAt || 0))
+    .slice(0, 30);
 }
 
 function getLocalDateKey() {
@@ -154,8 +272,12 @@ function escapeHtml(value) {
   return String(value || '').replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[char]));
 }
 
-function formatNoticeDate(notice) {
-  const key = normalizeDateKey(notice.startDate) || getLocalDateKey();
+function formatNotificationDate(notification) {
+  const timestamp = Number(notification.updatedAt || 0);
+  if (timestamp) {
+    return new Date(timestamp).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+  }
+  const key = normalizeDateKey(notification.startDate) || getLocalDateKey();
   const [year, month, day] = key.split('-').map(Number);
   return new Date(year, month - 1, day).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
 }

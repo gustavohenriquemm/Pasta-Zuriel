@@ -19,9 +19,11 @@ export function watchHymns(collection, onChange) {
 
 function normalizeHarpaHymn(number, hymn) {
   const title = String(hymn.hino || '').replace(/^\d+\s*-\s*/, '').trim();
-  const verses = Object.values(hymn.verses || {});
-  const chorus = hymn.coro ? [`Coro:\n${htmlToText(hymn.coro)}`] : [];
-  const lyrics = [...verses.map(htmlToText), ...chorus].join('\n\n');
+  const verses = Object.values(hymn.verses || {}).map(htmlToText).filter(Boolean);
+  const chorus = htmlToText(hymn.coro);
+  const lyrics = verses
+    .flatMap((verse) => chorus ? [verse, `Coro:\n${chorus}`] : [verse])
+    .join('\n\n');
   return {
     id: `harpa-${number}`,
     number: Number(number),

@@ -1,15 +1,7 @@
 import { listenCalendarEvents } from '../../database/firestore.js?v=20260708-21';
+import { SUNDAY_SCHOOL_LESSONS } from '../data/sundaySchoolLessons.js?v=20260713-11';
 
 const SUNDAY_EVENTS = [
-  {
-    id: 'recurring-sunday-school',
-    title: 'Escolinha Dominical',
-    time: '08:30',
-    location: 'Sede da Igreja',
-    color: '#FFC107',
-    recurrence: 'sundays',
-    icon: '📖',
-  },
   {
     id: 'recurring-youth-rehearsal',
     title: 'Ensaio da Mocidade',
@@ -17,6 +9,7 @@ const SUNDAY_EVENTS = [
     location: 'Sede da Igreja',
     color: '#FFC107',
     recurrence: 'sundays',
+    eventType: 'rehearsal',
     icon: '🎶',
   },
 ];
@@ -27,14 +20,32 @@ export function watchCalendarEvents(callback) {
 
 export function getEventsForDate(date, remoteEvents = []) {
   const dateKey = toDateKey(date);
-  const events = [];
+  const events = SUNDAY_SCHOOL_LESSONS
+    .filter((lesson) => lesson.date === dateKey)
+    .map((lesson) => ({
+      id: `sunday-school-lesson-${lesson.number}`,
+      title: `Escola Bíblica Dominical - Lição ${lesson.number}`,
+      date: lesson.date,
+      time: '08:30',
+      location: 'Sede da Igreja',
+      color: '#FFC107',
+      eventType: 'sunday-school',
+      lessonNumber: lesson.number,
+      lessonTitle: lesson.title,
+      lessonUrl: lesson.studyUrl || '',
+      icon: '📖',
+      fixed: true,
+    }));
+  const remoteEventsForDay = remoteEvents.filter((event) => event.recurrence === 'sundays'
+    ? date.getDay() === 0
+    : event.date === dateKey);
+  const hasRehearsalOverride = remoteEventsForDay.some(isRehearsal);
   if (date.getDay() === 0) {
-    events.push(...SUNDAY_EVENTS.map((event) => ({ ...event, date: dateKey, recurring: true })));
+    events.push(...SUNDAY_EVENTS
+      .filter((event) => !(event.eventType === 'rehearsal' && hasRehearsalOverride))
+      .map((event) => ({ ...event, date: dateKey, recurring: true })));
   }
-  remoteEvents.forEach((event) => {
-    if (event.recurrence === 'sundays' && date.getDay() === 0) events.push(event);
-    else if (event.date === dateKey) events.push(event);
-  });
+  events.push(...remoteEventsForDay.map((event) => ({ ...event, date: dateKey })));
   return events.sort((a, b) => String(a.time || '').localeCompare(String(b.time || '')));
 }
 
@@ -84,4 +95,9 @@ export function formatDate(date) {
 
 function compareEvents(a, b) {
   return `${a.date || ''} ${a.time || ''}`.localeCompare(`${b.date || ''} ${b.time || ''}`);
+}
+
+function isRehearsal(event) {
+  return event.eventType === 'rehearsal'
+    || String(event.title || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes('ensaio');
 }

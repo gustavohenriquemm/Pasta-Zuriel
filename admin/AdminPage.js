@@ -11,8 +11,23 @@ import {
   saveNotice,
   signInAdmin,
   signOutAdmin,
-} from '../database/firestore.js?v=20260708-30';
+} from '../database/firestore.js?v=20260713-31';
 import { getHymns } from '../src/services/hymnService.js';
+
+const DEFAULT_REHEARSAL = {
+  id: 'recurring-youth-rehearsal',
+  title: 'Ensaio da Mocidade',
+  date: '',
+  time: '11:00',
+  recurrence: 'sundays',
+  location: '',
+  eventType: 'rehearsal',
+  conductor: '',
+  rehearsalHymn: '',
+  notes: '',
+  color: '#FFC107',
+  isDefaultTemplate: true,
+};
 
 export function renderAdmin(root) {
   root.innerHTML = `
@@ -63,7 +78,7 @@ function renderEditor(content, user) {
   content.innerHTML = `
     <div class="tabs">
       <button class="tab active" data-view="hymns" data-collection="mocidade">Mocidade</button>
-      <button class="tab" data-view="calendar">Calendario</button>
+      <button class="tab" data-view="calendar">Calendário / Ensaios</button>
       <button class="tab" data-view="notices">Avisos <span data-active-count></span></button>
       <button class="plain-button" data-logout>Sair</button>
     </div>
@@ -86,11 +101,20 @@ function renderEditor(content, user) {
       <form class="app-modal hidden" data-event-form>
         <h2 data-event-modal-title>Cadastrar Evento</h2>
         <input type="hidden" id="event-id">
+        <div class="field"><label for="event-type">Tipo de evento</label><select id="event-type"><option value="general">Evento geral</option><option value="rehearsal">Ensaio da Mocidade</option></select></div>
         <div class="field"><label for="event-title">Descricao</label><input id="event-title" required></div>
         <div class="field"><label for="event-date">Data</label><input id="event-date" type="date"></div>
         <div class="field"><label for="event-time">Horario</label><input id="event-time" type="time" required></div>
         <div class="field"><label for="event-recurrence">Recorrencia</label><select id="event-recurrence"><option value="none">Somente nesta data</option><option value="sundays">Todos os domingos</option></select></div>
-        <div class="field"><label for="event-location">Local</label><input id="event-location"></div>
+        <div class="field" data-general-only><label for="event-location">Local</label><input id="event-location"></div>
+        <div class="field hidden" data-rehearsal-only><label for="event-conductor">Quem vai reger?</label><select id="event-conductor"><option value="">Selecione a regente</option><option value="Yasmin">Yasmin</option><option value="Bia">Bia</option><option value="Renata">Renata</option></select></div>
+        <div class="field hidden hymn-search-field" data-rehearsal-only>
+          <label for="event-hymn-search">Hino que será ensaiado</label>
+          <input id="event-hymn-search" autocomplete="off" placeholder="Digite o número ou nome do hino">
+          <input id="event-hymn-id" type="hidden">
+          <div class="hymn-search-results hidden" data-hymn-search-results></div>
+          <small>Digite e selecione um hino da lista.</small>
+        </div>
         <div class="field"><label for="event-notes">Observacoes</label><textarea id="event-notes"></textarea></div>
         <div class="field"><label for="event-color">Cor do evento</label><input id="event-color" type="color" value="#FFC107"></div>
         <div class="form-actions">
@@ -132,6 +156,7 @@ function renderEditor(content, user) {
     notice: content.querySelector('[data-notice-form]'),
     confirm: content.querySelector('[data-confirm-modal]'),
   };
+  let rehearsalHymnOptions = [];
 
   content.querySelector('[data-logout]').addEventListener('click', () => signOutAdmin().then(() => location.reload()));
   content.querySelectorAll('[data-close-modal]').forEach((button) => button.addEventListener('click', () => closeModal(screen, forms)));
@@ -165,7 +190,7 @@ function renderEditor(content, user) {
     state.baseHymns = await getHymns(collection);
     listenHymns(collection, (items) => {
       state.hymns = items;
-      renderHymns();
+      if (content.querySelector('[data-view="hymns"]').classList.contains('active')) renderHymns();
     });
     renderHymns();
   }
@@ -233,38 +258,107 @@ function renderEditor(content, user) {
   });
 
   function renderEvents() {
+    const adminEvents = getAdminEvents(state.events);
     area.innerHTML = `
       <div class="admin-actions">
-        <h2>Calendario</h2>
+        <h2>Calendário e ensaios</h2>
         <button class="primary-button" data-new-event>Cadastrar Evento</button>
       </div>
       <div class="list admin-list">
-        ${state.events.length ? state.events.map((item) => `<button class="list-item" data-edit-event="${item.id}"><strong>${item.time || '--:--'} - ${escapeHtml(item.title || '')}</strong><span>${item.recurrence === 'sundays' ? 'Todos os domingos' : item.date || 'Sem data'}</span></button>`).join('') : '<p class="empty">Nenhum evento cadastrado.</p>'}
+        ${adminEvents.map((item) => `<button class="list-item ${isRehearsal(item) ? 'admin-rehearsal-item' : ''}" data-edit-event="${item.id}"><strong>${item.time || '--:--'} - ${escapeHtml(item.title || '')}</strong><span>${item.recurrence === 'sundays' ? 'Todos os domingos' : item.date || 'Sem data'}${isRehearsal(item) ? ` · Regente: ${escapeHtml(item.conductor || 'Não informada')} · Hino: ${escapeHtml(item.rehearsalHymn || 'Não informado')}` : ''}</span>${item.isDefaultTemplate ? '<em>Clique para adicionar a regente e o hino</em>' : ''}</button>`).join('')}
       </div>
     `;
     area.querySelector('[data-new-event]').addEventListener('click', () => openEventForm());
-    area.querySelectorAll('[data-edit-event]').forEach((button) => button.addEventListener('click', () => openEventForm(state.events.find((item) => item.id === button.dataset.editEvent))));
+    area.querySelectorAll('[data-edit-event]').forEach((button) => button.addEventListener('click', () => openEventForm(adminEvents.find((item) => item.id === button.dataset.editEvent))));
   }
 
   function openEventForm(item = null) {
     forms.event.querySelector('[data-event-modal-title]').textContent = item ? 'Editar Evento' : 'Cadastrar Evento';
     setValue(forms.event, '#event-id', item?.id);
+    setValue(forms.event, '#event-type', isRehearsal(item) ? 'rehearsal' : 'general');
     setValue(forms.event, '#event-title', item?.title);
     setValue(forms.event, '#event-date', item?.date);
     setValue(forms.event, '#event-time', item?.time);
     setValue(forms.event, '#event-recurrence', item?.recurrence || 'none');
     setValue(forms.event, '#event-location', item?.location);
+    setValue(forms.event, '#event-conductor', item?.conductor);
+    populateRehearsalHymns(item?.rehearsalHymnId, item?.rehearsalHymn);
     setValue(forms.event, '#event-notes', item?.notes);
     setValue(forms.event, '#event-color', item?.color || '#FFC107');
+    toggleRehearsalFields();
     openModal(screen, forms, forms.event);
   }
+
+  function toggleRehearsalFields() {
+    const rehearsal = forms.event.querySelector('#event-type').value === 'rehearsal';
+    forms.event.querySelectorAll('[data-rehearsal-only]').forEach((field) => field.classList.toggle('hidden', !rehearsal));
+    forms.event.querySelectorAll('[data-general-only]').forEach((field) => field.classList.toggle('hidden', rehearsal));
+    forms.event.querySelector('#event-conductor').required = rehearsal;
+    forms.event.querySelector('#event-hymn-search').required = rehearsal;
+    if (rehearsal && !forms.event.querySelector('#event-title').value.trim()) {
+      forms.event.querySelector('#event-title').value = 'Ensaio da Mocidade';
+    }
+  }
+
+  forms.event.querySelector('#event-type').addEventListener('change', toggleRehearsalFields);
+
+  function populateRehearsalHymns(selectedId = '', legacyTitle = '') {
+    const hymns = mergeByNumber(state.baseHymns, state.hymns.filter(isValidRemoteHymn));
+    rehearsalHymnOptions = hymns.map((hymn) => ({
+      id: hymn.id,
+      label: `${String(hymn.number).padStart(3, '0')} - ${hymn.title}`,
+      search: normalizeText(`${hymn.number} ${hymn.title}`),
+    }));
+    const legacyMatch = !selectedId && legacyTitle
+      ? hymns.find((hymn) => normalizeText(legacyTitle).includes(normalizeText(hymn.title)))
+      : null;
+    const selected = rehearsalHymnOptions.find((hymn) => hymn.id === (selectedId || legacyMatch?.id));
+    forms.event.querySelector('#event-hymn-id').value = selected?.id || '';
+    forms.event.querySelector('#event-hymn-search').value = selected?.label || '';
+    forms.event.querySelector('[data-hymn-search-results]').classList.add('hidden');
+  }
+
+  function renderHymnSearchResults(query) {
+    const results = forms.event.querySelector('[data-hymn-search-results]');
+    const normalizedQuery = normalizeText(query);
+    const matches = rehearsalHymnOptions
+      .filter((hymn) => !normalizedQuery || hymn.search.includes(normalizedQuery))
+      .slice(0, 10);
+    results.innerHTML = matches.length
+      ? matches.map((hymn) => `<button type="button" data-select-rehearsal-hymn="${escapeAttr(hymn.id)}"><strong>${escapeHtml(hymn.label)}</strong></button>`).join('')
+      : '<p class="hymn-search-empty">Hino não encontrado. Caso o hino não apareça, adicione-o primeiro na área Hinos da Mocidade para ser mostrado aqui.</p>';
+    results.classList.remove('hidden');
+  }
+
+  const hymnSearch = forms.event.querySelector('#event-hymn-search');
+  hymnSearch.addEventListener('focus', () => renderHymnSearchResults(hymnSearch.value));
+  hymnSearch.addEventListener('input', () => {
+    forms.event.querySelector('#event-hymn-id').value = '';
+    renderHymnSearchResults(hymnSearch.value);
+  });
+  forms.event.querySelector('[data-hymn-search-results]').addEventListener('click', (event) => {
+    const button = event.target.closest('[data-select-rehearsal-hymn]');
+    if (!button) return;
+    const selected = rehearsalHymnOptions.find((hymn) => hymn.id === button.dataset.selectRehearsalHymn);
+    if (!selected) return;
+    forms.event.querySelector('#event-hymn-id').value = selected.id;
+    hymnSearch.value = selected.label;
+    forms.event.querySelector('[data-hymn-search-results]').classList.add('hidden');
+  });
 
   forms.event.addEventListener('submit', async (event) => {
     event.preventDefault();
     const recurrence = forms.event.querySelector('#event-recurrence').value;
     const date = forms.event.querySelector('#event-date').value;
+    const eventType = forms.event.querySelector('#event-type').value;
+    const selectedHymnId = forms.event.querySelector('#event-hymn-id').value;
+    const selectedHymn = rehearsalHymnOptions.find((hymn) => hymn.id === selectedHymnId);
     if (recurrence === 'none' && !date) {
       showToast('Escolha uma data para o evento.');
+      return;
+    }
+    if (eventType === 'rehearsal' && !selectedHymn) {
+      showToast('Selecione um hino da lista. Se ele não aparecer, adicione-o primeiro na área Hinos da Mocidade.');
       return;
     }
     try {
@@ -274,7 +368,11 @@ function renderEditor(content, user) {
         date,
         time: forms.event.querySelector('#event-time').value,
         recurrence,
-        location: forms.event.querySelector('#event-location').value.trim(),
+        location: eventType === 'rehearsal' ? '' : forms.event.querySelector('#event-location').value.trim(),
+        eventType,
+        conductor: eventType === 'rehearsal' ? forms.event.querySelector('#event-conductor').value : '',
+        rehearsalHymnId: eventType === 'rehearsal' ? selectedHymn.id : '',
+        rehearsalHymn: eventType === 'rehearsal' ? selectedHymn.label : '',
         notes: forms.event.querySelector('#event-notes').value.trim(),
         color: forms.event.querySelector('#event-color').value,
       });
@@ -381,6 +479,21 @@ function mergeByNumber(base, remote) {
 function isValidRemoteHymn(hymn) {
   const suffix = String(hymn.id || '').match(/-(\d+)$/)?.[1];
   return !suffix || Number(suffix) === Number(hymn.number);
+}
+
+function isRehearsal(event) {
+  if (!event) return false;
+  return event.eventType === 'rehearsal' || normalizeText(event.title).includes('ensaio');
+}
+
+function getAdminEvents(events) {
+  const savedDefault = events.find((event) => event.id === DEFAULT_REHEARSAL.id);
+  const defaultRehearsal = savedDefault || DEFAULT_REHEARSAL;
+  return [defaultRehearsal, ...events.filter((event) => event.id !== DEFAULT_REHEARSAL.id)];
+}
+
+function normalizeText(value) {
+  return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 }
 
 function getNextNumber(items) {

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'igreja-zuriel-v30';
+const CACHE_NAME = 'igreja-zuriel-v46';
 const STATIC_FILES = [
   '/',
   '/index.html',
@@ -9,13 +9,17 @@ const STATIC_FILES = [
   '/src/app.js',
   '/src/components/Layout.js',
   '/src/components/icons.js',
+  '/src/components/EventDetailsModal.js',
   '/src/pages/HomePage.js',
   '/src/pages/BiblePage.js',
   '/src/pages/HymnalPage.js',
   '/src/pages/CalendarPage.js',
+  '/src/pages/SundaySchoolPage.js',
+  '/src/data/sundaySchoolLessons.js',
   '/src/services/calendarService.js',
   '/src/services/bibleService.js',
   '/src/services/hymnService.js',
+  '/src/services/notificationService.js',
   '/src/utils/cache.js',
   '/src/utils/pwa.js',
   '/src/hooks/useTheme.js',
@@ -32,6 +36,11 @@ const STATIC_FILES = [
   '/img/harpa.jpg',
   '/img/biblia.jpg',
   '/img/calendario.jpg',
+  '/img/mocidade.png',
+  '/img/harpa.png',
+  '/img/biblia.png',
+  '/img/calendario.png',
+  '/img/Escolinhadominical.png',
 ];
 
 self.addEventListener('install', (event) => {
@@ -63,6 +72,21 @@ self.addEventListener('fetch', (event) => {
         }
         return response;
       });
+    })
+  );
+});
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  const target = new URL(event.notification.data?.link || '/', self.location.origin).href;
+  event.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clients) => {
+      const existing = clients.find((client) => client.url.startsWith(self.location.origin));
+      if (existing) {
+        existing.navigate(target);
+        return existing.focus();
+      }
+      return self.clients.openWindow(target);
     })
   );
 });

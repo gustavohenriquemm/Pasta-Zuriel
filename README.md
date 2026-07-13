@@ -11,6 +11,7 @@ Conteudos grandes ficam fora do codigo:
 - Biblia ARC: carregada sob demanda da base JSON aberta `damarals/biblias`.
 - Harpa Crista: carregada do JSON externo com 640 hinos.
 - Mocidade: migrada das paginas antigas para `data/hymns/mocidade.seed.json`.
+- Notificacoes: salvas no Firestore e exibidas em tempo real com o site aberto, sem plano pago; veja `docs/NOTIFICACOES.md`.
 
 ## Como testar
 
