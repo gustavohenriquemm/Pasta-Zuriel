@@ -1,5 +1,5 @@
 import { icon } from '../components/icons.js?v=20260713-8';
-import { SUNDAY_SCHOOL_LESSONS as lessons } from '../data/sundaySchoolLessons.js?v=20260713-12';
+import { SUNDAY_SCHOOL_LESSONS as lessons } from '../data/sundaySchoolLessons.js?v=20260802-1';
 
 const NOTE_KEY_PREFIX = 'ebd:2026:3-trimestre:licao:';
 
