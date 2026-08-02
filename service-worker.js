@@ -1,5 +1,5 @@
 const CACHE_PREFIX = 'igreja-zuriel-';
-const CACHE_NAME = `${CACHE_PREFIX}v52`;
+const CACHE_NAME = `${CACHE_PREFIX}v53`;
 const APP_SHELL = [
   '/index.html',
   '/manifest.json',

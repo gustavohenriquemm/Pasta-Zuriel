@@ -23,7 +23,12 @@ export const SUNDAY_SCHOOL_LESSONS = [
     title: 'As Acusações dos Amigos de Jó',
     studyUrl: 'https://marcosandreclubdateologia.blogspot.com/2026/07/escola-dominical-betel-conectar-licao-4.html?m=1',
   },
-  { number: 5, date: '2026-08-02', title: 'Da Tempestade à Calmaria' },
+  {
+    number: 5,
+    date: '2026-08-02',
+    title: 'Da Tempestade à Calmaria',
+    studyUrl: 'https://marcosandreclubdateologia.blogspot.com/2026/07/escola-dominical-betel-conectar-jovens.html?m=1',
+  },
   { number: 6, date: '2026-08-09', title: 'O Livro de Salmos' },
   { number: 7, date: '2026-08-16', title: 'A Pedagogia dos Salmos' },
   { number: 8, date: '2026-08-23', title: 'Bom é Louvar ao Senhor' },
