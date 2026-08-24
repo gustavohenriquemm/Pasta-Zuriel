@@ -1,6 +1,6 @@
 import { icon } from '../components/icons.js?v=20260713-8';
 import { getHymns, watchHymns } from '../services/hymnService.js';
-import { isFavorite, sortFavoritesFirst, toggleFavorite } from '../utils/favorites.js?v=20260824-5';
+import { isFavorite, sortFavoritesFirst, toggleFavorite } from '../utils/favorites.js?v=20260824-6';
 
 const CONGRESS_HYMNS = [
   { id: 'congresso-busca-me-eis-yasmin', number: 113, title: 'Busca-me-eis (Yasmin)', lookup: 'busca-me-eis' },

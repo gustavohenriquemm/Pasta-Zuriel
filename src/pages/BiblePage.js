@@ -1,5 +1,5 @@
 import { BIBLE_BOOKS, getBibleBook, searchBibleWord } from '../services/bibleService.js';
-import { getFavorites, isFavorite, toggleFavorite } from '../utils/favorites.js?v=20260824-5';
+import { getFavorites, isFavorite, toggleFavorite } from '../utils/favorites.js?v=20260824-6';
 
 const BIBLE_FAVORITES_KEY = 'favorites:bible';
 

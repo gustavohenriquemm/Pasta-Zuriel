@@ -1,17 +1,17 @@
 const CACHE_PREFIX = 'igreja-zuriel-';
-const CACHE_NAME = `${CACHE_PREFIX}v89`;
+const CACHE_NAME = `${CACHE_PREFIX}v90`;
 const APP_SHELL = [
   '/index.html',
   '/manifest.json',
   '/css/style.css',
-  '/styles/app.css?v=20260824-5',
-  '/js/script.js?v=20260824-5',
+  '/styles/app.css?v=20260824-6',
+  '/js/script.js?v=20260824-6',
   '/img/congresso-banner.png?v=20260817-1',
   '/img/mocidade-card.jpg?v=20260817-4',
   '/img/biblia-card.jpg?v=20260817-4',
   '/img/escola-dominical-card.jpg?v=20260817-4',
   '/img/calendario-card.jpg?v=20260817-4',
-  '/img/camisa-congresso.png?v=20260824-5',
+  '/img/camisa-congresso.png?v=20260824-6',
   '/img/logo-192.png',
 ];
 

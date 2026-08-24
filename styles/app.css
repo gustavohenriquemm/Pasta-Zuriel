@@ -4766,3 +4766,32 @@ body {
     max-width: 100vw !important;
   }
 }
+
+/* Desktop access-card recovery */
+@media (min-width: 768px) {
+  .home-premium {
+    width: min(100%, 992px) !important;
+  }
+
+  .quick-grid {
+    width: 100% !important;
+    max-width: 920px !important;
+    margin-inline: auto !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(280px, 1fr)) !important;
+    gap: 22px !important;
+    align-items: stretch !important;
+    justify-items: stretch !important;
+  }
+
+  .quick-card,
+  .combined-card {
+    display: grid !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 340px !important;
+    min-height: 340px !important;
+    overflow: hidden !important;
+  }
+}

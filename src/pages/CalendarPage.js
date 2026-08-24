@@ -1,7 +1,7 @@
-import { getEventsForDate, getMonthDays, toDateKey, formatDate, watchCalendarEvents } from '../services/calendarService.js?v=20260824-5';
+import { getEventsForDate, getMonthDays, toDateKey, formatDate, watchCalendarEvents } from '../services/calendarService.js?v=20260824-6';
 import { listenNotices } from '../../database/firestore.js?v=20260713-33';
 import { icon } from '../components/icons.js?v=20260817-4';
-import { openEventDetails, renderEventDetailsHost } from '../components/EventDetailsModal.js?v=20260824-5';
+import { openEventDetails, renderEventDetailsHost } from '../components/EventDetailsModal.js?v=20260824-6';
 
 export function renderCalendar(root, navigate, route = 'calendar') {
   const today = new Date();

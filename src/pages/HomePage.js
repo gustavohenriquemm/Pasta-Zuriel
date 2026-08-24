@@ -1,6 +1,6 @@
 import { icon } from '../components/icons.js?v=20260817-4';
-import { getUpcomingEvents, watchCalendarEvents } from '../services/calendarService.js?v=20260824-5';
-import { openEventDetails, renderEventDetailsHost } from '../components/EventDetailsModal.js?v=20260824-5';
+import { getUpcomingEvents, watchCalendarEvents } from '../services/calendarService.js?v=20260824-6';
+import { openEventDetails, renderEventDetailsHost } from '../components/EventDetailsModal.js?v=20260824-6';
 
 let homeEventsUnsubscribe;
 
