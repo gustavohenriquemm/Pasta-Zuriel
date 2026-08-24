@@ -1,4 +1,4 @@
-import { icon } from './icons.js?v=20260713-8';
+import { icon } from './icons.js?v=20260817-4';
 import { listenNotices, listenNotifications } from '../../database/firestore.js?v=20260713-33';
 import {
   enableNotifications,

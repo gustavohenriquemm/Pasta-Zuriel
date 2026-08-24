@@ -1,5 +1,5 @@
 import { icon } from '../components/icons.js?v=20260713-8';
-import { SUNDAY_SCHOOL_LESSONS as lessons } from '../data/sundaySchoolLessons.js?v=20260802-2';
+import { SUNDAY_SCHOOL_LESSONS as lessons } from '../data/sundaySchoolLessons.js?v=20260824-5';
 
 const NOTE_KEY_PREFIX = 'ebd:2026:3-trimestre:licao:';
 
@@ -29,6 +29,7 @@ function renderLesson(lesson) {
       <div class="lesson-number" aria-hidden="true">${String(lesson.number).padStart(2, '0')}</div>
       <div class="lesson-content">
         <span>Lição ${lesson.number}</span>
+        ${lesson.completed ? '<small class="lesson-status-done">Realizada</small>' : ''}
         <time class="lesson-date" datetime="${lesson.date}">${formatLessonDate(lesson.date)}</time>
         <h2>${lesson.title}</h2>
         <div class="lesson-actions">

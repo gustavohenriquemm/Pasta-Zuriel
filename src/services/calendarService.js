@@ -1,5 +1,5 @@
 import { listenCalendarEvents } from '../../database/firestore.js?v=20260713-33';
-import { SUNDAY_SCHOOL_LESSONS } from '../data/sundaySchoolLessons.js?v=20260802-2';
+import { SUNDAY_SCHOOL_LESSONS } from '../data/sundaySchoolLessons.js?v=20260824-5';
 
 const SUNDAY_EVENTS = [
   {
@@ -11,6 +11,76 @@ const SUNDAY_EVENTS = [
     recurrence: 'sundays',
     eventType: 'rehearsal',
     icon: '🎶',
+  },
+];
+
+const FIXED_EVENTS = [
+  {
+    id: 'fixed-vila-iasi-letter-2026-08-29',
+    title: 'Carta do Vila Iasi',
+    date: '2026-08-29',
+    time: 'Dia todo',
+    location: 'Vila Iasi',
+    color: '#7a1020',
+    eventType: 'commitment',
+    icon: '✉️',
+    fixed: true,
+  },
+  {
+    id: 'fixed-congress-2026-10-03',
+    title: 'Congresso',
+    date: '2026-10-03',
+    time: 'Dia todo',
+    location: 'Sede da Igreja',
+    color: '#6b0612',
+    eventType: 'congress',
+    icon: '👑',
+    theme: 'Mateus 5:6',
+    notes: 'Tema: Insaciáveis - Mateus 5:6',
+    special: true,
+    fixed: true,
+  },
+  {
+    id: 'fixed-congress-2026-10-04',
+    title: 'Congresso',
+    date: '2026-10-04',
+    time: 'Dia todo',
+    location: 'Sede da Igreja',
+    color: '#6b0612',
+    eventType: 'congress',
+    icon: '👑',
+    theme: 'Mateus 5:6',
+    notes: 'Tema: Insaciáveis - Mateus 5:6',
+    special: true,
+    fixed: true,
+  },
+  {
+    id: 'fixed-retreat-2026-10-17',
+    title: 'Retiro',
+    date: '2026-10-17',
+    time: 'Dia todo',
+    location: 'A definir',
+    color: '#8a5a18',
+    eventType: 'retreat',
+    icon: '⛺',
+    theme: 'Mateus 5:6',
+    notes: '3º final de semana de outubro - Mateus 5:6',
+    special: true,
+    fixed: true,
+  },
+  {
+    id: 'fixed-retreat-2026-10-18',
+    title: 'Retiro',
+    date: '2026-10-18',
+    time: 'Dia todo',
+    location: 'A definir',
+    color: '#8a5a18',
+    eventType: 'retreat',
+    icon: '⛺',
+    theme: 'Mateus 5:6',
+    notes: '3º final de semana de outubro - Mateus 5:6',
+    special: true,
+    fixed: true,
   },
 ];
 
@@ -33,9 +103,11 @@ export function getEventsForDate(date, remoteEvents = []) {
       lessonNumber: lesson.number,
       lessonTitle: lesson.title,
       lessonUrl: lesson.studyUrl || '',
+      lessonCompleted: lesson.completed === true,
       icon: '📖',
       fixed: true,
     }));
+  events.push(...FIXED_EVENTS.filter((event) => event.date === dateKey));
   const remoteEventsForDay = remoteEvents.filter((event) => event.recurrence === 'sundays'
     ? date.getDay() === 0
     : event.date === dateKey);

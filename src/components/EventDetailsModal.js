@@ -15,11 +15,12 @@ export function openEventDetails(root, event, date, navigate) {
 
   const rehearsal = isRehearsal(event);
   const sundaySchool = event.eventType === 'sunday-school';
+  const special = isSpecialEvent(event);
   const eventDate = date instanceof Date ? date : parseDateKey(event.date);
   modal.innerHTML = `
-    <header class="event-detail-header">
+    <header class="event-detail-header ${special ? 'event-detail-special' : ''}">
       <div>
-        <span>${rehearsal ? 'Ensaio da Mocidade' : sundaySchool ? 'Escola Bíblica Dominical' : 'Evento'}</span>
+        <span>${special ? 'Evento especial' : rehearsal ? 'Ensaio da Mocidade' : sundaySchool ? 'Escola Bíblica Dominical' : 'Evento'}</span>
         <h2>${escapeHtml(event.title || event.description || 'Evento')}</h2>
       </div>
       <button class="plain-button" type="button" data-close-event-details>Fechar</button>
@@ -32,6 +33,7 @@ export function openEventDetails(root, event, date, navigate) {
       ${rehearsal ? `<p><b>Hino</b><span>${escapeHtml(event.rehearsalHymn || 'Não informado')}</span></p>` : ''}
       ${sundaySchool ? `<p><b>Lição</b><span>${escapeHtml(event.lessonNumber)}</span></p>` : ''}
       ${sundaySchool ? `<p><b>Tema</b><span>${escapeHtml(event.lessonTitle || 'Não informado')}</span></p>` : ''}
+      ${special ? `<p class="special-theme-row"><b>Referência bíblica</b><span>${escapeHtml(event.theme || 'Mateus 5:6')}</span></p>` : ''}
       ${event.notes ? `<p><b>Observações</b><span>${escapeHtml(event.notes)}</span></p>` : ''}
     </div>
     <div class="form-actions event-detail-actions">
@@ -65,6 +67,10 @@ export function openEventDetails(root, event, date, navigate) {
 function isRehearsal(event) {
   return event.eventType === 'rehearsal'
     || normalize(event.title).includes('ensaio');
+}
+
+function isSpecialEvent(event) {
+  return event.special === true || ['congress', 'retreat'].includes(event.eventType);
 }
 
 function getWhatsAppUrl(event, date) {

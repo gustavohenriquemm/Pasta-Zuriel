@@ -91,6 +91,10 @@ function renderEditor(content, user) {
         <div class="field"><label for="hymn-number">Numero</label><input id="hymn-number" type="number" min="1" required></div>
         <div class="field"><label for="hymn-title">Titulo</label><input id="hymn-title" required></div>
         <div class="field"><label for="hymn-youtube">Link do YouTube (opcional)</label><input id="hymn-youtube" placeholder="Cole o link do YouTube"></div>
+        <label class="check-field" for="hymn-congress">
+          <input id="hymn-congress" type="checkbox">
+          <span>Este é um hino do Congresso?</span>
+        </label>
         <div class="field"><label for="hymn-lyrics">Letra</label><textarea id="hymn-lyrics" required></textarea></div>
         <div class="form-actions">
           <button class="primary-button" type="submit">Salvar</button>
@@ -203,7 +207,7 @@ function renderEditor(content, user) {
         <button class="primary-button" data-new-hymn>Cadastrar Hino</button>
       </div>
       <div class="list admin-list">
-        ${merged.map((hymn) => `<button class="list-item" data-edit-hymn="${escapeAttr(hymn.id)}"><strong>${hymn.number}. ${escapeHtml(hymn.title)}</strong></button>`).join('')}
+        ${merged.map((hymn) => `<button class="list-item" data-edit-hymn="${escapeAttr(hymn.id)}"><strong>${hymn.number}. ${escapeHtml(hymn.title)}</strong>${hymn.isCongressHymn ? '<span>Hino do Congresso</span>' : ''}</button>`).join('')}
       </div>
     `;
     area.querySelector('[data-new-hymn]').addEventListener('click', () => openHymnForm());
@@ -218,6 +222,7 @@ function renderEditor(content, user) {
     forms.hymn.querySelector('#hymn-number').value = hymn?.number || '';
     forms.hymn.querySelector('#hymn-title').value = hymn?.title || '';
     forms.hymn.querySelector('#hymn-youtube').value = hymn?.youtubeUrl || '';
+    forms.hymn.querySelector('#hymn-congress').checked = hymn?.isCongressHymn === true;
     forms.hymn.querySelector('#hymn-lyrics').value = hymn?.lyrics || '';
     openModal(screen, forms, forms.hymn);
   }
@@ -238,6 +243,7 @@ function renderEditor(content, user) {
         number,
         title: forms.hymn.querySelector('#hymn-title').value.trim(),
         youtubeUrl: normalizeExternalUrl(forms.hymn.querySelector('#hymn-youtube').value),
+        isCongressHymn: forms.hymn.querySelector('#hymn-congress').checked,
         lyrics: forms.hymn.querySelector('#hymn-lyrics').value.trim(),
         category: state.collection,
       });

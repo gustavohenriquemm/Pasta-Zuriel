@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 520">
+  <rect width="520" height="520" fill="#fff3dc"/>
+  <g transform="rotate(-18 260 260)" opacity=".36">
+    <rect x="88" y="120" width="300" height="250" rx="22" fill="#7b0e1d"/>
+    <rect x="112" y="144" width="300" height="250" rx="22" fill="#5b3a2f"/>
+    <text x="262" y="250" text-anchor="middle" fill="#fff8e9" font-family="Georgia, serif" font-size="42">BIBLIA</text>
+    <text x="262" y="304" text-anchor="middle" fill="#fff8e9" font-family="Georgia, serif" font-size="28">SAGRADA</text>
+  </g>
+  <rect width="520" height="520" fill="#fff7e8" opacity=".58"/>
+</svg>

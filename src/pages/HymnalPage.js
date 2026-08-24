@@ -1,11 +1,19 @@
 import { icon } from '../components/icons.js?v=20260713-8';
 import { getHymns, watchHymns } from '../services/hymnService.js';
+import { isFavorite, sortFavoritesFirst, toggleFavorite } from '../utils/favorites.js?v=20260824-5';
+
+const CONGRESS_HYMNS = [
+  { id: 'congresso-busca-me-eis-yasmin', number: 113, title: 'Busca-me-eis (Yasmin)', lookup: 'busca-me-eis' },
+  { id: 'congresso-renata', number: 2, title: 'Renata', pending: true },
+  { id: 'congresso-beatriz', number: 3, title: 'Beatriz', pending: true },
+];
 
 export async function renderHymnal(root, collection, navigate, route = collection) {
   const title = collection === 'harpa' ? 'Hinos da Harpa' : 'Hinos da Mocidade';
   const baseHymns = await getHymns(collection);
   let remoteHymns = [];
   let hymns = mergeHymns(baseHymns, remoteHymns);
+  const favoriteKey = `favorites:${collection}`;
   const selectedId = route.includes(':') ? decodeURIComponent(route.split(':').slice(1).join(':')) : '';
 
   root.innerHTML = `
@@ -37,6 +45,7 @@ export async function renderHymnal(root, collection, navigate, route = collectio
 
   function renderList() {
     body.innerHTML = `
+      ${collection === 'mocidade' ? renderCongressHymnsSection(getCongressHymns(hymns)) : ''}
       <div class="toolbar compact">
         <div class="field">
           <label for="search">Pesquisar</label>
@@ -49,27 +58,70 @@ export async function renderHymnal(root, collection, navigate, route = collectio
     const list = body.querySelector('[data-list]');
     const draw = () => {
       const query = normalize(input.value);
-      const items = hymns.filter((hymn) => !query || String(hymn.number).includes(query) || normalize(hymn.title).includes(query));
+      const items = sortFavoritesFirst(
+        hymns.filter((hymn) => !query || String(hymn.number).includes(query) || normalize(hymn.title).includes(query)),
+        favoriteKey,
+      );
       list.innerHTML = items.length
         ? items.map((hymn) => `
           <button class="hymn-row" data-id="${escapeAttr(hymn.id)}">
             <span><b>${String(hymn.number).padStart(3, '0')}</b> - ${escapeHtml(hymn.title)}</span>
-            ${icon('arrow')}
+            <span class="hymn-row-actions">
+              <span class="favorite-star ${isFavorite(favoriteKey, hymn.id) ? 'active' : ''}" role="button" tabindex="0" data-favorite-hymn="${escapeAttr(hymn.id)}" aria-label="${isFavorite(favoriteKey, hymn.id) ? 'Remover dos favoritos' : 'Favoritar hino'}">${isFavorite(favoriteKey, hymn.id) ? '★' : '☆'}</span>
+              ${icon('arrow')}
+            </span>
           </button>
         `).join('')
         : '<p class="empty">Nenhum hino encontrado.</p>';
+      list.querySelectorAll('[data-favorite-hymn]').forEach((button) => {
+        button.addEventListener('click', (event) => {
+          event.stopPropagation();
+          const hymn = hymns.find((item) => item.id === button.dataset.favoriteHymn);
+          if (!hymn) return;
+          toggleFavorite(favoriteKey, { id: hymn.id, number: hymn.number, title: hymn.title });
+          draw();
+        });
+        button.addEventListener('keydown', (event) => {
+          if (event.key !== 'Enter' && event.key !== ' ') return;
+          event.preventDefault();
+          button.click();
+        });
+      });
       list.querySelectorAll('[data-id]').forEach((button) => {
-        button.addEventListener('click', () => navigate(`${collection}:${button.dataset.id}`));
+        button.addEventListener('click', () => {
+          const selected = hymns.find((hymn) => hymn.id === button.dataset.id);
+          if (collection === 'mocidade' && isPendingHymn(selected)) {
+            showMissingHymnModal(root);
+            return;
+          }
+          navigate(`${collection}:${button.dataset.id}`);
+        });
       });
     };
     input.addEventListener('input', draw);
     draw();
+
+    body.querySelectorAll('[data-congress-hymn]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const selected = getCongressHymns(hymns).find((hymn) => hymn.id === button.dataset.congressHymn);
+        if (isPendingHymn(selected)) {
+          showMissingHymnModal(root);
+          return;
+        }
+        navigate(`${collection}:${selected.id}`);
+      });
+    });
   }
 
   function renderDetail(id) {
     const selected = hymns.find((hymn) => hymn.id === id) || hymns.find((hymn) => String(hymn.number) === String(id));
     if (!selected) {
       body.innerHTML = '<p class="empty">Hino nao encontrado.</p>';
+      return;
+    }
+    if (collection === 'mocidade' && isPendingHymn(selected)) {
+      renderList();
+      showMissingHymnModal(root);
       return;
     }
     const index = hymns.findIndex((hymn) => hymn.id === selected.id);
@@ -81,6 +133,9 @@ export async function renderHymnal(root, collection, navigate, route = collectio
         <header>
           <span>Hino ${String(selected.number).padStart(3, '0')}</span>
           <h2>${escapeHtml(selected.title)}</h2>
+          <button class="favorite-detail-button ${isFavorite(favoriteKey, selected.id) ? 'active' : ''}" type="button" data-favorite-detail>
+            ${isFavorite(favoriteKey, selected.id) ? '★ Favorito' : '☆ Favoritar'}
+          </button>
         </header>
         <div class="lyrics">${escapeHtml(selected.lyrics)}</div>
         ${collection === 'mocidade' ? `
@@ -108,10 +163,80 @@ export async function renderHymnal(root, collection, navigate, route = collectio
     `;
     body.querySelectorAll('[data-back-list]').forEach((button) => button.addEventListener('click', () => navigate(collection)));
     body.querySelectorAll('[data-go]').forEach((button) => button.addEventListener('click', () => navigate(`${collection}:${button.dataset.go}`)));
+    body.querySelector('[data-favorite-detail]')?.addEventListener('click', () => {
+      toggleFavorite(favoriteKey, { id: selected.id, number: selected.number, title: selected.title });
+      renderDetail(selected.id);
+    });
   }
 
   root.querySelectorAll('[data-back-list]').forEach((button) => button.addEventListener('click', () => navigate(collection)));
   renderCurrent();
+}
+
+function renderCongressHymnsSection(items) {
+  return `
+    <section class="congress-hymns-panel" aria-label="Hinos do congresso">
+      <div>
+        <span>Congresso Zuriel</span>
+        <h2>Hinos do Congresso</h2>
+      </div>
+      <div class="congress-hymns-grid">
+        ${items.map((hymn) => `
+          <button class="congress-hymn-card ${isPendingHymn(hymn) ? 'is-pending' : ''}" type="button" data-congress-hymn="${escapeAttr(hymn.id)}">
+            <b>${String(hymn.number).padStart(2, '0')}</b>
+            <strong>${escapeHtml(hymn.title)}</strong>
+            <small>${isPendingHymn(hymn) ? 'Aguardando letra' : 'Abrir letra'}</small>
+          </button>
+        `).join('')}
+      </div>
+    </section>
+  `;
+}
+
+function getCongressHymns(hymns) {
+  const fixedItems = CONGRESS_HYMNS.map((item) => {
+    if (!item.lookup) return item;
+    const match = hymns.find((hymn) => Number(hymn.number) === Number(item.number) || normalize(hymn.title).includes(item.lookup));
+    return match ? { ...match, title: item.title, number: match.number || item.number } : { ...item, pending: true };
+  });
+  const markedItems = hymns.filter((hymn) => hymn.isCongressHymn === true);
+  const byKey = new Map();
+  [...fixedItems, ...markedItems].forEach((hymn) => {
+    const key = hymn.id || `${hymn.number}-${normalize(hymn.title)}`;
+    if (![...byKey.values()].some((item) => item.id === hymn.id || Number(item.number) === Number(hymn.number))) {
+      byKey.set(key, hymn);
+    }
+  });
+  return [...byKey.values()];
+}
+
+function isPendingHymn(hymn) {
+  return !hymn || hymn.pending === true || !String(hymn.lyrics || '').trim();
+}
+
+function showMissingHymnModal(root) {
+  const oldModal = root.querySelector('[data-missing-hymn-modal]');
+  oldModal?.remove();
+  const screen = document.createElement('div');
+  screen.className = 'modal-screen hymn-missing-screen';
+  screen.dataset.missingHymnModal = 'true';
+  screen.innerHTML = `
+    <section class="app-modal hymn-missing-modal">
+      <h2>Ops!</h2>
+      <p>Esse hino ainda não foi adicionado 😂<br>Favor cobrar as regentes para adicionarem o hino.</p>
+      <button class="primary-button" type="button" data-close-missing-hymn>Fechar</button>
+    </section>
+  `;
+  const close = () => {
+    screen.remove();
+    document.body.classList.remove('modal-open');
+  };
+  screen.addEventListener('click', (event) => {
+    if (event.target === screen) close();
+  });
+  screen.querySelector('[data-close-missing-hymn]').addEventListener('click', close);
+  root.appendChild(screen);
+  document.body.classList.add('modal-open');
 }
 
 function normalize(value) {

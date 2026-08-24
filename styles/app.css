@@ -13,6 +13,15 @@
   --shadow: 0 22px 50px rgba(0, 0, 0, 0.38);
 }
 
+/* Congress wine palette refinement */
+:root {
+  --congress-wine-dark: #3f050d;
+  --congress-wine: #5a0713;
+  --congress-wine-soft: #6f0b18;
+  --congress-gold: #d4a13d;
+  --congress-cream: #fff3da;
+}
+
 [data-theme="dark"] {
   color-scheme: dark;
   --bg: #0b0b0b;
@@ -200,7 +209,7 @@ button {
 }
 
 .fade-in {
-  animation: fadeIn 600ms ease both;
+  animation: fadeIn 220ms ease both;
 }
 
 .banner-card {
@@ -553,8 +562,8 @@ button {
 
 @keyframes fadeIn {
   from {
-    opacity: 0;
-    transform: translateY(14px);
+    opacity: 0.96;
+    transform: translateY(4px);
   }
   to {
     opacity: 1;
@@ -1824,5 +1833,2936 @@ button {
     bottom: 10px;
     height: 66px;
     border-radius: 18px;
+  }
+}
+
+/* Congresso Zuriel theme */
+:root,
+[data-theme="dark"] {
+  --bg: #fff3df;
+  --surface: #fff7ea;
+  --surface-soft: #f6e3c7;
+  --text: #3b0710;
+  --muted: #6f4a42;
+  --line: rgba(181, 126, 32, 0.36);
+  --brand: #c69636;
+  --brand-strong: #5c0714;
+  --accent: #7b0e1d;
+  --shadow: 0 22px 54px rgba(78, 16, 15, 0.18);
+}
+
+body,
+[data-theme="dark"] body {
+  background:
+    radial-gradient(circle at 14% 8%, rgba(255, 244, 220, 0.95), rgba(255, 242, 218, 0.82) 36%, rgba(245, 225, 190, 0.95) 72%),
+    linear-gradient(180deg, #fff7e9 0%, #f7dfb8 100%) !important;
+  color: var(--text);
+}
+
+.topbar {
+  background: linear-gradient(135deg, #4c0711 0%, #7b1020 54%, #4a0710 100%);
+  border-bottom: 1px solid rgba(220, 173, 79, 0.32);
+  box-shadow: 0 16px 38px rgba(59, 7, 16, 0.28);
+}
+
+.brand-title,
+.top-icon {
+  color: #fff4df;
+}
+
+.top-icon:hover,
+.admin-shortcut:hover,
+.bottom-nav button.active {
+  color: #e0b44f;
+}
+
+.admin-shortcut {
+  background: rgba(224, 180, 79, 0.16);
+  color: #e0b44f;
+}
+
+.main {
+  width: min(1120px, 100%);
+}
+
+.home-premium {
+  gap: clamp(18px, 3vw, 30px);
+}
+
+.congress-hero {
+  position: relative;
+  min-height: clamp(172px, 28vw, 260px);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(120px, 0.9fr) minmax(180px, 1fr) minmax(150px, 1.05fr);
+  align-items: center;
+  gap: clamp(12px, 2.5vw, 28px);
+  border: 1px solid #c69636;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 83% 30%, rgba(255, 255, 255, 0.86), rgba(255, 245, 226, 0.46) 26%, transparent 54%),
+    linear-gradient(135deg, #fff7e9 0%, #f9e8ca 44%, #fff3de 64%, #6a0c1a 65%, #4b0711 100%);
+  color: #4b0711;
+  padding: clamp(18px, 4vw, 34px);
+  text-align: left;
+  box-shadow: 0 24px 60px rgba(93, 22, 16, 0.2);
+}
+
+.congress-hero::before,
+.congress-hero::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.congress-hero::before {
+  inset: -36% auto auto -12%;
+  width: 52%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(198, 150, 54, 0.2), transparent 64%);
+}
+
+.congress-hero::after {
+  right: -2px;
+  bottom: -2px;
+  width: 34%;
+  height: 44%;
+  border-top-left-radius: 95% 100%;
+  background: linear-gradient(135deg, transparent, rgba(198, 150, 54, 0.62));
+  opacity: 0.9;
+}
+
+.congress-flame {
+  position: relative;
+  z-index: 1;
+  width: clamp(82px, 13vw, 138px);
+  aspect-ratio: 0.78;
+  justify-self: center;
+  background:
+    radial-gradient(circle at 62% 76%, #c69636 0 12%, transparent 13%),
+    linear-gradient(140deg, transparent 0 34%, #c69636 35% 52%, transparent 53%),
+    linear-gradient(32deg, transparent 0 32%, #7b0e1d 33% 58%, transparent 59%),
+    linear-gradient(150deg, transparent 0 37%, #4b0711 38% 66%, transparent 67%);
+  clip-path: polygon(50% 0, 78% 28%, 70% 50%, 100% 76%, 58% 100%, 38% 74%, 14% 100%, 25% 63%, 0 47%, 32% 36%);
+  filter: drop-shadow(0 13px 20px rgba(75, 7, 17, 0.22));
+}
+
+.congress-hero-copy {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: start;
+  gap: 4px;
+}
+
+.congress-hero-copy small {
+  color: #4b0711;
+  font-size: clamp(0.78rem, 2vw, 1.2rem);
+  font-weight: 700;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+}
+
+.congress-hero-copy strong {
+  color: #6d0b19;
+  font-size: clamp(2.4rem, 8vw, 5.7rem);
+  line-height: 0.92;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.congress-hero-copy em {
+  width: fit-content;
+  margin-top: 8px;
+  padding: 5px 13px;
+  border-radius: 2px;
+  background: #c69636;
+  color: #fff8e9;
+  font-size: clamp(0.72rem, 1.8vw, 1rem);
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.congress-hero-copy b {
+  margin-top: 4px;
+  color: #4b0711;
+  font-size: clamp(0.88rem, 2vw, 1.15rem);
+  letter-spacing: 0.02em;
+}
+
+.congress-hero-worship {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: 48%;
+  background:
+    linear-gradient(90deg, rgba(255, 247, 233, 0.88) 0%, rgba(255, 247, 233, 0.42) 38%, rgba(95, 9, 21, 0.14) 100%),
+    radial-gradient(ellipse at 64% 45%, rgba(255, 255, 255, 0.78), transparent 42%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.42), rgba(94, 9, 21, 0.15));
+  opacity: 0.9;
+}
+
+.congress-hero-worship::before {
+  content: "";
+  position: absolute;
+  inset: 18% 7% 0 20%;
+  background:
+    radial-gradient(ellipse at 18% 68%, rgba(50, 34, 25, 0.55) 0 5%, transparent 6%),
+    radial-gradient(ellipse at 36% 56%, rgba(50, 34, 25, 0.48) 0 4%, transparent 5%),
+    radial-gradient(ellipse at 56% 60%, rgba(50, 34, 25, 0.52) 0 5%, transparent 6%),
+    radial-gradient(ellipse at 74% 52%, rgba(50, 34, 25, 0.44) 0 4%, transparent 5%),
+    linear-gradient(75deg, transparent 0 54%, rgba(75, 7, 17, 0.58) 55% 57%, transparent 58%),
+    linear-gradient(110deg, transparent 0 61%, rgba(75, 7, 17, 0.48) 62% 64%, transparent 65%);
+  opacity: 0.72;
+}
+
+.congress-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(8px, 2vw, 14px);
+}
+
+.congress-mini-card {
+  min-width: 0;
+  min-height: 118px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 5px;
+  border: 1px solid rgba(198, 150, 54, 0.68);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255, 249, 237, 0.94), rgba(250, 231, 196, 0.9));
+  color: #4b0711;
+  box-shadow: 0 14px 32px rgba(93, 22, 16, 0.12);
+  padding: 12px 6px;
+}
+
+.congress-mini-card span:first-child {
+  width: clamp(42px, 8vw, 58px);
+  height: clamp(42px, 8vw, 58px);
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: radial-gradient(circle at 35% 20%, #871428, #4b0711 70%);
+  border: 1px solid rgba(198, 150, 54, 0.72);
+  color: #e0b44f;
+}
+
+.congress-mini-card svg {
+  width: 24px;
+  height: 24px;
+}
+
+.congress-mini-card strong {
+  color: #3b0710;
+  font-size: clamp(0.8rem, 2.1vw, 1rem);
+  line-height: 1.05;
+}
+
+.congress-mini-card small {
+  color: #5e3833;
+  font-size: clamp(0.62rem, 1.8vw, 0.82rem);
+  line-height: 1.15;
+}
+
+.quick-title h1,
+.events-heading h2 {
+  color: #4b0711;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.quick-title span {
+  background: #c69636;
+  box-shadow: none;
+}
+
+.quick-card {
+  border-color: rgba(198, 150, 54, 0.74);
+  background: #fff7ea;
+  color: #4b0711;
+  box-shadow: 0 18px 42px rgba(75, 7, 17, 0.16);
+}
+
+.quick-card::before {
+  filter: sepia(0.18) saturate(0.74) brightness(1.08);
+  opacity: 0.48;
+}
+
+.quick-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 34%;
+  z-index: 0;
+  border-top-left-radius: 82% 72%;
+  background: linear-gradient(135deg, #6e0b19, #4b0711 72%);
+}
+
+.quick-overlay {
+  background: linear-gradient(180deg, rgba(255, 250, 240, 0.3), rgba(255, 243, 220, 0.82) 64%, rgba(255, 243, 220, 0.06));
+}
+
+.quick-icon {
+  background: radial-gradient(circle at 35% 18%, #871428, #4b0711 72%);
+  border-color: rgba(255, 239, 199, 0.72);
+  color: #e0b44f;
+  box-shadow: 0 13px 24px rgba(75, 7, 17, 0.28);
+}
+
+.quick-copy strong,
+.quick-copy small {
+  text-shadow: none;
+}
+
+.quick-copy strong span {
+  color: #1f1510;
+}
+
+.quick-copy strong b {
+  color: #7b0e1d;
+}
+
+.combined-copy strong b,
+.quick-card:nth-child(3) .quick-copy strong b {
+  color: #c69636;
+}
+
+.quick-copy small {
+  color: #3b0710;
+}
+
+.inline-arrow {
+  border-color: rgba(198, 150, 54, 0.72);
+  background: #7b0e1d;
+  color: #e0b44f;
+}
+
+.quick-split-actions button {
+  border-color: rgba(75, 7, 17, 0.78);
+  background: rgba(255, 248, 234, 0.78);
+  color: #4b0711;
+  box-shadow: none;
+}
+
+.quick-split-actions button:hover,
+.quick-split-actions button:focus-visible {
+  background: #7b0e1d;
+  color: #fff7ea;
+}
+
+.bottom-nav {
+  border-color: rgba(198, 150, 54, 0.35);
+  background: linear-gradient(135deg, rgba(75, 7, 17, 0.98), rgba(118, 14, 30, 0.96));
+}
+
+.bottom-nav button {
+  color: #fff4df;
+}
+
+.bottom-nav button.active {
+  color: #e0b44f;
+}
+
+.event-card,
+.panel,
+.lesson-card,
+.calendar-event {
+  border-color: rgba(198, 150, 54, 0.36);
+  background: rgba(255, 248, 235, 0.92);
+  color: #3b0710;
+}
+
+.event-info h3,
+.calendar-toolbar h2,
+.day-events h3,
+.calendar-event strong,
+.panel-header h1,
+.section-header h1,
+.lesson-content h2 {
+  color: #4b0711;
+}
+
+.event-info p,
+.events-heading button,
+.event-date,
+.hymn-row b,
+.section-kicker,
+.lesson-content > span {
+  color: #7b0e1d;
+}
+
+.event-info small,
+.calendar-event span,
+.calendar-event small,
+.panel-header p,
+.section-header p,
+.lesson-date {
+  color: #6f4a42;
+}
+
+.event-date,
+.lesson-number,
+.calendar-day span {
+  border-color: rgba(198, 150, 54, 0.48);
+  background: rgba(198, 150, 54, 0.14);
+}
+
+.calendar-day {
+  background: rgba(255, 248, 235, 0.88);
+  color: #4b0711;
+}
+
+.calendar-weekdays {
+  color: #7b0e1d;
+}
+
+.side-drawer {
+  background: #4b0711;
+  border-right-color: rgba(198, 150, 54, 0.36);
+}
+
+.side-drawer strong,
+.side-drawer button:hover {
+  color: #e0b44f;
+}
+
+.side-drawer button {
+  background: rgba(255, 244, 223, 0.08);
+  color: #fff4df;
+  border-color: rgba(198, 150, 54, 0.24);
+}
+
+@media (max-width: 860px) {
+  .main {
+    padding: 88px 14px 28px;
+  }
+
+  .congress-hero {
+    min-height: 164px;
+    grid-template-columns: 0.65fr 1fr;
+    padding: 18px;
+  }
+
+  .congress-hero-worship {
+    width: 44%;
+    opacity: 0.62;
+  }
+
+  .congress-hero-copy strong {
+    font-size: clamp(2.5rem, 13vw, 4.7rem);
+  }
+
+  .congress-mini-card {
+    min-height: 104px;
+    border-radius: 15px;
+  }
+}
+
+@media (max-width: 430px) {
+  .congress-mini-grid {
+    gap: 7px;
+  }
+
+  .congress-mini-card {
+    min-height: 90px;
+    padding: 8px 4px;
+  }
+
+  .congress-mini-card span:first-child {
+    width: 40px;
+    height: 40px;
+  }
+
+  .congress-mini-card strong {
+    font-size: 0.74rem;
+  }
+
+  .congress-mini-card small {
+    font-size: 0.58rem;
+  }
+
+  .congress-hero {
+    min-height: 150px;
+    border-radius: 18px;
+  }
+}
+
+/* Mobile containment fixes for the congress home */
+.home-premium,
+.congress-hero,
+.congress-mini-grid,
+.quick-grid,
+.quick-card,
+.bottom-nav {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.congress-hero > *,
+.congress-hero-copy,
+.congress-mini-card,
+.quick-card > * {
+  min-width: 0;
+}
+
+@media (max-width: 560px) {
+  .congress-hero {
+    width: 100%;
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .congress-flame {
+    width: 64px;
+  }
+
+  .congress-hero-copy strong {
+    max-width: 100%;
+    font-size: clamp(2.1rem, 11vw, 3.2rem);
+    overflow-wrap: anywhere;
+  }
+
+  .congress-hero-copy small {
+    font-size: 0.68rem;
+    letter-spacing: 0.28em;
+  }
+
+  .congress-hero-copy em {
+    font-size: 0.58rem;
+    letter-spacing: 0.16em;
+  }
+
+  .congress-hero-copy b {
+    font-size: 0.74rem;
+  }
+
+  .congress-hero-worship {
+    width: 38%;
+    opacity: 0.28;
+  }
+
+  .quick-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 390px) {
+  .congress-mini-card strong {
+    font-size: 0.68rem;
+  }
+
+  .congress-mini-card small {
+    font-size: 0.52rem;
+  }
+
+  .congress-mini-card svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Force exact mobile columns to avoid horizontal overflow */
+@media (max-width: 560px) {
+  .main {
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: hidden;
+  }
+
+  .home-premium {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .congress-mini-grid {
+    display: flex !important;
+    flex-wrap: nowrap;
+    width: 100%;
+  }
+
+  .congress-mini-card {
+    flex: 0 0 calc((100% - 21px) / 4);
+    width: calc((100% - 21px) / 4);
+  }
+
+  .quick-grid {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .quick-card,
+  .combined-card {
+    flex: 0 0 calc((100% - 12px) / 2);
+    width: calc((100% - 12px) / 2);
+    max-width: calc((100% - 12px) / 2);
+  }
+
+  .bottom-nav {
+    width: calc(100vw - 28px) !important;
+    max-width: calc(100vw - 28px) !important;
+    left: 14px;
+    right: 14px;
+    transform: none;
+  }
+}
+
+/* Hard mobile app width cap for browser/PWA rendering */
+@media (max-width: 560px) {
+  .main {
+    width: 100vw !important;
+    max-width: 430px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  .bottom-nav {
+    width: calc(100vw - 28px) !important;
+    max-width: 402px !important;
+    left: 14px !important;
+    right: auto !important;
+    transform: none !important;
+  }
+}
+
+/* Mobile text fit refinements */
+@media (max-width: 560px) {
+  .quick-copy strong {
+    font-size: clamp(1rem, 4.2vw, 1.22rem) !important;
+    line-height: 1.02;
+  }
+
+  .quick-copy strong b,
+  .quick-copy strong span {
+    overflow-wrap: anywhere;
+  }
+
+  .combined-copy strong {
+    font-size: clamp(0.86rem, 3.6vw, 1.02rem) !important;
+  }
+
+  .quick-copy small {
+    font-size: 0.72rem !important;
+  }
+
+  .quick-split-actions {
+    gap: 5px;
+  }
+
+  .quick-split-actions button {
+    min-height: 34px;
+    padding: 6px 4px;
+    font-size: 0.58rem !important;
+  }
+
+  .events-heading button {
+    font-size: 0.78rem;
+    white-space: nowrap;
+  }
+
+  .quick-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .quick-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* Final mobile breathing room */
+@media (max-width: 560px) {
+  .main {
+    max-width: 402px !important;
+  }
+
+  .bottom-nav {
+    max-width: 374px !important;
+  }
+}
+
+/* Refined congress art assets */
+.congress-hero {
+  display: block !important;
+  min-height: auto !important;
+  aspect-ratio: 1200 / 420;
+  padding: 0 !important;
+  background: #fff7e9 !important;
+  border-radius: 24px;
+}
+
+.congress-hero img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.congress-hero::before,
+.congress-hero::after,
+.congress-flame,
+.congress-hero-copy,
+.congress-hero-worship {
+  display: none !important;
+}
+
+.quick-card::before {
+  filter: none !important;
+  opacity: 0.82 !important;
+}
+
+.quick-overlay {
+  background: linear-gradient(180deg, rgba(255, 248, 234, 0.34), rgba(255, 246, 226, 0.78) 66%, rgba(255, 246, 226, 0.05)) !important;
+}
+
+.quick-card::after {
+  height: 31%;
+  border-top-left-radius: 88% 78%;
+  background: linear-gradient(135deg, #760b1a 0%, #5b0713 75%) !important;
+}
+
+.quick-card {
+  border-color: rgba(198, 150, 54, 0.9) !important;
+  box-shadow: 0 14px 34px rgba(117, 33, 21, 0.14) !important;
+}
+
+.quick-copy {
+  padding-bottom: 48px;
+}
+
+.combined-copy {
+  padding-bottom: 38px;
+}
+
+.quick-copy strong b {
+  color: #7a1020 !important;
+}
+
+.combined-copy strong b,
+.quick-card:nth-child(3) .quick-copy strong b {
+  color: #c69636 !important;
+}
+
+.quick-copy strong span,
+.quick-copy small {
+  color: #2b1811 !important;
+}
+
+.inline-arrow {
+  width: 24px;
+  height: 24px;
+  background: #7a1020 !important;
+  border-color: #c69636 !important;
+  color: #e7b74d !important;
+}
+
+.quick-split-actions button {
+  background: rgba(255, 248, 234, 0.9) !important;
+  border-color: #6c0b18 !important;
+  color: #5b0713 !important;
+}
+
+@media (max-width: 560px) {
+  .congress-hero {
+    min-height: auto !important;
+    aspect-ratio: 1200 / 420;
+  }
+
+  .quick-card,
+  .combined-card {
+    height: 238px !important;
+    min-height: 238px !important;
+  }
+
+  .quick-copy {
+    padding: 64px 10px 42px !important;
+  }
+
+  .combined-card .combined-copy {
+    padding: 64px 8px 34px !important;
+  }
+}
+
+/* Reference-accurate congress home */
+body,
+[data-theme="dark"] body {
+  background:
+    radial-gradient(circle at 50% 18%, rgba(255, 249, 235, 0.98), rgba(246, 220, 175, 0.96) 76%),
+    #f8e7c7 !important;
+}
+
+.topbar {
+  height: 138px !important;
+  padding: 22px clamp(24px, 7vw, 64px) 18px !important;
+  align-items: center;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(111, 11, 24, 0.58), transparent 58%),
+    linear-gradient(135deg, var(--congress-wine-dark) 0%, var(--congress-wine) 52%, #42050e 100%) !important;
+  border-bottom: 0 !important;
+  box-shadow: 0 18px 46px rgba(75, 7, 17, 0.22) !important;
+}
+
+.brand-title {
+  position: relative;
+  width: min(330px, 54vw);
+  min-height: 88px;
+  font-size: 0 !important;
+  color: #fff7e8 !important;
+}
+
+.brand-title::before,
+.brand-title::after {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: block;
+  width: 100%;
+  text-align: center;
+  color: #fff7e8;
+  text-shadow: 0 5px 16px rgba(30, 0, 4, 0.22);
+}
+
+.brand-title::before {
+  content: "M O C I D A D E";
+  top: 4px;
+  font-size: clamp(0.84rem, 3.4vw, 1.15rem);
+  font-weight: 600;
+  letter-spacing: 0.34em;
+}
+
+.brand-title::after {
+  content: "ZURIEL";
+  bottom: 0;
+  font-size: clamp(2.45rem, 11vw, 4.45rem);
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  line-height: 0.95;
+}
+
+.top-icon {
+  color: #fff4df !important;
+}
+
+.notice-button {
+  color: #e4bb56 !important;
+}
+
+.top-icon svg {
+  width: 34px;
+  height: 34px;
+  stroke-width: 1.9;
+}
+
+.main {
+  padding-top: 168px !important;
+}
+
+.home-premium {
+  gap: 22px !important;
+}
+
+.congress-hero {
+  aspect-ratio: 1200 / 500 !important;
+  border-radius: 28px !important;
+  border: 2px solid rgba(198, 150, 54, 0.95) !important;
+  box-shadow: 0 22px 56px rgba(91, 7, 19, 0.16) !important;
+}
+
+.congress-mini-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+  overflow: visible !important;
+}
+
+.congress-mini-card {
+  width: auto !important;
+  min-height: 145px !important;
+  padding: 18px 8px 15px !important;
+  border-radius: 20px !important;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.72), transparent 50%),
+    linear-gradient(180deg, #fff8ea 0%, #f5dfb7 100%) !important;
+  border-color: rgba(198, 150, 54, 0.86) !important;
+  box-shadow: 0 14px 30px rgba(91, 7, 19, 0.11) !important;
+}
+
+.congress-mini-card span:first-child {
+  width: 68px !important;
+  height: 68px !important;
+  border: 2px solid rgba(255, 238, 190, 0.95) !important;
+  background: radial-gradient(circle at 42% 24%, var(--congress-wine-soft) 0%, var(--congress-wine) 72%) !important;
+  color: #e7bd55 !important;
+}
+
+.congress-mini-card svg {
+  width: 34px !important;
+  height: 34px !important;
+  stroke-width: 2;
+}
+
+.congress-mini-card strong {
+  color: #160d0a !important;
+  font-size: clamp(1rem, 3.4vw, 1.28rem) !important;
+  font-weight: 700 !important;
+}
+
+.congress-mini-card small {
+  color: #2e1710 !important;
+  font-size: clamp(0.78rem, 2.6vw, 0.98rem) !important;
+}
+
+.quick-title {
+  margin-top: 4px !important;
+  gap: 18px !important;
+}
+
+.quick-title span {
+  width: 6px !important;
+  height: 54px !important;
+  border-radius: 999px !important;
+  background: #d09b36 !important;
+}
+
+.quick-title h1 {
+  color: #5a0713 !important;
+  font-size: clamp(1.48rem, 5.6vw, 2.25rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.04em !important;
+}
+
+.quick-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 18px !important;
+}
+
+.quick-card,
+.combined-card {
+  width: auto !important;
+  max-width: none !important;
+  height: clamp(300px, 44vw, 370px) !important;
+  min-height: clamp(300px, 44vw, 370px) !important;
+  padding: 0 !important;
+  border: 1.5px solid rgba(198, 150, 54, 0.95) !important;
+  border-radius: 24px !important;
+  background: #fff7ea !important;
+  box-shadow: 0 16px 36px rgba(91, 7, 19, 0.13) !important;
+}
+
+.quick-card::before {
+  filter: sepia(0.24) saturate(0.7) brightness(1.13) !important;
+  opacity: 0.68 !important;
+}
+
+.quick-overlay {
+  background:
+    linear-gradient(180deg, rgba(255, 250, 241, 0.22) 0%, rgba(255, 245, 225, 0.72) 58%, rgba(255, 245, 225, 0.03) 72%) !important;
+}
+
+.quick-card::after {
+  height: 27% !important;
+  border-top-left-radius: 86% 76% !important;
+  background:
+    radial-gradient(circle at 82% 72%, rgba(207, 155, 49, 0.24), transparent 32%),
+    linear-gradient(125deg, var(--congress-wine-soft) 0%, var(--congress-wine) 78%) !important;
+}
+
+.combined-card::after,
+.quick-card:nth-child(4)::after {
+  background:
+    radial-gradient(circle at 92% 46%, var(--congress-gold) 0 18%, transparent 19%),
+    linear-gradient(125deg, var(--congress-wine-soft) 0%, var(--congress-wine) 70%, #bd8f32 100%) !important;
+}
+
+.quick-icon {
+  top: 38px !important;
+  width: 78px !important;
+  height: 78px !important;
+  border: 2px solid rgba(255, 238, 190, 0.95) !important;
+  background: radial-gradient(circle at 42% 22%, var(--congress-wine-soft) 0%, var(--congress-wine) 72%) !important;
+  color: #e7bd55 !important;
+}
+
+.quick-icon svg {
+  width: 38px !important;
+  height: 38px !important;
+  stroke-width: 2;
+}
+
+.quick-copy {
+  padding: 126px 18px 58px !important;
+  gap: 16px !important;
+}
+
+.combined-card .combined-copy {
+  padding: 126px 18px 66px !important;
+}
+
+.quick-copy strong {
+  font-size: clamp(1.66rem, 5.2vw, 2.3rem) !important;
+  line-height: 0.98 !important;
+  gap: 6px !important;
+}
+
+.quick-copy strong span {
+  color: #1d120d !important;
+  font-size: 0.62em !important;
+  font-weight: 600 !important;
+}
+
+.quick-copy strong b {
+  color: #6e0b19 !important;
+  font-weight: 800 !important;
+}
+
+.combined-copy strong b,
+.quick-card:nth-child(3) .quick-copy strong b {
+  color: #c69332 !important;
+}
+
+.quick-copy small {
+  color: #2b1711 !important;
+  font-size: clamp(1rem, 3.2vw, 1.2rem) !important;
+  font-weight: 500 !important;
+}
+
+.inline-arrow {
+  position: absolute !important;
+  left: 50% !important;
+  bottom: 28px !important;
+  transform: translateX(-50%) !important;
+  width: 44px !important;
+  height: 44px !important;
+  color: #e7bd55 !important;
+  background: var(--congress-wine) !important;
+  border: 2px solid rgba(231, 189, 85, 0.82) !important;
+}
+
+.quick-split-actions {
+  gap: 16px !important;
+  margin-top: 8px !important;
+}
+
+.quick-split-actions button {
+  min-height: 50px !important;
+  padding: 0 18px !important;
+  border-radius: 999px !important;
+  border: 1.5px solid #6e0b19 !important;
+  background: rgba(255, 248, 234, 0.88) !important;
+  color: #4d0711 !important;
+  font-size: clamp(0.9rem, 2.7vw, 1.05rem) !important;
+  font-weight: 700 !important;
+}
+
+.events-section {
+  margin-top: 0 !important;
+}
+
+.bottom-nav {
+  height: 104px !important;
+  border-radius: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  padding: 10px 44px 16px !important;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(111, 11, 24, 0.5), transparent 62%),
+    linear-gradient(135deg, var(--congress-wine-dark) 0%, var(--congress-wine) 52%, #42050e 100%) !important;
+  border: 0 !important;
+  box-shadow: 0 -14px 34px rgba(75, 7, 17, 0.22) !important;
+}
+
+.bottom-nav button {
+  font-size: 1rem !important;
+  gap: 7px !important;
+  color: #fff7e8 !important;
+}
+
+.bottom-nav button svg {
+  width: 32px !important;
+  height: 32px !important;
+}
+
+.bottom-nav button.active {
+  color: #e7bd55 !important;
+}
+
+@media (max-width: 560px) {
+  .topbar {
+    height: 116px !important;
+    padding: 16px 28px 12px !important;
+  }
+
+  .brand-title {
+    min-height: 76px;
+    width: 216px;
+  }
+
+  .brand-title::before {
+    font-size: 0.72rem;
+    letter-spacing: 0.42em;
+  }
+
+  .brand-title::after {
+    font-size: 2.55rem;
+    letter-spacing: 0.13em;
+  }
+
+  .top-icon svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .main {
+    padding-top: 138px !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+    padding-bottom: 116px !important;
+  }
+
+  .congress-hero {
+    aspect-ratio: 1200 / 500 !important;
+    border-radius: 22px !important;
+  }
+
+  .congress-mini-grid {
+    gap: 12px !important;
+  }
+
+  .congress-mini-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: initial !important;
+    min-height: 126px !important;
+    padding: 14px 5px 12px !important;
+    border-radius: 17px !important;
+  }
+
+  .congress-mini-card span:first-child {
+    width: 56px !important;
+    height: 56px !important;
+  }
+
+  .congress-mini-card svg {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .congress-mini-card strong {
+    font-size: 1rem !important;
+  }
+
+  .congress-mini-card small {
+    font-size: 0.74rem !important;
+  }
+
+  .quick-grid {
+    gap: 18px !important;
+  }
+
+  .quick-card,
+  .combined-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: initial !important;
+    height: 310px !important;
+    min-height: 310px !important;
+  }
+
+  .quick-icon {
+    top: 32px !important;
+    width: 68px !important;
+    height: 68px !important;
+  }
+
+  .quick-icon svg {
+    width: 33px !important;
+    height: 33px !important;
+  }
+
+  .quick-copy,
+  .combined-card .combined-copy {
+    padding: 112px 12px 54px !important;
+  }
+
+  .quick-copy strong {
+    font-size: 1.68rem !important;
+  }
+
+  .combined-copy strong {
+    font-size: 1.36rem !important;
+  }
+
+  .quick-copy small {
+    font-size: 1rem !important;
+  }
+
+  .quick-split-actions {
+    gap: 10px !important;
+  }
+
+  .quick-split-actions button {
+    min-height: 42px !important;
+    padding: 0 9px !important;
+    font-size: 0.82rem !important;
+  }
+
+  .inline-arrow {
+    width: 40px !important;
+    height: 40px !important;
+    bottom: 24px !important;
+  }
+
+  .bottom-nav {
+    height: 96px !important;
+    padding: 9px 34px 14px !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .main {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .congress-mini-grid,
+  .quick-grid {
+    gap: 12px !important;
+  }
+
+  .quick-card,
+  .combined-card {
+    height: 286px !important;
+    min-height: 286px !important;
+  }
+
+  .quick-copy strong {
+    font-size: 1.42rem !important;
+  }
+}
+
+/* Final congress mobile fit */
+@media (max-width: 560px) {
+  .main {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+    overflow-x: hidden !important;
+  }
+
+  .home-premium,
+  .congress-hero,
+  .congress-mini-grid,
+  .quick-grid,
+  .events-section {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .quick-grid {
+    gap: 14px !important;
+  }
+
+  .quick-card,
+  .combined-card {
+    flex-basis: calc((100% - 14px) / 2) !important;
+    width: calc((100% - 14px) / 2) !important;
+    max-width: calc((100% - 14px) / 2) !important;
+  }
+
+  .bottom-nav {
+    width: calc(100vw - 36px) !important;
+    max-width: calc(100vw - 36px) !important;
+    left: 18px !important;
+  }
+}
+
+/* Absolute last override: keep the reference layout grid intact */
+@media (max-width: 560px) {
+  .main {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+
+  .congress-mini-grid,
+  .quick-grid {
+    display: grid !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .congress-mini-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+
+  .quick-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+
+  .congress-mini-card,
+  .quick-card,
+  .combined-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+    flex-basis: auto !important;
+  }
+
+  .bottom-nav {
+    left: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+  }
+
+  .congress-mini-card {
+    min-width: 0 !important;
+    min-height: 112px !important;
+  }
+
+  .congress-mini-card span:first-child {
+    width: 50px !important;
+    height: 50px !important;
+  }
+
+  .congress-mini-card strong {
+    font-size: 0.88rem !important;
+  }
+
+  .congress-mini-card small {
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    font-size: 0.66rem !important;
+  }
+
+  .quick-card,
+  .combined-card {
+    min-width: 0 !important;
+    height: 284px !important;
+    min-height: 284px !important;
+  }
+
+  .quick-icon {
+    top: 28px !important;
+    width: 58px !important;
+    height: 58px !important;
+  }
+
+  .quick-icon svg {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .quick-copy,
+  .combined-card .combined-copy {
+    padding: 98px 8px 48px !important;
+  }
+
+  .quick-copy strong {
+    max-width: 100% !important;
+    font-size: 1.36rem !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .combined-copy strong {
+    font-size: 1.02rem !important;
+  }
+
+  .quick-copy small {
+    max-width: 100% !important;
+    font-size: 0.88rem !important;
+  }
+
+  .quick-split-actions {
+    gap: 6px !important;
+  }
+
+  .quick-split-actions button {
+    min-height: 36px !important;
+    padding: 0 6px !important;
+    font-size: 0.68rem !important;
+  }
+
+  .inline-arrow {
+    width: 34px !important;
+    height: 34px !important;
+    bottom: 20px !important;
+  }
+}
+
+/* Mobile app viewport lock */
+@media (max-width: 560px) {
+  html,
+  body,
+  .app-shell {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .home-premium {
+    width: min(100%, 394px) !important;
+    max-width: 394px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .congress-hero,
+  .congress-mini-grid,
+  .quick-title,
+  .quick-grid,
+  .events-section {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .quick-card::before {
+    filter: sepia(0.42) saturate(0.58) brightness(1.25) contrast(0.86) !important;
+    opacity: 0.76 !important;
+  }
+
+  .quick-overlay {
+    background:
+      linear-gradient(180deg, rgba(255, 249, 237, 0.58) 0%, rgba(255, 245, 225, 0.72) 54%, rgba(255, 245, 225, 0.06) 70%),
+      radial-gradient(circle at 50% 38%, rgba(255, 255, 255, 0.4), transparent 52%) !important;
+  }
+}
+
+/* Final background shape: full-page wave behind the banner */
+@media (max-width: 560px) {
+  body,
+  [data-theme="dark"] body {
+    background: #fff3da !important;
+  }
+
+  body::before {
+    display: block !important;
+    position: absolute !important;
+    content: "" !important;
+    inset: 0 0 auto 0 !important;
+    height: 292px !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(90, 7, 19, 0.78), transparent 62%),
+      linear-gradient(135deg, #33040a 0%, #520710 52%, #36040b 100%) !important;
+  }
+
+  body::after {
+    display: block !important;
+    position: absolute !important;
+    content: "" !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: 226px !important;
+    height: 150px !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+    background: #fff3da !important;
+    clip-path: ellipse(74% 54% at 50% 0%) !important;
+  }
+
+  .home-premium::before {
+    display: none !important;
+  }
+
+  .app-shell,
+  .topbar,
+  .main,
+  .home-premium {
+    background: transparent !important;
+  }
+
+  .topbar {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+  }
+
+  .app-shell {
+    position: relative !important;
+    z-index: 1 !important;
+  }
+
+  .main {
+    padding-top: 14px !important;
+  }
+
+  .congress-hero {
+    margin-top: 0 !important;
+    position: relative !important;
+    z-index: 2 !important;
+  }
+}
+
+/* Reference sizing pass: match the sent mockup proportions before final images */
+@media (max-width: 560px) {
+  .home-premium {
+    gap: 18px !important;
+  }
+
+  .congress-hero {
+    aspect-ratio: 2.18 / 1 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    border-radius: 22px !important;
+  }
+
+  .congress-mini-grid {
+    gap: 10px !important;
+  }
+
+  .congress-mini-card {
+    aspect-ratio: 1 / 1 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    padding: 10px 4px 8px !important;
+    align-content: center !important;
+  }
+
+  .congress-mini-card span:first-child {
+    width: 52px !important;
+    height: 52px !important;
+  }
+
+  .congress-mini-card svg {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .congress-mini-card strong {
+    font-size: 0.94rem !important;
+    line-height: 1.05 !important;
+  }
+
+  .congress-mini-card small {
+    font-size: 0.72rem !important;
+    line-height: 1.1 !important;
+  }
+
+  .quick-title {
+    margin-top: 8px !important;
+    margin-bottom: 4px !important;
+  }
+
+  .quick-grid {
+    gap: 14px !important;
+  }
+
+  .quick-card,
+  .combined-card {
+    aspect-ratio: 1 / 1.04 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    border-radius: 22px !important;
+  }
+
+  .quick-card::after {
+    height: 25% !important;
+  }
+
+  .quick-icon {
+    top: 28px !important;
+    width: 62px !important;
+    height: 62px !important;
+  }
+
+  .quick-copy,
+  .combined-card .combined-copy {
+    padding: 96px 10px 46px !important;
+    gap: 10px !important;
+  }
+
+  .quick-copy strong {
+    font-size: 1.42rem !important;
+    line-height: 0.98 !important;
+  }
+
+  .combined-copy strong {
+    font-size: 1.06rem !important;
+  }
+
+  .quick-copy small {
+    font-size: 0.9rem !important;
+    line-height: 1.15 !important;
+  }
+
+  .quick-split-actions button {
+    min-height: 34px !important;
+  }
+
+  .inline-arrow {
+    width: 36px !important;
+    height: 36px !important;
+    bottom: 18px !important;
+  }
+}
+
+/* Typography/icon scale pass for reference mockup */
+@media (max-width: 560px) {
+  .congress-mini-card span:first-child {
+    width: 46px !important;
+    height: 46px !important;
+  }
+
+  .congress-mini-card svg {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .congress-mini-card strong {
+    font-size: 0.84rem !important;
+    font-weight: 700 !important;
+    line-height: 1.04 !important;
+  }
+
+  .congress-mini-card small {
+    font-size: 0.62rem !important;
+    font-weight: 400 !important;
+  }
+
+  .quick-icon {
+    top: 30px !important;
+    width: 54px !important;
+    height: 54px !important;
+  }
+
+  .quick-icon svg {
+    width: 26px !important;
+    height: 26px !important;
+  }
+
+  .quick-copy,
+  .combined-card .combined-copy {
+    padding-top: 90px !important;
+  }
+
+  .quick-copy strong {
+    font-size: 1.2rem !important;
+    font-weight: 800 !important;
+    line-height: 1.02 !important;
+    gap: 4px !important;
+  }
+
+  .quick-copy strong span {
+    font-size: 0.68em !important;
+    font-weight: 600 !important;
+  }
+
+  .combined-copy strong {
+    font-size: 0.9rem !important;
+  }
+
+  .quick-copy small {
+    font-size: 0.76rem !important;
+    font-weight: 500 !important;
+  }
+
+  .quick-split-actions button {
+    min-height: 30px !important;
+    padding: 0 6px !important;
+    font-size: 0.62rem !important;
+    font-weight: 700 !important;
+  }
+
+  .inline-arrow {
+    width: 30px !important;
+    height: 30px !important;
+    bottom: 18px !important;
+  }
+
+  .inline-arrow svg {
+    width: 17px !important;
+    height: 17px !important;
+  }
+}
+
+/* Card content positioning pass: prevent icon/text overlap */
+@media (max-width: 560px) {
+  .congress-mini-card {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 4px !important;
+    padding: 8px 4px !important;
+  }
+
+  .congress-mini-card span:first-child {
+    position: static !important;
+    flex: 0 0 auto !important;
+    width: 44px !important;
+    height: 44px !important;
+    margin: 0 0 4px !important;
+  }
+
+  .congress-mini-card svg {
+    width: 23px !important;
+    height: 23px !important;
+  }
+
+  .congress-mini-card strong,
+  .congress-mini-card small {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    text-align: center !important;
+    white-space: normal !important;
+  }
+
+  .congress-mini-card strong {
+    font-size: 0.78rem !important;
+    line-height: 1.02 !important;
+  }
+
+  .congress-mini-card small {
+    font-size: 0.58rem !important;
+    line-height: 1.05 !important;
+  }
+
+  .quick-card,
+  .combined-card {
+    display: block !important;
+  }
+
+  .quick-icon {
+    top: 28px !important;
+    width: 54px !important;
+    height: 54px !important;
+  }
+
+  .quick-copy,
+  .combined-card .combined-copy {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    inset: 0 !important;
+    padding: 96px 8px 44px !important;
+    gap: 7px !important;
+    text-align: center !important;
+  }
+
+  .quick-copy strong,
+  .quick-copy strong span,
+  .quick-copy strong b,
+  .quick-copy small {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    text-align: center !important;
+  }
+
+  .quick-copy strong {
+    font-size: 1.14rem !important;
+    line-height: 1.02 !important;
+  }
+
+  .quick-copy strong span {
+    font-size: 0.62em !important;
+  }
+
+  .combined-copy strong {
+    font-size: 0.86rem !important;
+  }
+
+  .quick-copy small {
+    font-size: 0.72rem !important;
+    line-height: 1.15 !important;
+  }
+
+  .quick-split-actions {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 5px !important;
+    margin-top: 2px !important;
+  }
+
+  .quick-split-actions button {
+    min-height: 28px !important;
+    padding: 0 6px !important;
+    font-size: 0.58rem !important;
+    line-height: 1 !important;
+  }
+
+  .inline-arrow {
+    position: absolute !important;
+    left: 50% !important;
+    bottom: 18px !important;
+    transform: translateX(-50%) !important;
+    margin: 0 !important;
+  }
+}
+
+/* Mini-card and combined-card fit pass */
+@media (max-width: 560px) {
+  .congress-mini-card {
+    aspect-ratio: 1 / 1.12 !important;
+    gap: 3px !important;
+    padding: 8px 3px 7px !important;
+  }
+
+  .congress-mini-card span:first-child {
+    width: 42px !important;
+    height: 42px !important;
+    margin-bottom: 3px !important;
+  }
+
+  .congress-mini-card svg {
+    width: 22px !important;
+    height: 22px !important;
+  }
+
+  .congress-mini-card strong {
+    font-size: 0.74rem !important;
+  }
+
+  .congress-mini-card small {
+    font-size: 0.54rem !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+  }
+
+  .combined-card .combined-copy {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
+
+  .quick-split-actions {
+    width: calc(100% - 8px) !important;
+    max-width: 100% !important;
+    gap: 4px !important;
+  }
+
+  .quick-split-actions button {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    min-height: 28px !important;
+    padding: 0 3px !important;
+    font-size: 0.52rem !important;
+    white-space: nowrap !important;
+  }
+}
+
+/* Readability pass: keep text on beige area and enlarge cards slightly */
+@media (max-width: 560px) {
+  .quick-card,
+  .combined-card {
+    aspect-ratio: 1 / 1.13 !important;
+    min-height: 236px !important;
+  }
+
+  .quick-card::after {
+    height: 23% !important;
+  }
+
+  .quick-icon {
+    top: 26px !important;
+    width: 52px !important;
+    height: 52px !important;
+  }
+
+  .quick-icon svg {
+    width: 25px !important;
+    height: 25px !important;
+  }
+
+  .quick-copy,
+  .combined-card .combined-copy {
+    padding: 88px 8px 58px !important;
+    gap: 6px !important;
+  }
+
+  .quick-copy strong {
+    font-size: 1.22rem !important;
+    line-height: 1.03 !important;
+    min-height: 44px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+  }
+
+  .quick-copy strong span {
+    font-size: 0.64em !important;
+  }
+
+  .combined-copy strong {
+    font-size: 0.92rem !important;
+  }
+
+  .quick-copy small {
+    position: static !important;
+    z-index: 3 !important;
+    margin-top: 8px !important;
+    color: #2a1710 !important;
+    background: rgba(255, 248, 232, 0.72) !important;
+    border-radius: 999px !important;
+    padding: 3px 7px !important;
+    font-size: 0.78rem !important;
+    font-weight: 600 !important;
+    line-height: 1.1 !important;
+    text-shadow: 0 1px 7px rgba(255, 247, 230, 0.85) !important;
+  }
+
+  .inline-arrow {
+    position: absolute !important;
+    bottom: 18px !important;
+    width: 31px !important;
+    height: 31px !important;
+  }
+
+  .quick-split-actions {
+    margin-top: 6px !important;
+  }
+
+  .quick-split-actions button {
+    min-height: 31px !important;
+    font-size: 0.56rem !important;
+  }
+}
+
+/* Final top/header wine correction */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 170px;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(92, 7, 19, 0.72), transparent 62%),
+    linear-gradient(135deg, #33040a 0%, #520710 52%, #36040b 100%);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 250px;
+  height: 120px;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, #fff3da 0%, rgba(255, 243, 218, 0) 100%);
+  border-top-left-radius: 70% 82px;
+  border-top-right-radius: 42% 58px;
+}
+
+.app-shell,
+.topbar,
+.main,
+.bottom-nav {
+  position: relative;
+}
+
+.app-shell {
+  z-index: 1;
+}
+
+.topbar {
+  background:
+    radial-gradient(circle at 50% -16%, rgba(99, 8, 20, 0.64), transparent 58%),
+    linear-gradient(135deg, #33040a 0%, #520710 52%, #36040b 100%) !important;
+  box-shadow: none !important;
+}
+
+.bottom-nav,
+.quick-card::after,
+.inline-arrow,
+.congress-mini-card span:first-child,
+.quick-icon {
+  background-color: #520710 !important;
+}
+
+.bottom-nav {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(99, 8, 20, 0.45), transparent 62%),
+    linear-gradient(135deg, #33040a 0%, #520710 52%, #36040b 100%) !important;
+}
+
+@media (max-width: 560px) {
+  body::before {
+    height: 118px;
+  }
+
+  .topbar {
+    height: 112px !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+
+  .main {
+    padding-top: 126px !important;
+  }
+
+  .home-premium {
+    gap: 16px !important;
+  }
+
+  .congress-hero {
+    aspect-ratio: 2.2 / 1 !important;
+    border-radius: 18px !important;
+  }
+
+  .congress-hero img {
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+}
+
+/* Header scroll behavior: header belongs to the page, not fixed to viewport */
+.topbar {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+}
+
+body::before,
+body::after {
+  position: absolute !important;
+}
+
+@media (max-width: 560px) {
+  .main {
+    padding-top: 14px !important;
+  }
+
+  body::before {
+    height: 286px !important;
+  }
+
+  body::after {
+    top: 248px !important;
+  }
+}
+
+/* Header layout correction: keep header fixed and remove the large cream gap */
+.topbar {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 30 !important;
+}
+
+@media (max-width: 560px) {
+  .topbar {
+    height: 112px !important;
+  }
+
+  .main {
+    padding-top: 128px !important;
+  }
+
+  .brand-title {
+    min-height: 68px !important;
+  }
+
+  .brand-title::before {
+    top: 2px !important;
+  }
+
+  .brand-title::after {
+    bottom: 2px !important;
+  }
+}
+
+/* Extend wine header color behind the banner */
+@media (max-width: 560px) {
+  body::before {
+    height: 340px !important;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(96, 8, 20, 0.78), transparent 62%),
+      linear-gradient(135deg, #33040a 0%, #520710 52%, #36040b 100%) !important;
+  }
+
+  body::after {
+    display: none !important;
+  }
+
+  .main {
+    padding-top: 118px !important;
+  }
+
+  .home-premium {
+    position: relative !important;
+    isolation: isolate !important;
+  }
+
+  .home-premium::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top: 18px;
+    left: -28px;
+    right: -28px;
+    height: 270px;
+    pointer-events: none;
+    background:
+      radial-gradient(105% 118px at 18% 0%, #fff3da 0 62%, rgba(255, 243, 218, 0) 64%),
+      linear-gradient(180deg, #fff3da 0%, #fff3da 72%, rgba(255, 243, 218, 0) 100%);
+    clip-path: polygon(0 38%, 13% 22%, 30% 29%, 47% 18%, 64% 28%, 80% 20%, 100% 34%, 100% 100%, 0 100%);
+  }
+
+  .home-premium > * {
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  .congress-hero {
+    margin-top: 0 !important;
+    box-shadow: 0 14px 30px rgba(34, 0, 7, 0.25) !important;
+  }
+}
+
+/* Absolute final top background fix */
+@media (max-width: 560px) {
+  body,
+  [data-theme="dark"] body {
+    background: #fff3da !important;
+  }
+
+  body::before {
+    display: block !important;
+    position: absolute !important;
+    content: "" !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 292px !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(90, 7, 19, 0.78), transparent 62%),
+      linear-gradient(135deg, #33040a 0%, #520710 52%, #36040b 100%) !important;
+  }
+
+  body::after {
+    display: block !important;
+    position: absolute !important;
+    content: "" !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: 226px !important;
+    height: 150px !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+    background: #fff3da !important;
+    clip-path: ellipse(74% 54% at 50% 0%) !important;
+  }
+
+  .home-premium::before {
+    display: none !important;
+  }
+
+  .app-shell,
+  .topbar,
+  .main,
+  .home-premium {
+    background: transparent !important;
+  }
+
+  .app-shell {
+    position: relative !important;
+    z-index: 1 !important;
+  }
+
+  .main {
+    padding-top: 14px !important;
+  }
+
+  .congress-hero {
+    position: relative !important;
+    z-index: 2 !important;
+  }
+}
+
+/* Final final: wave as page background, never above content */
+@media (max-width: 560px) {
+  body,
+  [data-theme="dark"] body {
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 430 170' preserveAspectRatio='none'%3E%3Cpath d='M0 78 C58 38 114 88 174 58 C247 22 308 74 430 50 L430 170 L0 170 Z' fill='%23fff3da'/%3E%3C/svg%3E") 0 178px / 100% 170px no-repeat,
+      linear-gradient(180deg, #33040a 0, #520710 284px, #fff3da 284px, #fff3da 100%) !important;
+  }
+
+  body::before,
+  body::after,
+  .home-premium::before {
+    display: none !important;
+  }
+
+  .topbar,
+  .main,
+  .home-premium,
+  .app-shell {
+    background: transparent !important;
+  }
+
+  .topbar {
+    position: relative !important;
+  }
+
+  .main {
+    padding-top: 14px !important;
+  }
+}
+
+/* Keep only the bottom menu fixed */
+.bottom-nav {
+  position: fixed !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 40 !important;
+}
+
+@media (max-width: 560px) {
+  .bottom-nav {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+  }
+}
+
+/* Shirt 3D page */
+.shirt-page {
+  display: grid;
+  gap: 18px;
+}
+
+.shirt-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.shirt-toolbar h1 {
+  margin: 0;
+  color: #5a0713;
+  font-size: clamp(1.35rem, 4vw, 2.1rem);
+  line-height: 1.05;
+}
+
+.shirt-toolbar p {
+  margin: 4px 0 0;
+  color: #6f4a42;
+  font-weight: 600;
+}
+
+.shirt-static-page .shirt-toolbar {
+  justify-content: center;
+  text-align: center;
+}
+
+.shirt-viewer-card {
+  overflow: hidden;
+  border: 1px solid rgba(198, 150, 54, 0.72);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 50% 8%, rgba(255, 246, 225, 0.96), rgba(246, 222, 181, 0.88) 52%, rgba(82, 7, 16, 0.95) 100%);
+  box-shadow: 0 22px 54px rgba(82, 7, 16, 0.2);
+}
+
+.shirt-reference {
+  margin: 0;
+  padding: 16px 16px 0;
+}
+
+.shirt-reference img {
+  display: block;
+  width: 100%;
+  max-height: min(44vh, 430px);
+  object-fit: cover;
+  object-position: center;
+  border: 1px solid rgba(198, 150, 54, 0.7);
+  border-radius: 20px;
+  box-shadow: 0 16px 34px rgba(82, 7, 16, 0.22);
+}
+
+.shirt-reference figcaption {
+  margin-top: 10px;
+  color: #5a0713;
+  text-align: center;
+  font-weight: 800;
+}
+
+.shirt-viewer {
+  position: relative;
+  height: min(48vh, 500px);
+  min-height: 430px;
+}
+
+.shirt-viewer canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}
+
+.shirt-loader {
+  position: absolute;
+  inset: auto 18px 18px;
+  border: 1px solid rgba(198, 150, 54, 0.42);
+  border-radius: 999px;
+  padding: 10px 14px;
+  background: rgba(255, 246, 225, 0.82);
+  color: #5a0713;
+  text-align: center;
+  font-weight: 700;
+}
+
+.shirt-actions {
+  display: flex;
+  gap: 10px;
+  padding: 14px;
+  background: rgba(255, 243, 218, 0.76);
+}
+
+.shirt-actions button {
+  flex: 1;
+}
+
+@media (max-width: 560px) {
+  .shirt-page {
+    padding-bottom: 96px;
+  }
+
+  .shirt-toolbar {
+    align-items: flex-start;
+  }
+
+  .shirt-toolbar .plain-button {
+    min-width: 88px;
+    padding: 0 10px;
+  }
+
+  .shirt-viewer {
+    height: 44vh;
+    min-height: 320px;
+  }
+
+  .shirt-reference {
+    padding: 12px 12px 0;
+  }
+
+  .shirt-reference img {
+    max-height: 260px;
+    border-radius: 18px;
+  }
+}
+
+/* Official shirt artwork visibility */
+.shirt-page .shirt-toolbar h1 {
+  color: #fff3da !important;
+}
+
+.shirt-page .shirt-toolbar p {
+  color: rgba(255, 243, 218, 0.82) !important;
+}
+
+.shirt-reference img {
+  object-fit: contain !important;
+  background: #170406 !important;
+}
+
+@media (max-width: 560px) {
+  .shirt-reference img {
+    max-height: 230px !important;
+  }
+}
+
+/* Final audit fixes - 2026-08-24 */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.side-drawer {
+  max-width: min(86vw, 340px) !important;
+}
+
+.panel,
+.home-premium,
+.shirt-page {
+  width: min(100%, 1120px);
+  margin-inline: auto;
+}
+
+.hymnal-panel .section-header h1,
+.hymnal-panel .section-header p,
+.hymn-title-list,
+.hymn-detail {
+  color: #4b0610 !important;
+}
+
+.hymn-title-list {
+  display: grid;
+  gap: 10px;
+}
+
+.hymn-row {
+  min-height: 58px;
+  border: 1px solid rgba(198, 150, 54, 0.72) !important;
+  border-radius: 16px !important;
+  background: rgba(255, 248, 232, 0.92) !important;
+  color: #4b0610 !important;
+  box-shadow: 0 10px 22px rgba(82, 7, 16, 0.08);
+}
+
+.hymn-row span,
+.hymn-row b,
+.hymn-row svg,
+.hymn-detail header span,
+.hymn-detail h2,
+.hymn-detail .lyrics {
+  color: #4b0610 !important;
+}
+
+.hymn-row b {
+  color: #a8741f !important;
+}
+
+.hymn-detail {
+  border-color: rgba(198, 150, 54, 0.62) !important;
+  background: rgba(255, 248, 232, 0.94) !important;
+}
+
+.hymn-detail .lyrics {
+  border-top-color: rgba(82, 7, 16, 0.16) !important;
+  font-size: clamp(1rem, 2.2vw, 1.12rem);
+  line-height: 1.78;
+}
+
+.congress-hymns-panel {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 18px;
+  padding: 18px;
+  border: 1px solid rgba(198, 150, 54, 0.7);
+  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(255, 248, 232, 0.96), rgba(246, 223, 184, 0.9));
+  box-shadow: 0 18px 34px rgba(82, 7, 16, 0.12);
+}
+
+.congress-hymns-panel > div:first-child span {
+  color: #a8741f;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.congress-hymns-panel h2 {
+  margin: 4px 0 0;
+  color: #4b0610;
+  font-size: clamp(1.25rem, 4vw, 1.8rem);
+}
+
+.congress-hymns-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.congress-hymn-card {
+  display: grid;
+  min-height: 116px;
+  place-items: center;
+  gap: 5px;
+  border: 1px solid rgba(198, 150, 54, 0.78);
+  border-radius: 18px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.34);
+  color: #4b0610;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 260ms ease, box-shadow 260ms ease;
+}
+
+.congress-hymn-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 28px rgba(82, 7, 16, 0.16);
+}
+
+.congress-hymn-card b {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 999px;
+  background: #5a0713;
+  color: #d8a23a;
+  font-size: 0.82rem;
+}
+
+.congress-hymn-card strong {
+  color: #4b0610;
+  font-size: 0.98rem;
+  line-height: 1.15;
+}
+
+.congress-hymn-card small {
+  color: #7b4f16;
+  font-weight: 700;
+}
+
+.congress-hymn-card.is-pending {
+  border-style: dashed;
+}
+
+.hymn-missing-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(0, 0, 0, 0.74);
+}
+
+.hymn-missing-modal {
+  width: min(92vw, 520px);
+  border: 1px solid rgba(216, 162, 58, 0.72);
+  border-radius: 22px;
+  padding: 26px;
+  background: linear-gradient(145deg, #fff7e7, #f1d7a6);
+  color: #4b0610;
+  text-align: center;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.38);
+}
+
+.hymn-missing-modal h2,
+.hymn-missing-modal p {
+  color: #4b0610;
+}
+
+.hymn-missing-modal p {
+  margin: 10px 0 20px;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+.shirt-static-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.88fr);
+  gap: 20px;
+  align-items: stretch;
+  border: 1px solid rgba(198, 150, 54, 0.72);
+  border-radius: 24px;
+  padding: 18px;
+  background: linear-gradient(145deg, rgba(255, 248, 232, 0.98), rgba(246, 223, 184, 0.94));
+  box-shadow: 0 22px 54px rgba(82, 7, 16, 0.18);
+}
+
+.shirt-reference-static {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+.shirt-reference-static img {
+  width: 100%;
+  max-height: none !important;
+  aspect-ratio: 1.28 / 1;
+  object-fit: contain !important;
+  border-radius: 20px;
+  background: #150407 !important;
+}
+
+.shirt-reference-static figcaption {
+  color: #5a0713 !important;
+}
+
+.shirt-info-panel {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  border: 1px solid rgba(198, 150, 54, 0.55);
+  border-radius: 20px;
+  padding: clamp(18px, 3vw, 28px);
+  background: rgba(255, 255, 255, 0.34);
+  color: #4b0610;
+}
+
+.check-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(198, 150, 54, 0.5);
+  border-radius: 14px;
+  padding: 12px 14px;
+  background: rgba(255, 248, 232, 0.08);
+  color: inherit;
+  font-weight: 800;
+}
+
+.check-field input {
+  width: 20px;
+  height: 20px;
+  accent-color: #d8a23a;
+}
+
+.hymn-row-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: inherit;
+}
+
+.favorite-star,
+.favorite-verse-button,
+.favorite-detail-button {
+  border: 1px solid rgba(198, 150, 54, 0.68);
+  background: rgba(255, 248, 232, 0.76);
+  color: #8a5a18;
+  cursor: pointer;
+  transition: transform 220ms ease, background 220ms ease, color 220ms ease;
+}
+
+.favorite-star {
+  display: inline-grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 999px;
+  font-size: 1.28rem;
+  line-height: 1;
+}
+
+.favorite-star.active,
+.favorite-verse-button.active,
+.favorite-detail-button.active {
+  background: #5a0713;
+  color: #f4c86e !important;
+}
+
+.favorite-star:hover,
+.favorite-verse-button:hover,
+.favorite-detail-button:hover {
+  transform: scale(1.05);
+}
+
+.favorite-detail-button {
+  width: max-content;
+  max-width: 100%;
+  border-radius: 999px;
+  padding: 9px 13px;
+  font-weight: 800;
+}
+
+.verse {
+  position: relative;
+}
+
+.verse.bible-verse-only {
+  grid-template-columns: 42px minmax(0, 1fr) 42px !important;
+  align-items: start;
+}
+
+.favorite-verse-button {
+  flex: 0 0 auto;
+  display: inline-grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  align-self: start;
+  border-radius: 999px;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 0 !important;
+  white-space: normal !important;
+}
+
+.favorite-verses-panel {
+  display: grid;
+  gap: 12px;
+  margin: 0 0 18px;
+  border: 1px solid rgba(198, 150, 54, 0.65);
+  border-radius: 18px;
+  padding: 14px;
+  background: rgba(255, 248, 232, 0.76);
+}
+
+.favorite-verses-panel h3 {
+  margin: 0;
+  color: #5a0713;
+  font-size: 1.05rem;
+}
+
+.favorite-verses-panel > div {
+  display: grid;
+  gap: 8px;
+}
+
+.favorite-verses-panel button {
+  display: grid;
+  gap: 4px;
+  border: 1px solid rgba(198, 150, 54, 0.48);
+  border-radius: 14px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.44);
+  color: #4b0610;
+  text-align: left;
+}
+
+.favorite-verses-panel strong {
+  color: #8a5a18;
+}
+
+.favorite-verses-panel span {
+  color: #4b0610;
+  line-height: 1.45;
+}
+
+.lesson-status-done {
+  display: inline-flex;
+  width: max-content;
+  align-items: center;
+  border: 1px solid rgba(198, 150, 54, 0.62);
+  border-radius: 999px;
+  padding: 5px 9px;
+  background: rgba(90, 7, 19, 0.08);
+  color: #8a5a18 !important;
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.shirt-tag {
+  width: max-content;
+  border: 1px solid rgba(90, 7, 19, 0.24);
+  border-radius: 999px;
+  padding: 7px 12px;
+  background: #5a0713;
+  color: #f5d78f;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.shirt-info-panel h2,
+.shirt-info-panel p,
+.shirt-info-panel span,
+.shirt-info-panel strong {
+  color: #4b0610;
+}
+
+.shirt-info-panel h2 {
+  margin: 0;
+  font-size: clamp(1.45rem, 4vw, 2.25rem);
+  line-height: 1.08;
+}
+
+.shirt-info-panel p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.shirt-price-box {
+  display: grid;
+  gap: 2px;
+  border-radius: 18px;
+  padding: 18px;
+  background: #5a0713;
+}
+
+.shirt-price-box span {
+  color: rgba(255, 243, 218, 0.76);
+  font-weight: 700;
+}
+
+.shirt-price-box strong {
+  color: #f4c86e;
+  font-size: clamp(2rem, 6vw, 3rem);
+  line-height: 1;
+}
+
+.shirt-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.shirt-info-grid div {
+  min-width: 0;
+  border: 1px solid rgba(198, 150, 54, 0.58);
+  border-radius: 16px;
+  padding: 14px;
+  background: rgba(255, 248, 232, 0.72);
+}
+
+.shirt-info-grid span {
+  display: block;
+  color: #7b4f16;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.shirt-info-grid strong {
+  display: block;
+  margin-top: 4px;
+  line-height: 1.3;
+}
+
+.shirt-note {
+  border-left: 4px solid #d8a23a;
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: rgba(216, 162, 58, 0.14);
+  font-weight: 700;
+}
+
+.calendar-special-event,
+.event-card-special {
+  border-color: rgba(216, 162, 58, 0.92) !important;
+  background:
+    linear-gradient(135deg, rgba(90, 7, 19, 0.96), rgba(122, 16, 32, 0.9)),
+    var(--surface) !important;
+  box-shadow: 0 14px 34px rgba(90, 7, 19, 0.26), inset 0 0 0 1px rgba(255, 243, 218, 0.08);
+}
+
+.calendar-special-event time,
+.calendar-special-event strong,
+.calendar-special-event span,
+.calendar-special-event small,
+.event-card-special h3,
+.event-card-special p,
+.event-card-special small {
+  color: #fff3da !important;
+}
+
+.special-event-theme {
+  display: inline-flex !important;
+  gap: 5px;
+  align-items: center;
+  width: max-content;
+  max-width: 100%;
+  border: 1px solid rgba(216, 162, 58, 0.48);
+  border-radius: 999px;
+  padding: 5px 9px;
+  background: rgba(216, 162, 58, 0.18);
+  color: #f4c86e !important;
+  font-weight: 800;
+}
+
+.event-detail-special h2,
+.special-theme-row span {
+  color: #f4c86e !important;
+}
+
+@media (min-width: 900px) {
+  .main {
+    padding-inline: clamp(22px, 5vw, 64px) !important;
+  }
+
+  .quick-grid,
+  .congress-mini-grid {
+    max-width: 920px;
+    margin-inline: auto;
+  }
+
+  .calendar-panel {
+    max-width: 1040px;
+  }
+}
+
+@media (max-width: 740px) {
+  .congress-hymns-grid,
+  .shirt-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shirt-static-card {
+    grid-template-columns: 1fr;
+    padding: 14px;
+  }
+
+  .shirt-reference-static img {
+    aspect-ratio: 1.1 / 1;
+  }
+}
+
+@media (max-width: 560px) {
+  .panel,
+  .home-premium,
+  .shirt-page {
+    width: 100%;
+  }
+
+  .congress-hymns-panel {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .congress-hymns-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .congress-hymn-card {
+    min-height: 94px;
+  }
+
+  .shirt-info-panel {
+    padding: 16px;
+  }
+}
+
+@media (min-width: 768px) {
+  .bottom-nav {
+    display: none !important;
+  }
+
+  .main {
+    padding-bottom: 54px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .main {
+    padding-bottom: 128px !important;
+  }
+
+  .bottom-nav {
+    display: grid !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
   }
 }

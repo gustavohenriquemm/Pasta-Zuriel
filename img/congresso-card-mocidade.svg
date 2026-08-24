@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 520">
+  <rect width="520" height="520" fill="#fff6e5"/>
+  <g opacity=".22" stroke="#6e4b3e" stroke-width="4">
+    <path d="M40 130h430M40 170h430M40 210h430M40 250h430M40 290h430"/>
+    <path d="M120 116v170M272 116v170M408 116v170"/>
+  </g>
+  <g opacity=".28" fill="#5d0714">
+    <circle cx="168" cy="182" r="12"/><path d="M180 182v-74h18v74z"/>
+    <circle cx="318" cy="232" r="14"/><path d="M332 232v-88h18v88z"/>
+  </g>
+  <radialGradient id="g" cx=".25" cy=".2" r=".9">
+    <stop offset="0" stop-color="#fffef6"/>
+    <stop offset="1" stop-color="#ead7b6"/>
+  </radialGradient>
+  <rect width="520" height="520" fill="url(#g)" opacity=".62"/>
+</svg>

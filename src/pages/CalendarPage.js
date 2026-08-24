@@ -1,12 +1,13 @@
-import { getEventsForDate, getMonthDays, toDateKey, formatDate, watchCalendarEvents } from '../services/calendarService.js?v=20260713-12';
+import { getEventsForDate, getMonthDays, toDateKey, formatDate, watchCalendarEvents } from '../services/calendarService.js?v=20260824-5';
 import { listenNotices } from '../../database/firestore.js?v=20260713-33';
-import { icon } from '../components/icons.js?v=20260713-8';
-import { openEventDetails, renderEventDetailsHost } from '../components/EventDetailsModal.js?v=20260713-12';
+import { icon } from '../components/icons.js?v=20260817-4';
+import { openEventDetails, renderEventDetailsHost } from '../components/EventDetailsModal.js?v=20260824-5';
 
-export function renderCalendar(root, navigate) {
+export function renderCalendar(root, navigate, route = 'calendar') {
   const today = new Date();
-  let current = new Date(today.getFullYear(), today.getMonth(), 1);
-  let selected = new Date(today);
+  const routedDate = getRouteDate(route);
+  let current = new Date((routedDate || today).getFullYear(), (routedDate || today).getMonth(), 1);
+  let selected = new Date(routedDate || today);
   let remoteEvents = [];
   let activeNotices = [];
 
@@ -80,12 +81,14 @@ export function renderCalendar(root, navigate) {
               `;
             }).join('')}
             ${selectedEvents.map((event, index) => `
-            <article class="calendar-event calendar-event-clickable" role="button" tabindex="0" data-event-details="${index}" style="--event-color:${event.color || '#FFC107'}">
+            <article class="calendar-event calendar-event-clickable ${isSpecialEvent(event) ? 'calendar-special-event' : ''}" role="button" tabindex="0" data-event-details="${index}" style="--event-color:${event.color || '#FFC107'}">
               <time>${event.time || '--:--'}</time>
               <div>
                 <strong>${escapeHtml(event.icon || '')} ${escapeHtml(event.title || event.description || 'Evento')}</strong>
                 ${!isRehearsal(event) ? `<span>${escapeHtml(event.location || 'Local nao informado')}</span>` : ''}
                 ${event.eventType === 'sunday-school' ? `<small><b>Tema:</b> ${escapeHtml(event.lessonTitle || '')}</small>` : ''}
+                ${event.lessonCompleted ? '<small class="lesson-status-done">Realizada</small>' : ''}
+                ${isSpecialEvent(event) ? `<small class="special-event-theme"><b>Referência:</b> ${escapeHtml(event.theme || 'Mateus 5:6')}</small>` : ''}
                 ${isRehearsal(event) && event.conductor ? `<small><b>Regente:</b> ${escapeHtml(event.conductor)}</small>` : ''}
                 ${isRehearsal(event) && event.rehearsalHymn ? `<small><b>Hino:</b> ${escapeHtml(event.rehearsalHymn)}</small>` : ''}
                 ${event.notes ? `<small>${escapeHtml(event.notes)}</small>` : ''}
@@ -156,6 +159,13 @@ function parseDateKey(value) {
   return new Date(year, month - 1, day);
 }
 
+function getRouteDate(route) {
+  const value = String(route || '').split(':')[1];
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value || '')) return null;
+  const date = parseDateKey(value);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
 function escapeHtml(value) {
   return String(value || '').replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[char]));
 }
@@ -167,6 +177,10 @@ function escapeAttr(value) {
 function isRehearsal(event) {
   return event.eventType === 'rehearsal'
     || String(event.title || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes('ensaio');
+}
+
+function isSpecialEvent(event) {
+  return event.special === true || ['congress', 'retreat'].includes(event.eventType);
 }
 
 function getEventWhatsAppUrl(event, date) {
