@@ -1,11 +1,11 @@
 const CACHE_PREFIX = 'igreja-zuriel-';
-const CACHE_NAME = `${CACHE_PREFIX}v90`;
+const CACHE_NAME = `${CACHE_PREFIX}v91`;
 const APP_SHELL = [
   '/index.html',
   '/manifest.json',
   '/css/style.css',
   '/styles/app.css?v=20260824-6',
-  '/js/script.js?v=20260824-6',
+  '/js/script.js?v=20260824-7',
   '/img/congresso-banner.png?v=20260817-1',
   '/img/mocidade-card.jpg?v=20260817-4',
   '/img/biblia-card.jpg?v=20260817-4',
@@ -118,3 +118,4 @@ self.addEventListener('notificationclick', (event) => {
     }),
   );
 });
+

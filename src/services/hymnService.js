@@ -1,5 +1,5 @@
 import { getCachedJson } from '../utils/cache.js';
-import { listenHymns } from '../../database/firestore.js';
+import { loadPublicHymns } from '../../database/firestore.js?v=20260824-7';
 
 const HARPA_URL = 'https://raw.githubusercontent.com/DanielLiberato/Harpa-Crista-JSON-640-Hinos-Completa/main/harpa_crista_640_hinos.json';
 
@@ -14,7 +14,7 @@ export async function getHymns(collection) {
 }
 
 export function watchHymns(collection, onChange) {
-  return listenHymns(collection, onChange);
+  return loadPublicHymns(collection, onChange);
 }
 
 function normalizeHarpaHymn(number, hymn) {
@@ -38,3 +38,4 @@ function htmlToText(value) {
   div.innerHTML = String(value || '').replace(/<br\s*\/?>/gi, '\n');
   return div.textContent.split('\n').map((line) => line.trim()).filter(Boolean).join('\n');
 }
+

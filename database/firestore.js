@@ -1,6 +1,9 @@
 import { getFirebase } from '../authentication/firebase.js?v=20260713-19';
 import { sendPushNotification } from '../src/services/pushApiService.js?v=20260713-19';
 
+const PUBLIC_CACHE_TTL = 1000 * 60 * 10;
+const PUBLIC_CACHE_PREFIX = 'zuriel:firestore-cache:';
+
 export async function signInAdmin(email, password) {
   const firebase = await getFirebase();
   if (!firebase) throw new Error('Firebase ainda nao configurado.');
@@ -47,6 +50,19 @@ export function listenHymns(collectionName, callback) {
   return () => unsubscribe?.();
 }
 
+export function loadPublicHymns(collectionName, callback) {
+  return loadCachedPublicCollection(
+    `hymns:${collectionName}`,
+    async (firebase) => {
+      const { collection, getDocs, orderBy, query } = firebase.firestoreModule;
+      const ref = query(collection(firebase.db, collectionName), orderBy('number', 'asc'));
+      const snapshot = await getDocs(ref);
+      return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    },
+    callback,
+  );
+}
+
 export function listenCalendarEvents(callback) {
   let unsubscribe;
   getFirebase().then((firebase) => {
@@ -58,6 +74,19 @@ export function listenCalendarEvents(callback) {
     }, () => callback([]));
   });
   return () => unsubscribe?.();
+}
+
+export function loadPublicCalendarEvents(callback) {
+  return loadCachedPublicCollection(
+    'calendarEvents',
+    async (firebase) => {
+      const { collection, getDocs, orderBy, query } = firebase.firestoreModule;
+      const ref = query(collection(firebase.db, 'calendarEvents'), orderBy('date', 'asc'));
+      const snapshot = await getDocs(ref);
+      return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    },
+    callback,
+  );
 }
 
 export function listenNotices(callback) {
@@ -73,6 +102,21 @@ export function listenNotices(callback) {
     }, () => callback([]));
   });
   return () => unsubscribe?.();
+}
+
+export function loadPublicNotices(callback) {
+  return loadCachedPublicCollection(
+    'notices:public',
+    async (firebase) => {
+      const { collection, getDocs } = firebase.firestoreModule;
+      const ref = collection(firebase.db, 'notices');
+      const snapshot = await getDocs(ref);
+      return snapshot.docs
+        .map((document) => ({ id: document.id, ...document.data() }))
+        .filter((item) => item.notificationOnly !== true);
+    },
+    callback,
+  );
 }
 
 export function listenNotifications(callback) {
@@ -101,6 +145,23 @@ export function listenNotifications(callback) {
   return () => unsubscribe?.();
 }
 
+export function loadPublicNotifications(callback) {
+  return loadCachedPublicCollection(
+    'notices:notifications',
+    async (firebase) => {
+      const { collection, getDocs } = firebase.firestoreModule;
+      const ref = collection(firebase.db, 'notices');
+      const snapshot = await getDocs(ref);
+      return snapshot.docs
+        .map((document) => ({ id: document.id, ...document.data() }))
+        .filter((item) => item.notificationOnly === true)
+        .sort((a, b) => Number(b.updatedAt || 0) - Number(a.updatedAt || 0))
+        .slice(0, 50);
+    },
+    (items) => callback(items, [], false),
+  );
+}
+
 export async function saveHymn(collectionName, hymn) {
   const firebase = await getFirebase();
   if (!firebase) throw new Error('Firebase ainda nao configurado.');
@@ -108,6 +169,7 @@ export async function saveHymn(collectionName, hymn) {
   const id = hymn.id || `${collectionName}-${hymn.number}`;
   try {
     await setDoc(doc(collection(firebase.db, collectionName), id), { ...hymn, id, updatedAt: Date.now() });
+    clearPublicCache(`hymns:${collectionName}`);
   } catch (error) {
     throw new Error(getFriendlyFirestoreError(error));
   }
@@ -119,6 +181,7 @@ export async function deleteHymn(collectionName, id) {
   const { doc, deleteDoc } = firebase.firestoreModule;
   try {
     await deleteDoc(doc(firebase.db, collectionName, id));
+    clearPublicCache(`hymns:${collectionName}`);
   } catch (error) {
     throw new Error(getFriendlyFirestoreError(error));
   }
@@ -138,6 +201,8 @@ export async function saveCalendarEvent(event) {
     const notificationId = createNotificationId(updatedAt);
     batch.set(doc(collection(firebase.db, 'notices'), notificationId), notification);
     await batch.commit();
+    clearPublicCache('calendarEvents');
+    clearPublicCache('notices:notifications');
     return { notificationSent: await deliverPush({ id: notificationId, ...notification }) };
   } catch (error) {
     throw new Error(getFriendlyFirestoreError(error));
@@ -168,6 +233,8 @@ export async function deleteCalendarEvent(id) {
     batch.delete(eventRef);
     batch.set(doc(collection(firebase.db, 'notices'), notificationId), notification);
     await batch.commit();
+    clearPublicCache('calendarEvents');
+    clearPublicCache('notices:notifications');
     return { notificationSent: await deliverPush({ id: notificationId, ...notification }) };
   } catch (error) {
     throw new Error(getFriendlyFirestoreError(error));
@@ -197,6 +264,8 @@ export async function saveNotice(notice) {
     batch.set(doc(collection(firebase.db, 'notices'), id), { ...notice, id, updatedAt });
     batch.set(doc(collection(firebase.db, 'notices'), notificationId), notification);
     await batch.commit();
+    clearPublicCache('notices:public');
+    clearPublicCache('notices:notifications');
     const notificationSent = notice.active === false
       ? null
       : await deliverPush({ id: notificationId, ...notification });
@@ -230,9 +299,59 @@ export async function deleteNotice(id) {
     batch.delete(noticeRef);
     batch.set(doc(collection(firebase.db, 'notices'), notificationId), notification);
     await batch.commit();
+    clearPublicCache('notices:public');
+    clearPublicCache('notices:notifications');
     return { notificationSent: await deliverPush({ id: notificationId, ...notification }) };
   } catch (error) {
     throw new Error(getFriendlyFirestoreError(error));
+  }
+}
+
+function loadCachedPublicCollection(cacheKey, fetcher, callback) {
+  const cached = readPublicCache(cacheKey);
+  if (cached) {
+    callback(cached);
+    return () => {};
+  }
+
+  getFirebase().then(async (firebase) => {
+    if (!firebase) return callback([]);
+    try {
+      const items = await fetcher(firebase);
+      writePublicCache(cacheKey, items);
+      callback(items);
+    } catch {
+      callback([]);
+    }
+  });
+  return () => {};
+}
+
+function readPublicCache(cacheKey) {
+  try {
+    const raw = localStorage.getItem(PUBLIC_CACHE_PREFIX + cacheKey);
+    if (!raw) return null;
+    const cached = JSON.parse(raw);
+    if (!cached?.savedAt || Date.now() - cached.savedAt > PUBLIC_CACHE_TTL) return null;
+    return Array.isArray(cached.items) ? cached.items : null;
+  } catch {
+    return null;
+  }
+}
+
+function writePublicCache(cacheKey, items) {
+  try {
+    localStorage.setItem(PUBLIC_CACHE_PREFIX + cacheKey, JSON.stringify({ savedAt: Date.now(), items }));
+  } catch {
+    // Cache is optional. Ignore storage failures.
+  }
+}
+
+function clearPublicCache(cacheKey) {
+  try {
+    localStorage.removeItem(PUBLIC_CACHE_PREFIX + cacheKey);
+  } catch {
+    // Cache is optional. Ignore storage failures.
   }
 }
 

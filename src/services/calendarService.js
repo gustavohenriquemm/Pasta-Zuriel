@@ -1,4 +1,4 @@
-import { listenCalendarEvents } from '../../database/firestore.js?v=20260713-33';
+import { loadPublicCalendarEvents } from '../../database/firestore.js?v=20260824-7';
 import { SUNDAY_SCHOOL_LESSONS } from '../data/sundaySchoolLessons.js?v=20260824-6';
 
 const SUNDAY_EVENTS = [
@@ -85,7 +85,7 @@ const FIXED_EVENTS = [
 ];
 
 export function watchCalendarEvents(callback) {
-  return listenCalendarEvents(callback);
+  return loadPublicCalendarEvents(callback);
 }
 
 export function getEventsForDate(date, remoteEvents = []) {
@@ -173,3 +173,4 @@ function isRehearsal(event) {
   return event.eventType === 'rehearsal'
     || String(event.title || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes('ensaio');
 }
+

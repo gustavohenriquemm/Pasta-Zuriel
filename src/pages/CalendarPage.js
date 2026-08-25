@@ -1,5 +1,5 @@
 import { getEventsForDate, getMonthDays, toDateKey, formatDate, watchCalendarEvents } from '../services/calendarService.js?v=20260824-6';
-import { listenNotices } from '../../database/firestore.js?v=20260713-33';
+import { loadPublicNotices } from '../../database/firestore.js?v=20260824-7';
 import { icon } from '../components/icons.js?v=20260817-4';
 import { openEventDetails, renderEventDetailsHost } from '../components/EventDetailsModal.js?v=20260824-6';
 
@@ -29,7 +29,7 @@ export function renderCalendar(root, navigate, route = 'calendar') {
     remoteEvents = events;
     draw();
   });
-  const stopNotices = listenNotices((notices) => {
+  const stopNotices = loadPublicNotices((notices) => {
     activeNotices = notices.filter(isNoticeActive);
     draw();
   });
@@ -197,3 +197,4 @@ function getEventWhatsAppUrl(event, date) {
   lines.push(`${location.origin}${location.pathname}#calendar`);
   return `https://wa.me/?text=${encodeURIComponent(lines.join('\n'))}`;
 }
+

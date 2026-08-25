@@ -1,5 +1,5 @@
 import { icon } from './icons.js?v=20260817-4';
-import { listenNotices, listenNotifications } from '../../database/firestore.js?v=20260713-33';
+import { loadPublicNotices, loadPublicNotifications } from '../../database/firestore.js?v=20260824-7';
 import {
   enableNotifications,
   getNotificationsLastSeen,
@@ -180,12 +180,12 @@ function bindNotices(root) {
   button.addEventListener('click', () => openNotices());
   renderBadge();
   noticesUnsubscribe?.();
-  noticesUnsubscribe = listenNotices((notices) => {
+  noticesUnsubscribe = loadPublicNotices((notices) => {
     activeNotices = notices.filter(isNoticeActive);
     renderBadge();
   });
   notificationsUnsubscribe?.();
-  notificationsUnsubscribe = listenNotifications((notifications, changes, initialized) => {
+  notificationsUnsubscribe = loadPublicNotifications((notifications, changes, initialized) => {
     if (initialized) changes.slice(0, 3).forEach((notification) => showSiteNotification(notification));
     if (screen.classList.contains('hidden') && shouldAutoOpenNotices(getUnread())) openNotices();
   });
@@ -281,3 +281,4 @@ function formatNotificationDate(notification) {
   const [year, month, day] = key.split('-').map(Number);
   return new Date(year, month - 1, day).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
 }
+

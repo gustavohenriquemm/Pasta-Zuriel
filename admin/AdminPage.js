@@ -11,7 +11,7 @@ import {
   saveNotice,
   signInAdmin,
   signOutAdmin,
-} from '../database/firestore.js?v=20260713-33';
+} from '../database/firestore.js?v=20260824-7';
 import { getHymns } from '../src/services/hymnService.js';
 
 const DEFAULT_REHEARSAL = {
@@ -555,3 +555,4 @@ function getLocalDateKey() {
   const day = String(now.getDate()).padStart(2, '0');
   return `${year}-${month}-${day}`;
 }
+
