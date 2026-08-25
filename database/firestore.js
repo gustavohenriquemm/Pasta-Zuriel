@@ -1,7 +1,7 @@
 import { getFirebase } from '../authentication/firebase.js?v=20260713-19';
 import { sendPushNotification } from '../src/services/pushApiService.js?v=20260713-19';
 
-const PUBLIC_CACHE_TTL = 1000 * 60 * 10;
+const PUBLIC_CACHE_TTL = 1000 * 60 * 3;
 const PUBLIC_CACHE_PREFIX = 'zuriel:firestore-cache:';
 
 export async function signInAdmin(email, password) {
@@ -424,3 +424,4 @@ function getFriendlyFirestoreError(error) {
   }
   return message || 'Nao foi possivel salvar no Firebase.';
 }
+
