@@ -95,6 +95,15 @@ function renderEditor(content, user) {
           <input id="hymn-congress" type="checkbox">
           <span>Este é um hino do Congresso?</span>
         </label>
+        <div class="field hidden" data-congress-singer-field>
+          <label for="hymn-congress-singer">Para qual regente?</label>
+          <select id="hymn-congress-singer">
+            <option value="">Selecione a regente</option>
+            <option value="yasmin">Yasmin</option>
+            <option value="renata">Renata</option>
+            <option value="beatriz">Beatriz / Bia</option>
+          </select>
+        </div>
         <div class="field"><label for="hymn-lyrics">Letra</label><textarea id="hymn-lyrics" required></textarea></div>
         <div class="form-actions">
           <button class="primary-button" type="submit">Salvar</button>
@@ -169,6 +178,17 @@ function renderEditor(content, user) {
     closeModal(screen, forms);
   });
 
+  forms.hymn.querySelector('#hymn-congress').addEventListener('change', toggleCongressSingerField);
+
+  function toggleCongressSingerField() {
+    const enabled = forms.hymn.querySelector('#hymn-congress').checked;
+    const field = forms.hymn.querySelector('[data-congress-singer-field]');
+    const select = forms.hymn.querySelector('#hymn-congress-singer');
+    field.classList.toggle('hidden', !enabled);
+    select.required = enabled;
+    if (!enabled) select.value = '';
+  }
+
   content.querySelectorAll('[data-view]').forEach((tab) => {
     tab.addEventListener('click', () => {
       content.querySelectorAll('.tab').forEach((item) => item.classList.remove('active'));
@@ -207,7 +227,7 @@ function renderEditor(content, user) {
         <button class="primary-button" data-new-hymn>Cadastrar Hino</button>
       </div>
       <div class="list admin-list">
-        ${merged.map((hymn) => `<button class="list-item" data-edit-hymn="${escapeAttr(hymn.id)}"><strong>${hymn.number}. ${escapeHtml(hymn.title)}</strong>${hymn.isCongressHymn ? '<span>Hino do Congresso</span>' : ''}</button>`).join('')}
+        ${merged.map((hymn) => `<button class="list-item" data-edit-hymn="${escapeAttr(hymn.id)}"><strong>${hymn.number}. ${escapeHtml(hymn.title)}</strong>${renderHymnCongressBadge(hymn)}</button>`).join('')}
       </div>
     `;
     area.querySelector('[data-new-hymn]').addEventListener('click', () => openHymnForm());
@@ -223,6 +243,8 @@ function renderEditor(content, user) {
     forms.hymn.querySelector('#hymn-title').value = hymn?.title || '';
     forms.hymn.querySelector('#hymn-youtube').value = hymn?.youtubeUrl || '';
     forms.hymn.querySelector('#hymn-congress').checked = hymn?.isCongressHymn === true;
+    forms.hymn.querySelector('#hymn-congress-singer').value = hymn?.congressSinger || guessCongressSinger(hymn);
+    toggleCongressSingerField();
     forms.hymn.querySelector('#hymn-lyrics').value = hymn?.lyrics || '';
     openModal(screen, forms, forms.hymn);
   }
@@ -237,13 +259,20 @@ function renderEditor(content, user) {
       showToast(`O hino nº ${number} ja existe. O proximo numero disponivel e ${getNextNumber(allHymns)}.`);
       return;
     }
+    const isCongressHymn = forms.hymn.querySelector('#hymn-congress').checked;
+    const congressSinger = forms.hymn.querySelector('#hymn-congress-singer').value;
+    if (isCongressHymn && !congressSinger) {
+      showToast('Selecione se este hino é da Yasmin, Renata ou Beatriz.');
+      return;
+    }
     try {
       await saveHymn(state.collection, {
         id: id || `${state.collection}-${number}`,
         number,
         title: forms.hymn.querySelector('#hymn-title').value.trim(),
         youtubeUrl: normalizeExternalUrl(forms.hymn.querySelector('#hymn-youtube').value),
-        isCongressHymn: forms.hymn.querySelector('#hymn-congress').checked,
+        isCongressHymn,
+        congressSinger: isCongressHymn ? congressSinger : '',
         lyrics: forms.hymn.querySelector('#hymn-lyrics').value.trim(),
         category: state.collection,
       });
@@ -485,6 +514,12 @@ function setValue(form, selector, value = '') {
   form.querySelector(selector).value = value || '';
 }
 
+function renderHymnCongressBadge(hymn) {
+  if (!hymn.isCongressHymn) return '';
+  const singer = hymn.congressSinger ? ` - ${getCongressSingerLabel(hymn.congressSinger)}` : '';
+  return `<span>Hino do Congresso${singer}</span>`;
+}
+
 function mergeByNumber(base, remote) {
   const map = new Map();
   base.forEach((item) => map.set(Number(item.number), item));
@@ -510,6 +545,19 @@ function getAdminEvents(events) {
 
 function normalizeText(value) {
   return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+}
+
+function getCongressSingerLabel(value) {
+  const labels = { yasmin: 'Yasmin', renata: 'Renata', beatriz: 'Beatriz / Bia' };
+  return labels[value] || value || '';
+}
+
+function guessCongressSinger(hymn) {
+  const text = normalizeText(`${hymn?.title || ''} ${hymn?.number || ''}`);
+  if (text.includes('yasmin') || text.includes('busca-me-eis') || text.includes('busca me eis') || text.includes('113')) return 'yasmin';
+  if (text.includes('renata')) return 'renata';
+  if (text.includes('bia') || text.includes('beatriz')) return 'beatriz';
+  return '';
 }
 
 function getNextNumber(items) {

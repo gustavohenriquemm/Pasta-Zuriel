@@ -3,9 +3,9 @@ import { getHymns, watchHymns } from '../services/hymnService.js';
 import { isFavorite, sortFavoritesFirst, toggleFavorite } from '../utils/favorites.js?v=20260824-6';
 
 const CONGRESS_HYMNS = [
-  { id: 'congresso-busca-me-eis-yasmin', number: 113, title: 'Busca-me-eis (Yasmin)', lookup: 'busca-me-eis' },
-  { id: 'congresso-renata', number: 2, title: 'Renata', pending: true },
-  { id: 'congresso-beatriz', number: 3, title: 'Beatriz', pending: true },
+  { id: 'congresso-busca-me-eis-yasmin', number: 113, title: 'Busca-me-eis (Yasmin)', singer: 'yasmin', lookup: 'busca-me-eis' },
+  { id: 'congresso-renata', number: 2, title: 'Renata', singer: 'renata', pending: true },
+  { id: 'congresso-beatriz', number: 3, title: 'Beatriz', singer: 'beatriz', pending: true },
 ];
 
 export async function renderHymnal(root, collection, navigate, route = collection) {
@@ -195,19 +195,50 @@ function renderCongressHymnsSection(items) {
 
 function getCongressHymns(hymns) {
   const fixedItems = CONGRESS_HYMNS.map((item) => {
-    if (!item.lookup) return item;
-    const match = hymns.find((hymn) => Number(hymn.number) === Number(item.number) || normalize(hymn.title).includes(item.lookup));
-    return match ? { ...match, title: item.title, number: match.number || item.number } : { ...item, pending: true };
+    const match = findCongressHymnForSlot(hymns, item);
+    if (!match) return { ...item, pending: true };
+    return {
+      ...match,
+      title: formatCongressHymnTitle(match, item),
+      number: match.number || item.number,
+      pending: false,
+    };
   });
-  const markedItems = hymns.filter((hymn) => hymn.isCongressHymn === true);
-  const byKey = new Map();
-  [...fixedItems, ...markedItems].forEach((hymn) => {
-    const key = hymn.id || `${hymn.number}-${normalize(hymn.title)}`;
-    if (![...byKey.values()].some((item) => item.id === hymn.id || Number(item.number) === Number(hymn.number))) {
-      byKey.set(key, hymn);
-    }
+  const usedIds = new Set(fixedItems.filter((item) => !item.pending).map((item) => item.id));
+  const extraItems = hymns.filter((hymn) => hymn.isCongressHymn === true && !usedIds.has(hymn.id));
+  return [...fixedItems, ...extraItems];
+}
+
+function findCongressHymnForSlot(hymns, slot) {
+  const singer = normalizeCongressSinger(slot.singer);
+  const bySinger = hymns.find((hymn) => hymn.isCongressHymn === true && normalizeCongressSinger(hymn.congressSinger) === singer);
+  if (bySinger) return bySinger;
+  const byLegacyTitle = hymns.find((hymn) => {
+    const title = normalize(hymn.title);
+    return hymn.isCongressHymn === true && (title.includes(singer) || title.includes(normalize(slot.title)));
   });
-  return [...byKey.values()];
+  if (byLegacyTitle) return byLegacyTitle;
+  if (!slot.lookup) return null;
+  return hymns.find((hymn) => Number(hymn.number) === Number(slot.number) || normalize(hymn.title).includes(slot.lookup));
+}
+
+function formatCongressHymnTitle(hymn, slot) {
+  const title = hymn.title || slot.title;
+  const singer = getCongressSingerLabel(normalizeCongressSinger(hymn.congressSinger) || slot.singer);
+  return singer && !normalize(title).includes(normalize(singer)) ? `${title} (${singer})` : title;
+}
+
+function normalizeCongressSinger(value) {
+  const normalized = normalize(value);
+  if (normalized.includes('yasmin')) return 'yasmin';
+  if (normalized.includes('renata')) return 'renata';
+  if (normalized.includes('bia') || normalized.includes('beatriz')) return 'beatriz';
+  return normalized;
+}
+
+function getCongressSingerLabel(value) {
+  const labels = { yasmin: 'Yasmin', renata: 'Renata', beatriz: 'Beatriz' };
+  return labels[normalizeCongressSinger(value)] || '';
 }
 
 function isPendingHymn(hymn) {

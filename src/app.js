@@ -1,11 +1,11 @@
 import { renderLayout } from './components/Layout.js?v=20260824-7';
 import { renderHome } from './pages/HomePage.js?v=20260824-7';
 import { renderBible } from './pages/BiblePage.js?v=20260824-6';
-import { renderHymnal } from './pages/HymnalPage.js?v=20260824-7';
+import { renderHymnal } from './pages/HymnalPage.js?v=20260830-1';
 import { renderCalendar } from './pages/CalendarPage.js?v=20260824-7';
 import { renderSundaySchool } from './pages/SundaySchoolPage.js?v=20260824-6';
 import { renderShirt } from './pages/ShirtPage.js?v=20260824-6';
-import { renderAdmin } from '../admin/AdminPage.js?v=20260824-7';
+import { renderAdmin } from '../admin/AdminPage.js?v=20260830-1';
 import { initTheme } from './hooks/useTheme.js';
 import { registerServiceWorker } from './utils/pwa.js?v=20260713-3';
 import { initializeNotifications } from './services/notificationService.js?v=20260713-19';
