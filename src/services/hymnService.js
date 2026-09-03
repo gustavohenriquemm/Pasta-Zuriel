@@ -1,5 +1,5 @@
 import { getCachedJson } from '../utils/cache.js';
-import { loadPublicHymns } from '../../database/firestore.js?v=20260824-7';
+import { loadPublicHymn, loadPublicHymns } from '../../database/firestore.js?v=20260831-1';
 
 const HARPA_URL = 'https://raw.githubusercontent.com/DanielLiberato/Harpa-Crista-JSON-640-Hinos-Completa/main/harpa_crista_640_hinos.json';
 
@@ -15,6 +15,14 @@ export async function getHymns(collection) {
 
 export function watchHymns(collection, onChange) {
   return loadPublicHymns(collection, onChange);
+}
+
+export async function getHymn(collection, idOrNumber) {
+  if (collection === 'harpa') {
+    const hymns = await getHymns(collection);
+    return hymns.find((hymn) => hymn.id === idOrNumber) || hymns.find((hymn) => String(hymn.number) === String(idOrNumber)) || null;
+  }
+  return loadPublicHymn(collection, idOrNumber);
 }
 
 function normalizeHarpaHymn(number, hymn) {

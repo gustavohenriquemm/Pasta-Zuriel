@@ -1,5 +1,5 @@
 import { icon } from '../components/icons.js?v=20260713-8';
-import { getHymns, watchHymns } from '../services/hymnService.js';
+import { getHymn, getHymns, watchHymns } from '../services/hymnService.js?v=20260831-1';
 import { isFavorite, sortFavoritesFirst, toggleFavorite } from '../utils/favorites.js?v=20260824-6';
 
 const CONGRESS_HYMNS = [
@@ -15,6 +15,8 @@ export async function renderHymnal(root, collection, navigate, route = collectio
   let hymns = mergeHymns(baseHymns, remoteHymns);
   const favoriteKey = `favorites:${collection}`;
   const selectedId = route.includes(':') ? decodeURIComponent(route.split(':').slice(1).join(':')) : '';
+  const directFetches = new Map();
+  let detailRequest = 0;
 
   root.innerHTML = `
     <section class="panel hymnal-panel">
@@ -113,10 +115,31 @@ export async function renderHymnal(root, collection, navigate, route = collectio
     });
   }
 
-  function renderDetail(id) {
+  async function renderDetail(id) {
+    const requestId = ++detailRequest;
     const selected = hymns.find((hymn) => hymn.id === id) || hymns.find((hymn) => String(hymn.number) === String(id));
     if (!selected) {
-      body.innerHTML = '<p class="empty">Hino nao encontrado.</p>';
+      body.innerHTML = `
+        <div class="loading-state">
+          <span class="loading-spinner" aria-hidden="true"></span>
+          <p>Carregando hino...</p>
+        </div>
+      `;
+      let directFetch = directFetches.get(id);
+      if (!directFetch) {
+        directFetch = findHymnWithRetry(collection, id);
+        directFetches.set(id, directFetch);
+      }
+      const found = await directFetch;
+      directFetches.delete(id);
+      if (requestId !== detailRequest) return;
+      if (found) {
+        remoteHymns = mergeHymns(remoteHymns, [found]);
+        hymns = mergeHymns(baseHymns, remoteHymns);
+        renderDetail(found.id);
+        return;
+      }
+      body.innerHTML = '<p class="empty">Hino nao encontrado. Tente atualizar a pagina em alguns instantes.</p>';
       return;
     }
     if (collection === 'mocidade' && isPendingHymn(selected)) {
@@ -243,6 +266,19 @@ function getCongressSingerLabel(value) {
 
 function isPendingHymn(hymn) {
   return !hymn || hymn.pending === true || !String(hymn.lyrics || '').trim();
+}
+
+async function findHymnWithRetry(collection, id, attempts = 4, delayMs = 1200) {
+  for (let attempt = 0; attempt < attempts; attempt += 1) {
+    const hymn = await getHymn(collection, id);
+    if (hymn) return hymn;
+    if (attempt < attempts - 1) await wait(delayMs);
+  }
+  return null;
+}
+
+function wait(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function showMissingHymnModal(root) {

@@ -63,6 +63,31 @@ export function loadPublicHymns(collectionName, callback) {
   );
 }
 
+export async function loadPublicHymn(collectionName, idOrNumber) {
+  const firebase = await getFirebase();
+  if (!firebase) return null;
+  const { collection, doc, getDoc, getDocs, limit, query, where } = firebase.firestoreModule;
+  const value = String(idOrNumber || '').trim();
+  if (!value) return null;
+
+  try {
+    const directSnapshot = await getDoc(doc(firebase.db, collectionName, value));
+    if (directSnapshot.exists()) {
+      return { id: directSnapshot.id, ...directSnapshot.data() };
+    }
+
+    const number = Number(value);
+    if (!Number.isFinite(number)) return null;
+
+    const ref = query(collection(firebase.db, collectionName), where('number', '==', number), limit(1));
+    const snapshot = await getDocs(ref);
+    const first = snapshot.docs[0];
+    return first ? { id: first.id, ...first.data() } : null;
+  } catch {
+    return null;
+  }
+}
+
 export function listenCalendarEvents(callback) {
   let unsubscribe;
   getFirebase().then((firebase) => {

@@ -1,7 +1,7 @@
 import { renderLayout } from './components/Layout.js?v=20260824-7';
 import { renderHome } from './pages/HomePage.js?v=20260824-7';
 import { renderBible } from './pages/BiblePage.js?v=20260824-6';
-import { renderHymnal } from './pages/HymnalPage.js?v=20260830-1';
+import { renderHymnal } from './pages/HymnalPage.js?v=20260831-1';
 import { renderCalendar } from './pages/CalendarPage.js?v=20260824-7';
 import { renderSundaySchool } from './pages/SundaySchoolPage.js?v=20260824-6';
 import { renderShirt } from './pages/ShirtPage.js?v=20260824-6';
