@@ -50,8 +50,19 @@ export const SUNDAY_SCHOOL_LESSONS = [
     studyUrl: 'http://marcosandreclubdateologia.blogspot.com/2026/08/escola-dominical-betel-conectar-jovens_01582279350.html',
     completed: true,
   },
-  { number: 10, date: '2026-09-06', title: 'O Chamado à Prudência' },
-  { number: 11, date: '2026-09-13', title: 'Aprendendo sobre Amizade, Lascívia e Ética' },
+  {
+    number: 10,
+    date: '2026-09-06',
+    title: 'O Chamado à Prudência',
+    studyUrl: 'https://marcosandreclubdateologia.blogspot.com/2026/08/escola-dominical-betel-conectar-jovens_0822733483.html',
+    completed: true,
+  },
+  {
+    number: 11,
+    date: '2026-09-13',
+    title: 'Princípios Éticos em Provérbios',
+    studyUrl: 'https://marcosandreclubdateologia.blogspot.com/2026/09/escola-dominical-betel-conectar-jovens.html',
+  },
   { number: 12, date: '2026-09-20', title: 'O Livro de Eclesiastes' },
   { number: 13, date: '2026-09-27', title: 'Cantares de Salomão' },
 ];
