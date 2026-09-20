@@ -1,4 +1,4 @@
-import { getEventsForDate, getMonthDays, toDateKey, formatDate, watchCalendarEvents } from '../services/calendarService.js?v=20260824-6';
+import { getEventsForDate, getMonthDays, toDateKey, formatDate, watchCalendarEvents } from '../services/calendarService.js?v=20260920-1';
 import { loadPublicNotices } from '../../database/firestore.js?v=20260824-7';
 import { icon } from '../components/icons.js?v=20260817-4';
 import { openEventDetails, renderEventDetailsHost } from '../components/EventDetailsModal.js?v=20260824-6';
