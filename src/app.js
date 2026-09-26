@@ -1,4 +1,4 @@
-import { renderLayout } from './components/Layout.js?v=20260824-7';
+import { renderLayout } from './components/Layout.js?v=20260926-2';
 import { renderHome } from './pages/HomePage.js?v=20260920-1';
 import { renderBible } from './pages/BiblePage.js?v=20260824-6';
 import { renderHymnal } from './pages/HymnalPage.js?v=20260926-1';

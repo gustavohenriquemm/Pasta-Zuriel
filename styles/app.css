@@ -4826,3 +4826,24 @@ body {
     overflow: hidden !important;
   }
 }
+
+/* Keep the mobile navigation out of the visual viewport while the keyboard is open. */
+.bottom-nav {
+  box-sizing: border-box;
+  transition: transform 180ms ease, opacity 180ms ease;
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
+}
+
+.app-shell.keyboard-open .bottom-nav {
+  transform: translateY(calc(100% + env(safe-area-inset-bottom) + 12px)) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+@supports (height: 100dvh) {
+  html,
+  body,
+  .app-shell {
+    min-height: 100dvh;
+  }
+}

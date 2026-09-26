@@ -12,6 +12,7 @@ let noticesUnsubscribe;
 let notificationsUnsubscribe;
 let activeNotices = [];
 let autoNoticeOpened = false;
+let keyboardViewportCleanup;
 
 export function renderLayout(root, activeRoute, navigate) {
   root.innerHTML = `
@@ -53,8 +54,52 @@ export function renderLayout(root, activeRoute, navigate) {
   root.querySelectorAll('[data-route]').forEach((button) => {
     button.addEventListener('click', () => navigate(button.dataset.route));
   });
+  bindKeyboardViewport(root);
   bindMenu(root);
   bindNotices(root);
+}
+
+function bindKeyboardViewport(root) {
+  keyboardViewportCleanup?.();
+  keyboardViewportCleanup = undefined;
+
+  const viewport = window.visualViewport;
+  if (!viewport) return;
+
+  let largestViewportHeight = Math.max(
+    viewport.height,
+    window.innerHeight || 0,
+    document.documentElement.clientHeight || 0,
+  );
+
+  const syncKeyboardState = () => {
+    const currentHeight = viewport.height;
+    const editableFocused = document.activeElement?.matches(
+      'input, textarea, select, [contenteditable="true"]',
+    );
+
+    if (currentHeight > largestViewportHeight - 40) {
+      largestViewportHeight = Math.max(largestViewportHeight, currentHeight);
+    }
+
+    const keyboardOpen = editableFocused && largestViewportHeight - currentHeight > 120;
+    root.querySelector('.app-shell')?.classList.toggle('keyboard-open', keyboardOpen);
+  };
+
+  viewport.addEventListener('resize', syncKeyboardState);
+  viewport.addEventListener('scroll', syncKeyboardState);
+  window.addEventListener('resize', syncKeyboardState);
+  document.addEventListener('focusin', syncKeyboardState);
+  document.addEventListener('focusout', syncKeyboardState);
+  syncKeyboardState();
+
+  keyboardViewportCleanup = () => {
+    viewport.removeEventListener('resize', syncKeyboardState);
+    viewport.removeEventListener('scroll', syncKeyboardState);
+    window.removeEventListener('resize', syncKeyboardState);
+    document.removeEventListener('focusin', syncKeyboardState);
+    document.removeEventListener('focusout', syncKeyboardState);
+  };
 }
 
 function bindMenu(root) {
