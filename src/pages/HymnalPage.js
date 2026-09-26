@@ -1,5 +1,5 @@
 import { icon } from '../components/icons.js?v=20260713-8';
-import { getHymn, getHymns, watchHymns } from '../services/hymnService.js?v=20260831-1';
+import { getHymn, getHymns, watchHymns } from '../services/hymnService.js?v=20260926-1';
 import { isFavorite, sortFavoritesFirst, toggleFavorite } from '../utils/favorites.js?v=20260824-6';
 
 const CONGRESS_HYMNS = [
