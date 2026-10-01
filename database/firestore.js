@@ -187,6 +187,40 @@ export function loadPublicNotifications(callback) {
   );
 }
 
+export function loadPublicQuizScores(callback) {
+  return loadCachedPublicCollection(
+    'quizScores',
+    async (firebase) => {
+      const { collection, getDocs } = firebase.firestoreModule;
+      const snapshot = await getDocs(collection(firebase.db, 'quizScores'));
+      return snapshot.docs.map((document) => ({ id: document.id, ...document.data() }));
+    },
+    callback,
+  );
+}
+
+export async function saveQuizScore(score) {
+  const firebase = await getFirebase();
+  if (!firebase) throw new Error('Firebase ainda nao configurado.');
+  const { collection, doc, getDoc, setDoc } = firebase.firestoreModule;
+  const participantId = String(score.participantId || score.displayName || 'participante')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 36) || 'participante';
+  const quizId = String(score.quizId || 'licoes-1-11');
+  const scoreRef = doc(collection(firebase.db, 'quizScores'), `${quizId}-${participantId}`);
+  const previous = await getDoc(scoreRef);
+  if (previous.exists() && Number(previous.data().score || 0) > Number(score.score || 0)) return;
+  await setDoc(scoreRef, {
+    quizId,
+    participantId,
+    displayName: String(score.displayName || 'Participante').trim().slice(0, 40),
+    score: Math.max(0, Math.min(55, Number(score.score || 0))),
+    correctAnswers: Math.max(0, Math.min(11, Number(score.correctAnswers || 0))),
+    totalQuestions: 11,
+    updatedAt: Date.now(),
+  });
+  clearPublicCache('quizScores');
+}
+
 export async function saveHymn(collectionName, hymn) {
   const firebase = await getFirebase();
   if (!firebase) throw new Error('Firebase ainda nao configurado.');

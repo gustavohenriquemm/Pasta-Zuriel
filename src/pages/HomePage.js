@@ -15,6 +15,7 @@ export function renderHome(root, navigate) {
     { route: 'mocidade', image: '/img/mocidade-card.jpg?v=20260817-4', icon: icon('music'), titleTop: 'Hinos da', titleMain: 'MOCIDADE' },
     { combined: true, image: '/img/biblia-card.jpg?v=20260817-4', icon: icon('book'), titleTop: 'B&iacute;blia Sagrada', titleMain: 'HARPA CRIST&Atilde;' },
     { route: 'ebd', image: '/img/escola-dominical-card.jpg?v=20260817-4', icon: icon('book'), titleTop: 'Escola B&iacute;blica', titleMain: 'DOMINICAL' },
+    { route: 'quiz', image: '/img/escola-dominical-card.jpg?v=20260817-4', icon: icon('award'), titleTop: 'Quiz das', titleMain: 'LI&Ccedil;&Otilde;ES' },
     { route: 'calendar', image: '/img/calendario-card.jpg?v=20260817-4', icon: icon('calendar'), titleTop: 'Calend&aacute;rio', titleMain: 'ZURIEL' },
   ];
 

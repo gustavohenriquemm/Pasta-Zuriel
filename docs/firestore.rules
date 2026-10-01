@@ -31,5 +31,20 @@ service cloud.firestore {
       allow read: if true;
       allow write: if isAdmin();
     }
+
+    match /quizScores/{scoreId} {
+      allow read: if true;
+      allow create, update: if request.resource.data.quizId == 'licoes-1-11'
+        && request.resource.data.displayName is string
+        && request.resource.data.displayName.size() >= 2
+        && request.resource.data.displayName.size() <= 40
+        && request.resource.data.score is int
+        && request.resource.data.score >= 0
+        && request.resource.data.score <= 55
+        && request.resource.data.correctAnswers is int
+        && request.resource.data.correctAnswers >= 0
+        && request.resource.data.correctAnswers <= 11;
+      allow delete: if isAdmin();
+    }
   }
 }

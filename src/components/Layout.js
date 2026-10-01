@@ -35,6 +35,7 @@ export function renderLayout(root, activeRoute, navigate) {
         <button data-route="harpa">${icon('harp')} Hinos da Harpa</button>
         <button data-route="bible">${icon('book')} Biblia</button>
         <button data-route="ebd">${icon('book')} Escola Bíblica Dominical</button>
+        <button data-route="quiz">${icon('award')} Quiz das Lições</button>
         <button data-route="calendar">${icon('calendar')} Calendario</button>
         <button data-route="admin">${icon('user')} Perfil/Admin</button>
       </aside>
