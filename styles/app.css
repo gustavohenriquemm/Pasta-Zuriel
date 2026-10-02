@@ -5263,6 +5263,34 @@ body {
 .devotional-shell .devotional-journal textarea { width: 100%; min-height: 90px; box-sizing: border-box; resize: vertical; border: 1px solid rgba(117, 74, 51, .24); border-radius: 12px; padding: 12px; color: #4b0711; background: #fffaf3; font: inherit; line-height: 1.5; }
 .devotional-shell .devotional-journal textarea:focus { outline: 2px solid #b17b5f; outline-offset: 1px; }
 .devotional-shell .devotional-journal > small { display: block; margin-top: 6px; color: #8b6b61; font-size: .72rem; }
+.devotional-shell .devotional-passage-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 13px; color: #650d1d; font-size: .78rem; font-weight: 800; text-decoration: none; }
+.devotional-shell .devotional-passage-link:hover { text-decoration: underline; }
+.devotional-shell .devotional-passage-link svg { width: 16px; height: 16px; }
+.devotional-shell .devotional-collapsible { margin-top: 18px; overflow: hidden; border: 1px solid rgba(117, 74, 51, .16); border-radius: 17px; background: #f7f0e7; }
+.devotional-shell .devotional-collapsible summary { display: grid; grid-template-columns: 36px minmax(0, 1fr) auto; gap: 3px 10px; align-items: center; padding: 15px 18px; color: #650d1d; cursor: pointer; list-style: none; }
+.devotional-shell .devotional-collapsible summary::-webkit-details-marker { display: none; }
+.devotional-shell .devotional-collapsible summary > span { display: grid; grid-row: span 2; width: 34px; height: 34px; place-items: center; border-radius: 50%; background: #f0ddd3; }
+.devotional-shell .devotional-collapsible summary svg { width: 17px; height: 17px; }
+.devotional-shell .devotional-collapsible summary strong { font-family: Georgia, 'Times New Roman', serif; font-size: 1.02rem; }
+.devotional-shell .devotional-collapsible summary small { color: #96766d; font-size: .72rem; }
+.devotional-shell .devotional-collapsible summary b { grid-column: 3; grid-row: 1 / span 2; font-size: 1.35rem; font-weight: 400; }
+.devotional-shell .devotional-collapsible[open] summary b { transform: rotate(45deg); }
+.devotional-shell .devotional-collapsible-content { padding: 0 18px 19px 64px; }
+.devotional-shell .devotional-collapsible-content p { margin: 0; color: #604944; line-height: 1.75; }
+.devotional-shell .devotional-reflection-large { min-height: 245px; padding: 25px 22px; }
+.devotional-shell .devotional-reflection-large > p { font-size: 1.06rem; line-height: 1.82; }
+.devotional-shell .devotional-reading-bridge { display: grid; gap: 3px; margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(117, 74, 51, .14); }
+.devotional-shell .devotional-reading-bridge strong { color: #650d1d; font-family: Georgia, 'Times New Roman', serif; }
+.devotional-shell .devotional-reading-bridge span { color: #8b6b61; font-size: .8rem; }
+.devotional-shell .devotional-weekly-reading { margin-top: 18px; padding: 19px; border: 1px solid rgba(117, 74, 51, .13); border-radius: 17px; background: #fffaf3; }
+.devotional-shell .devotional-week-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+.devotional-shell .devotional-week-item { display: grid; grid-template-columns: 35px 1fr; gap: 2px 9px; align-items: center; padding: 11px 12px; border: 1px solid rgba(117, 74, 51, .12); border-radius: 12px; color: #604944; background: #fff; text-decoration: none; transition: border-color 160ms ease, transform 160ms ease; }
+.devotional-shell .devotional-week-item:hover { border-color: #9a6a35; transform: translateY(-1px); }
+.devotional-shell .devotional-week-item > b { display: grid; grid-row: span 3; width: 31px; height: 31px; place-items: center; border-radius: 50%; color: #650d1d; background: #f1dfd5; font-size: .68rem; }
+.devotional-shell .devotional-week-item > strong { color: #650d1d; font-size: .78rem; }
+.devotional-shell .devotional-week-item > span { color: #8b6b61; font-size: .69rem; line-height: 1.3; }
+.devotional-shell .devotional-week-item > em { display: inline-flex; align-items: center; gap: 3px; color: #9a6a35; font-size: .65rem; font-style: normal; font-weight: 800; }
+.devotional-shell .devotional-week-item > em svg { width: 13px; height: 13px; }
 .devotional-shell .quiz-back-link { color: #8d6c65; }
 .devotional-shell .quiz-back-link:hover { color: var(--devotional-wine); }
 .ebd-devotional-note { margin: -4px 0 18px; padding: 12px 15px; border-left: 3px solid #9a5e50; border-radius: 0 10px 10px 0; color: #8a635d; background: #f8eee5; }
@@ -5322,4 +5350,6 @@ body {
   .devotional-shell .devotional-dots { gap: 2px; }
   .devotional-shell .devotional-dots span { width: 27px; height: 27px; font-size: .68rem; }
   .devotional-shell .devotional-dots span:not(:last-child)::after { width: 8px; }
+  .devotional-shell .devotional-week-grid { grid-template-columns: 1fr; }
+  .devotional-shell .devotional-collapsible-content { padding-left: 18px; }
 }

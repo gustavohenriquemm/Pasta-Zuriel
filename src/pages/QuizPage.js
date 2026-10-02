@@ -5,6 +5,7 @@ import { SUNDAY_SCHOOL_LESSONS, getLessonReleaseDate, isLessonReleased } from '.
 export const QUIZ_ID = 'licoes-1-11';
 const POINTS_PER_QUESTION = 5;
 const LOCAL_KEY = 'zuriel:quiz-scores:v1';
+const NAME_KEY = 'zuriel:devotional-name:v1';
 
 const QUESTIONS = [
   {
@@ -180,6 +181,22 @@ const DEVOTIONAL_DETAILS = {
   11: { context: 'As profecias pedem reverência e contexto. A tecnologia pode levantar possibilidades, mas não controla o futuro: Deus continua no trono.', reflection: 'A esperança cristã não nega os desafios; ela nos dá coragem para permanecer fiéis enquanto esperamos a vitória de Cristo.', questions: ['O medo do futuro tem guiado minhas decisões?', 'Que fidelidade Deus pede hoje?', 'Como posso testemunhar esperança?'], prayer: 'Senhor, livra-me do medo e da especulação. Faz-me perseverante, fiel e cheio de esperança até a volta de Cristo.' },
 };
 
+const WEEKLY_READINGS = {
+  1: [['Seg', 'Gn 1.1-5', 'O ponto de partida da História.', 'GEN:1:1'], ['Ter', 'Ec 3.1-8', 'A soberania de Deus no tempo.', 'ECC:3:1'], ['Qua', '1Co 1.18-22', 'Cristo, o centro e o cumprimento da História.', '1CO:1:18'], ['Qui', 'Mt 28.16-20', 'A missão da Igreja na expansão do Reino.', 'MAT:28:16'], ['Sex', 'Hb 1.1-2', 'A revelação progressiva de Deus.', 'HEB:1:1'], ['Sáb', 'Ap 21.1-5', 'A esperança na restauração final.', 'REV:21:1']],
+  2: [['Seg', 'Êx 31.1-6', 'Sabedoria para criar e servir.', 'EXO:31:1'], ['Ter', '1Rs 7.13-14', 'Habilidade e excelência no trabalho.', '1KI:7:13'], ['Qua', '1Rs 8.22-30', 'A construção como testemunho da glória.', '1KI:8:22'], ['Qui', 'Dt 6.6-9', 'A Palavra transmitida entre gerações.', 'DEU:6:6'], ['Sex', 'Sl 78.1-7', 'Memória, ensino e fidelidade.', 'PSA:78:1'], ['Sáb', 'Pv 8.12-14', 'Sabedoria para usar ferramentas.', 'PRO:8:12']],
+  3: [['Seg', 'Sl 19.1-4', 'A criação anuncia a glória de Deus.', 'PSA:19:1'], ['Ter', 'Pv 1.7', 'O princípio do conhecimento.', 'PRO:1:7'], ['Qua', 'Dn 1.17-20', 'Conhecimento com discernimento.', 'DAN:1:17'], ['Qui', 'Rm 1.19-20', 'O Criador revelado na criação.', 'ROM:1:19'], ['Sex', 'Cl 1.15-17', 'Cristo sustenta todas as coisas.', 'COL:1:15'], ['Sáb', 'Tg 1.5-8', 'Pedindo sabedoria ao Senhor.', 'JAS:1:5']],
+  4: [['Seg', 'Gn 1.26-28', 'Criados para cultivar e cuidar.', 'GEN:1:26'], ['Ter', 'Êx 31.1-5', 'Bezalel e a criatividade consagrada.', 'EXO:31:1'], ['Qua', '1Rs 6.1-14', 'Planejamento e excelência na construção.', '1KI:6:1'], ['Qui', 'Pv 22.29', 'Habilidade colocada a serviço.', 'PRO:22:29'], ['Sex', 'Ec 9.10', 'Fazer com dedicação.', 'ECC:9:10'], ['Sáb', '1Co 10.31', 'Tudo para a glória de Deus.', '1CO:10:31']],
+  5: [['Seg', 'Gn 1.26-27', 'A singularidade da imagem de Deus.', 'GEN:1:26'], ['Ter', 'Sl 8.3-6', 'Dignidade e responsabilidade humana.', 'PSA:8:3'], ['Qua', 'Sl 139.13-18', 'Conhecidos e formados por Deus.', 'PSA:139:13'], ['Qui', 'Pv 11.3', 'Integridade nas decisões.', 'PRO:11:3'], ['Sex', 'Cl 3.9-10', 'Verdade e nova humanidade.', 'COL:3:9'], ['Sáb', 'Fp 4.8-9', 'Pensar no que é justo e bom.', 'PHP:4:8']],
+  6: [['Seg', 'Mq 6.8', 'Justiça, misericórdia e humildade.', 'MIC:6:8'], ['Ter', 'Mt 7.12', 'Tratar o outro como gostaria de ser tratado.', 'MAT:7:12'], ['Qua', 'Ef 4.25-32', 'Verdade e cuidado nas palavras.', 'EPH:4:25'], ['Qui', 'Fp 4.8', 'Filtrar o que ocupa a mente.', 'PHP:4:8'], ['Sex', '1Co 6.12', 'Liberdade com domínio próprio.', '1CO:6:12'], ['Sáb', 'Cl 3.17', 'Fazer tudo em nome de Jesus.', 'COL:3:17']],
+  7: [['Seg', 'At 1.8', 'Testemunhas até os confins.', 'ACT:1:8'], ['Ter', 'Mt 5.13-16', 'Luz visível no mundo.', 'MAT:5:13'], ['Qua', 'Cl 4.5-6', 'Palavras com graça e sabedoria.', 'COL:4:5'], ['Qui', '1Pe 3.15-16', 'Responder com mansidão.', '1PE:3:15'], ['Sex', 'Rm 10.13-15', 'A mensagem que alcança pessoas.', 'ROM:10:13'], ['Sáb', 'Hb 10.24-25', 'A comunhão que nenhuma tela substitui.', 'HEB:10:24']],
+  8: [['Seg', 'Sl 139.13-16', 'A vida formada com cuidado.', 'PSA:139:13'], ['Ter', 'Gn 1.26-28', 'Dignidade e responsabilidade.', 'GEN:1:26'], ['Qua', 'Êx 20.13', 'O valor da vida.', 'EXO:20:13'], ['Qui', 'Lc 10.25-37', 'Amor que cuida do vulnerável.', 'LUK:10:25'], ['Sex', 'Pv 31.8-9', 'Defender quem não tem voz.', 'PRO:31:8'], ['Sáb', 'Rm 12.15', 'Compaixão com quem sofre.', 'ROM:12:15']],
+  9: [['Seg', 'Pv 11.13', 'Guardar a confiança recebida.', 'PRO:11:13'], ['Ter', 'Mt 6.1-6', 'Integridade longe dos olhos.', 'MAT:6:1'], ['Qua', 'Lc 12.2-7', 'Deus conhece cada pessoa.', 'LUK:12:2'], ['Qui', 'Ef 4.25', 'Verdade no relacionamento.', 'EPH:4:25'], ['Sex', 'Êx 23.1-3', 'Não espalhar informação falsa.', 'EXO:23:1'], ['Sáb', 'Fp 2.3-4', 'Considerar o interesse do outro.', 'PHP:2:3']],
+  10: [['Seg', 'Êx 20.1-6', 'Somente Deus ocupa o primeiro lugar.', 'EXO:20:1'], ['Ter', 'Mt 6.19-24', 'Onde está o seu tesouro?', 'MAT:6:19'], ['Qua', 'Sl 16.4-11', 'A alegria que vem do Senhor.', 'PSA:16:4'], ['Qui', '1Co 10.14-22', 'Fugir da idolatria.', '1CO:10:14'], ['Sex', 'Gl 5.16-25', 'Viver pelo Espírito.', 'GAL:5:16'], ['Sáb', 'Rm 12.1-2', 'Uma mente renovada.', 'ROM:12:1']],
+  11: [['Seg', 'Ap 1.1-8', 'A revelação de Jesus Cristo.', 'REV:1:1'], ['Ter', 'Mt 24.4-14', 'Perseverar sem medo.', 'MAT:24:4'], ['Qua', 'Dn 7.13-14', 'O reino eterno do Filho.', 'DAN:7:13'], ['Qui', 'Ap 13.15-18', 'Discernimento diante do poder.', 'REV:13:15'], ['Sex', 'Ap 14.6-13', 'Fidelidade até o fim.', 'REV:14:6'], ['Sáb', 'Ap 21.1-5', 'Deus faz novas todas as coisas.', 'REV:21:1']],
+};
+
+const FULL_PASSAGE_ROUTES = { 1: 'REV:21:1', 2: 'PRO:8:12', 3: 'PSA:19:1', 4: 'EXO:31:3', 5: 'GEN:1:27', 6: 'COL:3:23', 7: 'ACT:1:8', 8: 'PSA:139:13', 9: 'PSA:139:7', 10: '1CO:10:14', 11: 'REV:21:1' };
+
 let scoresUnsubscribe;
 
 export function renderQuiz(root, navigate, route = 'devotional') {
@@ -237,6 +254,7 @@ function formatReleaseDate(lessonNumber) {
 
 function showIntro(root, requestedLesson = 0) {
   const stage = root.querySelector('[data-quiz-stage]');
+  const savedName = readParticipantName();
   const availableIndexes = getAvailableIndexes();
   const nextLocked = DEVOTIONALS.find((devotional) => !availableIndexes.includes(DEVOTIONALS.indexOf(devotional)));
   const firstAvailableIndex = getFirstAvailableIndex(requestedLesson, availableIndexes);
@@ -255,10 +273,10 @@ function showIntro(root, requestedLesson = 0) {
         <div><span>${icon('award')}</span><strong>Responda</strong><small>Uma pergunta da lição</small></div>
       </div>
       <label class="quiz-name-label" for="quiz-participant-name">Seu nome para o ranking</label>
-      <input id="quiz-participant-name" class="quiz-name-input" type="text" maxlength="40" autocomplete="name" placeholder="Digite seu nome" />
+      <input id="quiz-participant-name" class="quiz-name-input" type="text" maxlength="40" autocomplete="name" placeholder="Digite seu nome" value="${escapeHtml(savedName)}" />
       <button class="primary-button quiz-start-button" type="button" data-start-quiz>Começar Dia ${firstLesson.lesson} ${icon('arrow')}</button>
       ${nextLocked ? `<p class="quiz-release-note">Próximo devocional: Lição ${nextLocked.lesson} libera em ${formatReleaseDate(nextLocked.lesson)}.</p>` : '<p class="quiz-release-note">Todas as lições deste plano já estão disponíveis.</p>'}
-      <p class="quiz-note">Seu nome e sua pontuação serão exibidos no ranking público.</p>
+      <p class="quiz-note">${savedName ? `Nome salvo: <strong>${escapeHtml(savedName)}</strong>. Ele será usado automaticamente nas próximas lições.` : 'Digite seu primeiro nome uma vez. Ele será usado automaticamente nas próximas lições e no ranking.'}</p>
     </article>
   `;
   const input = stage.querySelector('#quiz-participant-name');
@@ -271,6 +289,7 @@ function showIntro(root, requestedLesson = 0) {
       return;
     }
     input.setCustomValidity('');
+    writeParticipantName(name);
     startDevotional(root, name, availableIndexes, firstLessonPosition >= 0 ? firstLessonPosition : 0);
   };
   stage.querySelector('[data-start-quiz]').addEventListener('click', start);
@@ -289,6 +308,8 @@ function startDevotional(root, displayName, availableIndexes = getAvailableIndex
 function renderDevotional(root, state) {
   const devotional = DEVOTIONALS[state.index];
   const detail = DEVOTIONAL_DETAILS[devotional.lesson] || { context: devotional.text, reflection: devotional.practice, questions: ['O que Deus está me ensinando?', 'Como praticarei isso hoje?'], prayer: 'Senhor, ajuda-me a viver a Tua Palavra.' };
+  const weekly = WEEKLY_READINGS[devotional.lesson] || [];
+  const passageRoute = FULL_PASSAGE_ROUTES[devotional.lesson] || weekly[weekly.length - 1]?.[3] || '';
   const stage = root.querySelector('[data-quiz-stage]');
   const progress = Math.round((state.position / state.availableIndexes.length) * 100);
   const noteKey = getDevotionalNoteKey(devotional.lesson);
@@ -298,9 +319,10 @@ function renderDevotional(root, state) {
       <div class="quiz-progress"><span style="width:${progress}%"></span></div>
       <div class="devotional-heading"><div class="devotional-lesson-number">${devotional.lesson}</div><div><div class="quiz-question-label">Lição ${devotional.lesson}</div><h2>${escapeHtml(devotional.title)}</h2></div></div>
       <div class="devotional-reading-time"><span>${icon('book')} Leitura de hoje</span><span>~ 10 min · leia, medite e ore</span></div>
-      <div class="devotional-scripture"><div class="devotional-scripture-label">Texto para guardar</div><blockquote>${escapeHtml(devotional.verse)}</blockquote><small>${escapeHtml(devotional.reference)}</small></div>
-      <section class="devotional-section devotional-context"><div class="devotional-section-heading"><span>${icon('book')}</span><div><strong>Contexto</strong><small>Entenda o tema da lição</small></div></div><p>${escapeHtml(detail.context)}</p></section>
-      <section class="devotional-section devotional-reflection"><div class="devotional-section-heading"><span>${icon('heart')}</span><div><strong>Medite na Palavra</strong><small>Traga o texto para a sua vida</small></div></div><p>${escapeHtml(devotional.text)}</p><p class="devotional-reflection-highlight">${escapeHtml(detail.reflection)}</p></section>
+      <div class="devotional-scripture"><div class="devotional-scripture-label">Texto para guardar</div><blockquote>${escapeHtml(devotional.verse)}</blockquote><small>${escapeHtml(devotional.reference)}</small>${passageRoute ? `<a class="devotional-passage-link" href="/#bible:${passageRoute}">${icon('book')} Ver a passagem completa na Bíblia</a>` : ''}</div>
+      <details class="devotional-collapsible devotional-context"><summary><span>${icon('book')}</span><strong>Contexto da lição</strong><small>Toque para abrir o contexto completo</small><b>+</b></summary><div class="devotional-collapsible-content"><p>${escapeHtml(detail.context)}</p></div></details>
+      <section class="devotional-section devotional-reflection devotional-reflection-large"><div class="devotional-section-heading"><span>${icon('heart')}</span><div><strong>Medite na Palavra</strong><small>Leia com calma e perceba o que Deus está ensinando</small></div></div><p>${escapeHtml(devotional.text)}</p><p class="devotional-reflection-highlight">${escapeHtml(detail.reflection)}</p><div class="devotional-reading-bridge"><strong>Leia a semana toda</strong><span>As seis leituras abaixo ajudam você a enxergar o tema da lição por inteiro.</span></div></section>
+      <section class="devotional-weekly-reading"><div class="devotional-section-heading"><span>${icon('calendar')}</span><div><strong>Leitura semanal</strong><small>Uma passagem por dia até a aula</small></div></div><div class="devotional-week-grid">${weekly.map(([day, reference, label, route]) => `<a class="devotional-week-item" href="/#bible:${route}"><b>${day}</b><strong>${reference}</strong><span>${label}</span><em>Ver passagem ${icon('arrow')}</em></a>`).join('')}</div></section>
       <section class="devotional-section devotional-questions"><div class="devotional-section-heading"><span>${icon('award')}</span><div><strong>Perguntas para refletir</strong><small>Responda com sinceridade diante de Deus</small></div></div><ol>${detail.questions.map((question) => `<li>${escapeHtml(question)}</li>`).join('')}</ol></section>
       <div class="devotional-practice"><strong>Para praticar hoje</strong><p>${escapeHtml(devotional.practice)}</p></div>
       <section class="devotional-prayer"><div class="devotional-section-heading"><span>${icon('heart')}</span><div><strong>Oração</strong><small>Converse com Deus</small></div></div><p>${escapeHtml(detail.prayer)}</p></section>
@@ -422,6 +444,14 @@ function readLocalScores() {
 
 function getDevotionalNoteKey(lessonNumber) {
   return `zuriel:devotional-note:v1:${lessonNumber}`;
+}
+
+function readParticipantName() {
+  try { return localStorage.getItem(NAME_KEY) || ''; } catch { return ''; }
+}
+
+function writeParticipantName(value) {
+  try { localStorage.setItem(NAME_KEY, String(value || '').trim().slice(0, 40)); } catch { /* storage unavailable */ }
 }
 
 function readDevotionalNote(lessonNumber) {

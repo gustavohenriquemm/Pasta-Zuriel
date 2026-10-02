@@ -1,11 +1,11 @@
 const CACHE_PREFIX = 'igreja-zuriel-';
-const CACHE_NAME = `${CACHE_PREFIX}v110`;
+const CACHE_NAME = `${CACHE_PREFIX}v112`;
 const APP_SHELL = [
   '/index.html',
   '/manifest.json',
-  '/css/style.css?v=20261002-4',
-  '/styles/app.css?v=20261002-4',
-  '/js/script.js?v=20261002-3',
+  '/css/style.css?v=20261002-5',
+  '/styles/app.css?v=20261002-5',
+  '/js/script.js?v=20261002-5',
   '/data/hymns/mocidade.seed.json',
   '/src/data/mocidadeOfflineHymns.js?v=20260926-1',
   '/img/congresso-banner.png?v=20260817-1',
