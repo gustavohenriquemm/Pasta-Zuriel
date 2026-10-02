@@ -4,6 +4,7 @@ import { renderBible } from './pages/BiblePage.js?v=20260824-6';
 import { renderHymnal } from './pages/HymnalPage.js?v=20260926-1';
 import { renderCalendar } from './pages/CalendarPage.js?v=20260920-1';
 import { renderSundaySchool } from './pages/SundaySchoolPage.js?v=20261002-1';
+import { renderLessonPage } from './pages/LessonPage.js?v=20261002-1';
 import { renderShirt } from './pages/ShirtPage.js?v=20260824-6';
 import { renderAdmin } from '../admin/AdminPage.js?v=20260830-1';
 import { renderQuiz } from './pages/QuizPage.js?v=20261002-1';
@@ -15,6 +16,7 @@ const routes = {
   home: renderHome,
   bible: (root, navigate, route) => renderBible(root, navigate, route),
   ebd: (root, navigate, route) => renderSundaySchool(root, navigate, route),
+  lesson: (root, navigate, route) => renderLessonPage(root, navigate, route),
   harpa: (root, navigate, route) => renderHymnal(root, 'harpa', navigate, route),
   mocidade: (root, navigate, route) => renderHymnal(root, 'mocidade', navigate, route),
   calendar: (root, navigate, route) => renderCalendar(root, navigate, route),

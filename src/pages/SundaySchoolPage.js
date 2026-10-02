@@ -26,6 +26,9 @@ export function renderSundaySchool(root, navigate) {
 
 function renderLesson(lesson) {
   const released = isLessonReleased(lesson);
+  const lessonAction = released
+    ? `<a class="lesson-link lesson-reader-link" href="/#lesson:${lesson.number}">${icon('book')} Ler lição</a>`
+    : '';
   const devotionalAction = released
     ? `<a class="lesson-link devotional-link" href="/#devotional:lesson-${lesson.number}">${icon('heart')} Devocional</a>`
     : `<span class="lesson-pending">Devocional libera em ${formatLessonReleaseDate(lesson.date)}</span>`;
@@ -41,6 +44,7 @@ function renderLesson(lesson) {
           ${lesson.studyUrl
             ? `<a class="lesson-link primary" href="${lesson.studyUrl}" target="_blank" rel="noopener">Abrir lição</a>`
             : ''}
+          ${lessonAction}
           ${devotionalAction}
           <a class="share-button whatsapp-button" href="${escapeAttr(getLessonWhatsAppUrl(lesson))}" target="_blank" rel="noopener" aria-label="Compartilhar lição no WhatsApp">${icon('whatsapp')}<span>WhatsApp</span></a>
         </div>
