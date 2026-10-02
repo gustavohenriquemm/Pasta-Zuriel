@@ -1,5 +1,6 @@
 import { icon } from '../components/icons.js?v=20261001-1';
 import { loadPublicQuizScores, saveQuizScore } from '../../database/firestore.js?v=20261001-1';
+import { SUNDAY_SCHOOL_LESSONS, getLessonReleaseDate, isLessonReleased } from '../data/sundaySchoolLessons.js?v=20261002-1';
 
 export const QUIZ_ID = 'licoes-1-11';
 const POINTS_PER_QUESTION = 5;
@@ -167,15 +168,16 @@ const DEVOTIONALS = [
 
 let scoresUnsubscribe;
 
-export function renderQuiz(root, navigate) {
+export function renderQuiz(root, navigate, route = 'devotional') {
   scoresUnsubscribe?.();
+  root.closest('.app-shell')?.classList.add('devotional-shell');
   root.innerHTML = `
     <section class="quiz-page fade-in">
       <header class="quiz-hero">
         <div class="devotional-hero-copy">
           <div class="quiz-kicker">Plano devocional · Escola Bíblica</div>
-          <h1>Fé, tecnologia e propósito</h1>
-          <p>Onze encontros curtos para ler a Palavra, refletir e praticar. A pergunta só aparece depois do devocional.</p>
+          <h1>11 dias com propósito</h1>
+          <p>Leia, pratique e viva a Palavra um dia de cada vez. O devocional e a pergunta caminham junto com a lição da Escola Bíblica.</p>
           <div class="quiz-meta"><span>${icon('book')} 11 dias de leitura</span><span>${icon('star')} 5 pontos por acerto</span><span>10 min por dia</span></div>
         </div>
         <div class="devotional-plan-mark" aria-hidden="true"><span>${icon('book')}</span><strong>11</strong><small>lições</small></div>
@@ -183,7 +185,7 @@ export function renderQuiz(root, navigate) {
       <div class="quiz-layout">
         <div class="quiz-stage" data-quiz-stage></div>
         <aside class="quiz-ranking" data-ranking-panel>
-          <div class="quiz-section-title"><span>${icon('award')}</span><div><strong>Ranking da turma</strong><small>Quem está caminhando com a gente</small></div></div>
+          <div class="quiz-section-title"><span>${icon('award')}</span><div><strong>Top 3 da semana</strong><small>Quem está caminhando com a gente</small></div></div>
           <div data-ranking-list><p class="empty">Carregando ranking...</p></div>
         </aside>
       </div>
@@ -197,25 +199,51 @@ export function renderQuiz(root, navigate) {
   scoresUnsubscribe = loadPublicQuizScores((remoteScores) => {
     renderRanking(root, mergeScores(remoteScores, readLocalScores()));
   });
-  showIntro(root);
+  const requestedLesson = Number(String(route).match(/lesson-(\d+)/)?.[1] || 0);
+  showIntro(root, requestedLesson);
 }
 
-function showIntro(root) {
+function getAvailableIndexes(now = new Date()) {
+  return DEVOTIONALS
+    .map((devotional, index) => isLessonReleased(SUNDAY_SCHOOL_LESSONS[devotional.lesson - 1], now) ? index : -1)
+    .filter((index) => index >= 0);
+}
+
+function getFirstAvailableIndex(requestedLesson = 0, availableIndexes = getAvailableIndexes()) {
+  const requestedIndex = requestedLesson > 0 ? DEVOTIONALS.findIndex((item) => item.lesson === requestedLesson) : -1;
+  return requestedIndex >= 0 && availableIndexes.includes(requestedIndex) ? requestedIndex : availableIndexes[0];
+}
+
+function formatReleaseDate(lessonNumber) {
+  const lesson = SUNDAY_SCHOOL_LESSONS[lessonNumber - 1];
+  if (!lesson) return '';
+  const [year, month, day] = getLessonReleaseDate(lesson.date).split('-').map(Number);
+  return new Date(year, month - 1, day).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
+}
+
+function showIntro(root, requestedLesson = 0) {
   const stage = root.querySelector('[data-quiz-stage]');
+  const availableIndexes = getAvailableIndexes();
+  const nextLocked = DEVOTIONALS.find((devotional) => !availableIndexes.includes(DEVOTIONALS.indexOf(devotional)));
+  const firstAvailableIndex = getFirstAvailableIndex(requestedLesson, availableIndexes);
+  const firstLesson = DEVOTIONALS[firstAvailableIndex] || DEVOTIONALS[0];
+  const firstLessonPosition = availableIndexes.indexOf(firstAvailableIndex);
   stage.innerHTML = `
     <article class="quiz-card quiz-intro-card plan-start-card">
       <div class="plan-start-art" aria-hidden="true"><span>${icon('book')}</span><i></i><b>${icon('heart')}</b></div>
-      <div class="devotional-card-eyebrow">Seu caminho de 11 dias</div>
-      <h2>Comece pelo devocional</h2>
-      <p class="plan-lead">Um momento simples para desacelerar, ouvir a Palavra e trazer a lição para a vida real.</p>
+      <div class="devotional-card-eyebrow">Plano devocional</div>
+      <h2>11 dias com propósito</h2>
+      <p class="plan-lead">Leia, pratique e viva a Palavra um dia de cada vez — sempre conectado à lição da Escola Bíblica.</p>
+      <div class="devotional-path"><strong>Seu caminho</strong><div class="devotional-dots" aria-label="Progresso do plano">${DEVOTIONALS.map((item, index) => `<span class="${availableIndexes.includes(index) ? (index === firstAvailableIndex ? 'active' : 'available') : 'locked'}" title="${availableIndexes.includes(index) ? `Lição ${item.lesson}` : `Libera em ${formatReleaseDate(item.lesson)}`} ">${item.lesson}</span>`).join('')}</div></div>
       <div class="plan-steps">
-        <div><span>1</span><strong>Leia</strong><small>Versículo e reflexão</small></div>
-        <div><span>2</span><strong>Pratique</strong><small>Uma atitude para hoje</small></div>
-        <div><span>3</span><strong>Responda</strong><small>Uma pergunta da lição</small></div>
+        <div><span>${icon('book')}</span><strong>Leia</strong><small>Versículo e reflexão</small></div>
+        <div><span>${icon('heart')}</span><strong>Pratique</strong><small>Uma atitude para hoje</small></div>
+        <div><span>${icon('award')}</span><strong>Responda</strong><small>Uma pergunta da lição</small></div>
       </div>
       <label class="quiz-name-label" for="quiz-participant-name">Seu nome para o ranking</label>
       <input id="quiz-participant-name" class="quiz-name-input" type="text" maxlength="40" autocomplete="name" placeholder="Digite seu nome" />
-      <button class="primary-button quiz-start-button" type="button" data-start-quiz>Começar Dia 1 ${icon('arrow')}</button>
+      <button class="primary-button quiz-start-button" type="button" data-start-quiz>Começar Dia ${firstLesson.lesson} ${icon('arrow')}</button>
+      ${nextLocked ? `<p class="quiz-release-note">Próximo devocional: Lição ${nextLocked.lesson} libera em ${formatReleaseDate(nextLocked.lesson)}.</p>` : '<p class="quiz-release-note">Todas as lições deste plano já estão disponíveis.</p>'}
       <p class="quiz-note">Seu nome e sua pontuação serão exibidos no ranking público.</p>
     </article>
   `;
@@ -229,7 +257,7 @@ function showIntro(root) {
       return;
     }
     input.setCustomValidity('');
-    startDevotional(root, name);
+    startDevotional(root, name, availableIndexes, firstLessonPosition >= 0 ? firstLessonPosition : 0);
   };
   stage.querySelector('[data-start-quiz]').addEventListener('click', start);
   input.addEventListener('keydown', (event) => {
@@ -237,18 +265,20 @@ function showIntro(root) {
   });
 }
 
-function startDevotional(root, displayName) {
-  const state = { displayName, index: 0, answers: [], selected: null };
+function startDevotional(root, displayName, availableIndexes = getAvailableIndexes(), position = 0) {
+  const safeIndexes = availableIndexes.length ? availableIndexes : [0];
+  const safePosition = Math.min(Math.max(position, 0), safeIndexes.length - 1);
+  const state = { displayName, availableIndexes: safeIndexes, position: safePosition, index: safeIndexes[safePosition], answers: {}, selected: null };
   renderDevotional(root, state);
 }
 
 function renderDevotional(root, state) {
   const devotional = DEVOTIONALS[state.index];
   const stage = root.querySelector('[data-quiz-stage]');
-  const progress = Math.round((state.index / QUESTIONS.length) * 100);
+  const progress = Math.round((state.position / state.availableIndexes.length) * 100);
   stage.innerHTML = `
     <article class="quiz-card devotional-card">
-      <div class="devotional-topline"><span class="devotional-day">DIA ${String(state.index + 1).padStart(2, '0')}</span><span>${state.index + 1} de ${DEVOTIONALS.length}</span><strong>${progress}% concluído</strong></div>
+      <div class="devotional-topline"><span class="devotional-day">DIA ${String(devotional.lesson).padStart(2, '0')}</span><span>${state.position + 1} de ${state.availableIndexes.length} disponíveis</span><strong>${progress}% concluído</strong></div>
       <div class="quiz-progress"><span style="width:${progress}%"></span></div>
       <div class="devotional-heading"><div class="devotional-lesson-number">${devotional.lesson}</div><div><div class="quiz-question-label">Lição ${devotional.lesson}</div><h2>${escapeHtml(devotional.title)}</h2></div></div>
       <div class="devotional-reading-time"><span>${icon('book')} Leitura de hoje</span><span>~ 10 min</span></div>
@@ -264,17 +294,17 @@ function renderDevotional(root, state) {
 function renderQuestion(root, state) {
   const question = QUESTIONS[state.index];
   const stage = root.querySelector('[data-quiz-stage]');
-  const progress = Math.round(((state.index + 0.5) / QUESTIONS.length) * 100);
+  const progress = Math.round(((state.position + 0.5) / state.availableIndexes.length) * 100);
   stage.innerHTML = `
     <article class="quiz-card quiz-question-card">
-      <div class="quiz-progress-row"><span>Questão ${state.index + 1} de ${QUESTIONS.length}</span><strong>${progress}%</strong></div>
+      <div class="quiz-progress-row"><span>Questão ${state.position + 1} de ${state.availableIndexes.length}</span><strong>${progress}%</strong></div>
       <div class="quiz-progress"><span style="width:${progress}%"></span></div>
       <div class="quiz-question-label">Lição ${question.lesson} · Pergunta liberada</div>
       <h2>${escapeHtml(question.text)}</h2>
       <div class="quiz-options" role="radiogroup" aria-label="Alternativas">
         ${question.options.map((option, index) => `<button class="quiz-option" type="button" role="radio" aria-checked="false" data-option="${index}"><span>${String.fromCharCode(65 + index)}</span>${escapeHtml(option)}</button>`).join('')}
       </div>
-      <div class="quiz-actions"><span class="quiz-points">Vale ${POINTS_PER_QUESTION} pontos</span><button class="primary-button" type="button" data-next-quiz disabled>${state.index === QUESTIONS.length - 1 ? 'Finalizar' : 'Próxima'} ${icon('arrow')}</button></div>
+      <div class="quiz-actions"><span class="quiz-points">Vale ${POINTS_PER_QUESTION} pontos</span><button class="primary-button" type="button" data-next-quiz disabled>${state.position === state.availableIndexes.length - 1 ? 'Finalizar' : 'Próxima'} ${icon('arrow')}</button></div>
     </article>
   `;
   const next = stage.querySelector('[data-next-quiz]');
@@ -290,18 +320,19 @@ function renderQuestion(root, state) {
   next.addEventListener('click', () => {
     if (state.selected === null) return;
     state.answers[state.index] = state.selected;
-    if (state.index === QUESTIONS.length - 1) {
+    if (state.position === state.availableIndexes.length - 1) {
       finishQuiz(root, state);
       return;
     }
-    state.index += 1;
+    state.position += 1;
+    state.index = state.availableIndexes[state.position];
     state.selected = null;
     renderDevotional(root, state);
   });
 }
 
 async function finishQuiz(root, state) {
-  const correctAnswers = state.answers.reduce((total, answer, index) => total + (answer === QUESTIONS[index].answer ? 1 : 0), 0);
+  const correctAnswers = state.availableIndexes.reduce((total, index) => total + (state.answers[index] === QUESTIONS[index].answer ? 1 : 0), 0);
   const score = correctAnswers * POINTS_PER_QUESTION;
   const entry = {
     quizId: QUIZ_ID,
@@ -309,7 +340,7 @@ async function finishQuiz(root, state) {
     displayName: state.displayName,
     score,
     correctAnswers,
-    totalQuestions: QUESTIONS.length,
+    totalQuestions: state.availableIndexes.length,
     updatedAt: Date.now(),
   };
   const localScores = mergeScores(readLocalScores(), [entry]);
@@ -331,8 +362,8 @@ function showResult(root, entry, scores, savedLocally) {
       <span class="quiz-card-icon">${icon('star')}</span>
       <div class="quiz-question-label">Questionário concluído</div>
       <h2>${entry.score >= 45 ? 'Excelente revisão!' : entry.score >= 30 ? 'Muito bem!' : 'Continue estudando!'}</h2>
-      <div class="quiz-score"><strong>${entry.score}</strong><span>/ ${QUESTIONS.length * POINTS_PER_QUESTION} pontos</span></div>
-      <p>Você acertou <strong>${entry.correctAnswers} de ${QUESTIONS.length}</strong> questões e está em <strong>${position}º lugar</strong> no ranking deste aparelho.</p>
+      <div class="quiz-score"><strong>${entry.score}</strong><span>/ ${entry.totalQuestions * POINTS_PER_QUESTION} pontos</span></div>
+      <p>Você acertou <strong>${entry.correctAnswers} de ${entry.totalQuestions}</strong> questões e está em <strong>${position}º lugar</strong> no ranking deste aparelho.</p>
       <p class="quiz-note">${savedLocally ? 'Pontuação salva. Se houver internet, ela também será sincronizada com o ranking geral.' : ''}</p>
       <div class="quiz-result-actions"><button class="primary-button" type="button" data-retry-quiz>Tentar novamente</button><button class="plain-button" type="button" data-scroll-ranking>Ver ranking</button></div>
     </article>
@@ -344,7 +375,7 @@ function showResult(root, entry, scores, savedLocally) {
 function renderRanking(root, scores) {
   const target = root.querySelector('[data-ranking-list]');
   if (!target) return;
-  const ordered = mergeScores(scores, []).slice(0, 10);
+  const ordered = mergeScores(scores, []).slice(0, 3);
   target.innerHTML = ordered.length ? ordered.map((item, index) => `
     <div class="ranking-row ${index < 3 ? `ranking-top-${index + 1}` : ''}">
       <span class="ranking-position">${index + 1}</span>

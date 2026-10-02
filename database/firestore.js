@@ -209,13 +209,14 @@ export async function saveQuizScore(score) {
   const scoreRef = doc(collection(firebase.db, 'quizScores'), `${quizId}-${participantId}`);
   const previous = await getDoc(scoreRef);
   if (previous.exists() && Number(previous.data().score || 0) > Number(score.score || 0)) return;
+  const totalQuestions = Math.max(1, Math.min(11, Number(score.totalQuestions || 11)));
   await setDoc(scoreRef, {
     quizId,
     participantId,
     displayName: String(score.displayName || 'Participante').trim().slice(0, 40),
-    score: Math.max(0, Math.min(55, Number(score.score || 0))),
+    score: Math.max(0, Math.min(totalQuestions * 5, Number(score.score || 0))),
     correctAnswers: Math.max(0, Math.min(11, Number(score.correctAnswers || 0))),
-    totalQuestions: 11,
+    totalQuestions,
     updatedAt: Date.now(),
   });
   clearPublicCache('quizScores');

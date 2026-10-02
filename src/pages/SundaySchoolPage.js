@@ -1,21 +1,22 @@
 import { icon } from '../components/icons.js?v=20260713-8';
-import { SUNDAY_SCHOOL_LESSONS as lessons } from '../data/sundaySchoolLessons.js?v=20260920-1';
+import { SUNDAY_SCHOOL_LESSONS as lessons, formatLessonReleaseDate, isLessonReleased } from '../data/sundaySchoolLessons.js?v=20261002-1';
 
-const NOTE_KEY_PREFIX = 'ebd:2026:3-trimestre:licao:';
+const NOTE_KEY_PREFIX = 'ebd:2026:4-trimestre:licao:';
 
-export function renderSundaySchool(root) {
+export function renderSundaySchool(root, navigate) {
   root.innerHTML = `
     <section class="panel sunday-school-panel fade-in">
       <div class="section-header sunday-school-header">
         <div>
-          <span class="section-kicker">3º trimestre de 2026</span>
+          <span class="section-kicker">4º trimestre de 2026</span>
           <h1>Escola Bíblica Dominical</h1>
-          <p>Livros Poéticos — acesse as lições que já foram publicadas.</p>
+          <p>Fé, tecnologia e propósito — acompanhe a lição e o devocional da semana.</p>
         </div>
       </div>
+      <p class="ebd-devotional-note">O devocional abre na segunda-feira da semana da lição e traz a pergunta da própria aula.</p>
       <p class="private-notes-message">Suas anotações ficam salvas somente neste aparelho e não são compartilhadas.</p>
       <div class="lesson-grid" aria-label="Lista de lições da Escola Bíblica Dominical">
-        ${lessons.map(renderLesson).join('')}
+        ${lessons.map((lesson) => renderLesson(lesson)).join('')}
       </div>
     </section>
   `;
@@ -24,6 +25,10 @@ export function renderSundaySchool(root) {
 }
 
 function renderLesson(lesson) {
+  const released = isLessonReleased(lesson);
+  const devotionalAction = released
+    ? `<a class="lesson-link devotional-link" href="/#devotional:lesson-${lesson.number}">${icon('heart')} Devocional</a>`
+    : `<span class="lesson-pending">Devocional libera em ${formatLessonReleaseDate(lesson.date)}</span>`;
   return `
     <article class="lesson-card">
       <div class="lesson-number" aria-hidden="true">${String(lesson.number).padStart(2, '0')}</div>
@@ -36,6 +41,7 @@ function renderLesson(lesson) {
           ${lesson.studyUrl
             ? `<a class="lesson-link primary" href="${lesson.studyUrl}" target="_blank" rel="noopener">Abrir lição</a>`
             : '<span class="lesson-pending">Lição em breve</span>'}
+          ${devotionalAction}
           <a class="share-button whatsapp-button" href="${escapeAttr(getLessonWhatsAppUrl(lesson))}" target="_blank" rel="noopener" aria-label="Compartilhar lição no WhatsApp">${icon('whatsapp')}<span>WhatsApp</span></a>
         </div>
         <details class="lesson-notes">
