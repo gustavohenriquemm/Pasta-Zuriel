@@ -5226,6 +5226,21 @@ body {
 .devotional-shell .devotional-practice p { color: #53614a !important; }
 .devotional-shell .devotional-check { border-top-color: rgba(117, 74, 51, .13); }
 .devotional-shell .devotional-check > span { color: #617653; }
+.devotional-shell .devotional-topline { color: #765a52; }
+.devotional-shell .devotional-topline strong { color: var(--devotional-wine); }
+.devotional-shell .quiz-question-label { color: var(--devotional-wine); }
+.devotional-shell .devotional-reading-time { color: #896e67; }
+.devotional-shell .devotional-reading-time span:first-child { color: var(--devotional-wine); }
+.devotional-shell .devotional-lesson-number { color: var(--devotional-wine); background: #f4e5d8; }
+.devotional-shell .quiz-progress-row { color: #896e67; }
+.devotional-shell .quiz-progress-row strong { color: var(--devotional-wine); }
+.devotional-shell .quiz-progress { background: #eadfd3; }
+.devotional-shell .quiz-progress span { background: linear-gradient(90deg, #7d1728, #b77755); }
+.devotional-shell .quiz-note { color: #896e67 !important; }
+.devotional-shell .quiz-option { color: #5f4644; border-color: rgba(117, 74, 51, .18); background: #fffaf3; }
+.devotional-shell .quiz-option span { color: var(--devotional-wine); background: #f1dfd5; }
+.devotional-shell .quiz-option.selected { border-color: #9a5e50; background: #f5e6dc; }
+.devotional-shell .quiz-score span { color: #896e67; }
 .devotional-shell .quiz-back-link { color: #8d6c65; }
 .devotional-shell .quiz-back-link:hover { color: var(--devotional-wine); }
 .ebd-devotional-note { margin: -4px 0 18px; padding: 12px 15px; border-left: 3px solid #9a5e50; border-radius: 0 10px 10px 0; color: #8a635d; background: #f8eee5; }
