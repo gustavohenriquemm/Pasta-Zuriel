@@ -5095,3 +5095,68 @@ body {
   .quiz-layout { grid-template-columns: 1fr; }
   .quiz-ranking { order: 2; }
 }
+
+/* Devotional reading experience */
+.quiz-page { max-width: 1180px; }
+.quiz-hero { position: relative; display: flex; min-height: 218px; align-items: center; justify-content: space-between; overflow: hidden; isolation: isolate; border: 0; background: linear-gradient(118deg, #241b0e 0%, #4e3519 47%, #1c211c 100%); }
+.quiz-hero::before { position: absolute; z-index: -1; top: -120px; right: 12%; width: 330px; height: 330px; border: 1px solid rgba(255, 218, 126, 0.22); border-radius: 50%; box-shadow: 0 0 0 22px rgba(255, 218, 126, 0.04), 0 0 0 48px rgba(255, 218, 126, 0.03); content: ''; }
+.quiz-hero::after { position: absolute; z-index: -1; right: -90px; bottom: -160px; width: 380px; height: 380px; border-radius: 50%; background: rgba(130, 168, 116, 0.16); filter: blur(3px); content: ''; }
+.devotional-hero-copy { max-width: 710px; }
+.devotional-hero-copy p { max-width: 600px; font-size: 0.98rem; line-height: 1.55; }
+.devotional-plan-mark { display: grid; width: 132px; height: 132px; flex: 0 0 132px; margin-right: clamp(0px, 3vw, 28px); place-items: center; align-content: center; border: 1px solid rgba(255, 223, 139, 0.42); border-radius: 50%; color: #f7d77e; background: rgba(18, 20, 16, 0.32); box-shadow: inset 0 0 28px rgba(255, 219, 109, 0.08); }
+.devotional-plan-mark span { display: flex; height: 21px; }
+.devotional-plan-mark strong { margin-top: -3px; font-family: Georgia, serif; font-size: 3.1rem; line-height: 0.95; }
+.devotional-plan-mark small { color: rgba(255, 239, 189, 0.7); font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; }
+.devotional-card-eyebrow { color: #d7aa4e; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.13em; text-transform: uppercase; }
+.plan-start-card { min-height: 548px; padding: clamp(26px, 5vw, 52px); background: linear-gradient(145deg, var(--surface, #171717) 0%, #211d15 100%); }
+.plan-start-art { position: relative; display: flex; width: 116px; height: 78px; align-items: center; justify-content: space-between; margin: 0 auto 24px; color: #e6bd5d; }
+.plan-start-art::before { position: absolute; top: 50%; right: 13px; left: 13px; height: 1px; background: linear-gradient(90deg, transparent, rgba(230, 189, 93, 0.65), transparent); content: ''; }
+.plan-start-art span, .plan-start-art b { position: relative; z-index: 1; display: grid; width: 54px; height: 54px; place-items: center; border: 1px solid rgba(230, 189, 93, 0.35); border-radius: 50%; background: #211d15; }
+.plan-start-art b { color: #a7c69e; }
+.plan-start-art i { position: absolute; top: 50%; left: 50%; z-index: 2; width: 7px; height: 7px; border-radius: 50%; background: #e6bd5d; transform: translate(-50%, -50%); }
+.plan-start-card h2 { margin-top: 10px; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.7rem, 4vw, 2.25rem); font-weight: 600; }
+.plan-lead { max-width: 480px; margin: 0 auto !important; font-size: 0.97rem; }
+.plan-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; max-width: 560px; margin: 30px auto 5px; padding: 15px 0; border-top: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.08); }
+.plan-steps > div { display: grid; justify-items: center; gap: 4px; padding: 0 7px; border-right: 1px solid rgba(255,255,255,0.08); }
+.plan-steps > div:last-child { border-right: 0; }
+.plan-steps span { display: grid; width: 25px; height: 25px; place-items: center; border-radius: 50%; color: #221908; background: #e5bd62; font-size: 0.76rem; font-weight: 800; }
+.plan-steps strong { color: var(--text, #fff); font-size: 0.79rem; }
+.plan-steps small { color: var(--muted, #aaa); font-size: 0.68rem; text-align: center; }
+.quiz-name-label { max-width: 560px; margin-right: auto; margin-left: auto; }
+.quiz-name-input { max-width: 560px; }
+.quiz-start-button { max-width: 560px; margin-right: auto; margin-left: auto; }
+.devotional-topline { display: flex; align-items: center; gap: 12px; color: var(--muted, #aaa); font-size: 0.78rem; font-weight: 700; }
+.devotional-topline strong { margin-left: auto; color: #dcb65c; font-size: 0.74rem; }
+.devotional-day { display: inline-flex; padding: 5px 9px; border-radius: 7px; color: #281d0b; background: #e0b858; font-size: 0.68rem; letter-spacing: 0.12em; }
+.devotional-card .quiz-progress { margin-top: 10px; margin-bottom: 30px; }
+.devotional-heading { display: flex; gap: 15px; align-items: flex-start; }
+.devotional-lesson-number { display: grid; width: 52px; height: 52px; flex: 0 0 52px; place-items: center; border-radius: 15px; color: #e4bc5b; background: rgba(220, 182, 92, 0.12); font-family: Georgia, serif; font-size: 1.7rem; }
+.devotional-heading h2 { margin: 6px 0 0; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.45rem, 3vw, 2rem); font-weight: 600; }
+.devotional-reading-time { display: flex; justify-content: space-between; margin: 20px 0 12px 67px; color: var(--muted, #999); font-size: 0.76rem; }
+.devotional-reading-time span:first-child { display: inline-flex; align-items: center; gap: 5px; color: #d9b65d; }
+.devotional-reading-time svg { width: 16px; height: 16px; }
+.devotional-scripture { margin: 0 0 24px; padding: 21px 22px 18px; border-radius: 15px; background: linear-gradient(135deg, rgba(208, 169, 74, 0.17), rgba(105, 137, 91, 0.12)); }
+.devotional-scripture-label { color: #e1bd62; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
+.devotional-scripture blockquote { margin: 9px 0 10px; color: #f4dfaa; font-family: Georgia, 'Times New Roman', serif; font-size: 1.15rem; line-height: 1.45; }
+.devotional-scripture small { color: rgba(255,255,255,0.6); font-size: 0.76rem; }
+.devotional-card .devotional-text { max-width: 700px; font-size: 1rem; line-height: 1.8; }
+.devotional-practice { margin-top: 28px; border: 0; border-left: 3px solid #89ac7f; border-radius: 0 13px 13px 0; background: rgba(113, 154, 98, 0.11); }
+.devotional-check { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-top: 28px; padding-top: 19px; border-top: 1px solid rgba(255,255,255,0.08); }
+.devotional-check > span { display: inline-flex; align-items: center; gap: 7px; color: #9bc18f; font-size: 0.77rem; }
+.devotional-check svg { width: 17px; height: 17px; }
+.devotional-check .primary-button { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 5px; }
+.devotional-check .primary-button svg { width: 18px; height: 18px; }
+
+@media (max-width: 600px) {
+  .quiz-hero { min-height: 0; padding: 24px 22px 25px; }
+  .devotional-plan-mark { display: none; }
+  .plan-start-card { min-height: 0; }
+  .plan-steps { gap: 2px; }
+  .plan-steps small { font-size: 0.62rem; }
+  .devotional-topline { gap: 7px; }
+  .devotional-topline strong { font-size: 0.67rem; }
+  .devotional-heading h2 { font-size: 1.45rem; }
+  .devotional-reading-time { margin-left: 0; }
+  .devotional-check { align-items: stretch; flex-direction: column; }
+  .devotional-check .primary-button { justify-content: center; }
+}

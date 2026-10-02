@@ -172,15 +172,18 @@ export function renderQuiz(root, navigate) {
   root.innerHTML = `
     <section class="quiz-page fade-in">
       <header class="quiz-hero">
-        <div class="quiz-kicker">Escola Bíblica Dominical</div>
-        <h1>Devocional + Quiz das Lições 1–11</h1>
-        <p>Leia o devocional de cada lição e responda às perguntas que serão liberadas em seguida.</p>
-        <div class="quiz-meta"><span>${icon('book')} 11 devocionais</span><span>${icon('star')} 5 pontos por acerto</span></div>
+        <div class="devotional-hero-copy">
+          <div class="quiz-kicker">Plano devocional · Escola Bíblica</div>
+          <h1>Fé, tecnologia e propósito</h1>
+          <p>Onze encontros curtos para ler a Palavra, refletir e praticar. A pergunta só aparece depois do devocional.</p>
+          <div class="quiz-meta"><span>${icon('book')} 11 dias de leitura</span><span>${icon('star')} 5 pontos por acerto</span><span>10 min por dia</span></div>
+        </div>
+        <div class="devotional-plan-mark" aria-hidden="true"><span>${icon('book')}</span><strong>11</strong><small>lições</small></div>
       </header>
       <div class="quiz-layout">
         <div class="quiz-stage" data-quiz-stage></div>
         <aside class="quiz-ranking" data-ranking-panel>
-          <div class="quiz-section-title"><span>${icon('award')}</span><div><strong>Ranking</strong><small>Melhores pontuações</small></div></div>
+          <div class="quiz-section-title"><span>${icon('award')}</span><div><strong>Ranking da turma</strong><small>Quem está caminhando com a gente</small></div></div>
           <div data-ranking-list><p class="empty">Carregando ranking...</p></div>
         </aside>
       </div>
@@ -200,13 +203,19 @@ export function renderQuiz(root, navigate) {
 function showIntro(root) {
   const stage = root.querySelector('[data-quiz-stage]');
   stage.innerHTML = `
-    <article class="quiz-card quiz-intro-card">
-      <span class="quiz-card-icon">${icon('award')}</span>
+    <article class="quiz-card quiz-intro-card plan-start-card">
+      <div class="plan-start-art" aria-hidden="true"><span>${icon('book')}</span><i></i><b>${icon('heart')}</b></div>
+      <div class="devotional-card-eyebrow">Seu caminho de 11 dias</div>
       <h2>Comece pelo devocional</h2>
-      <p>Você vai ler uma reflexão baseada em cada lição. Depois de concluir a leitura, a pergunta daquela lição será liberada. Ao final, sua pontuação entra no ranking da turma.</p>
+      <p class="plan-lead">Um momento simples para desacelerar, ouvir a Palavra e trazer a lição para a vida real.</p>
+      <div class="plan-steps">
+        <div><span>1</span><strong>Leia</strong><small>Versículo e reflexão</small></div>
+        <div><span>2</span><strong>Pratique</strong><small>Uma atitude para hoje</small></div>
+        <div><span>3</span><strong>Responda</strong><small>Uma pergunta da lição</small></div>
+      </div>
       <label class="quiz-name-label" for="quiz-participant-name">Seu nome para o ranking</label>
       <input id="quiz-participant-name" class="quiz-name-input" type="text" maxlength="40" autocomplete="name" placeholder="Digite seu nome" />
-      <button class="primary-button quiz-start-button" type="button" data-start-quiz>Começar devocional ${icon('arrow')}</button>
+      <button class="primary-button quiz-start-button" type="button" data-start-quiz>Começar Dia 1 ${icon('arrow')}</button>
       <p class="quiz-note">Seu nome e sua pontuação serão exibidos no ranking público.</p>
     </article>
   `;
@@ -239,15 +248,14 @@ function renderDevotional(root, state) {
   const progress = Math.round((state.index / QUESTIONS.length) * 100);
   stage.innerHTML = `
     <article class="quiz-card devotional-card">
-      <div class="quiz-progress-row"><span>Devocional ${state.index + 1} de ${DEVOTIONALS.length}</span><strong>${progress}%</strong></div>
+      <div class="devotional-topline"><span class="devotional-day">DIA ${String(state.index + 1).padStart(2, '0')}</span><span>${state.index + 1} de ${DEVOTIONALS.length}</span><strong>${progress}% concluído</strong></div>
       <div class="quiz-progress"><span style="width:${progress}%"></span></div>
-      <div class="quiz-question-label">Lição ${devotional.lesson}</div>
-      <h2>${escapeHtml(devotional.title)}</h2>
-      <p class="devotional-reference">${escapeHtml(devotional.reference)}</p>
-      <blockquote class="devotional-verse">${escapeHtml(devotional.verse)}</blockquote>
+      <div class="devotional-heading"><div class="devotional-lesson-number">${devotional.lesson}</div><div><div class="quiz-question-label">Lição ${devotional.lesson}</div><h2>${escapeHtml(devotional.title)}</h2></div></div>
+      <div class="devotional-reading-time"><span>${icon('book')} Leitura de hoje</span><span>~ 10 min</span></div>
+      <div class="devotional-scripture"><div class="devotional-scripture-label">Texto para guardar</div><blockquote>${escapeHtml(devotional.verse)}</blockquote><small>${escapeHtml(devotional.reference)}</small></div>
       <p class="devotional-text">${escapeHtml(devotional.text)}</p>
       <div class="devotional-practice"><strong>Para praticar hoje</strong><p>${escapeHtml(devotional.practice)}</p></div>
-      <div class="quiz-actions"><span class="quiz-points">Leia com calma</span><button class="primary-button" type="button" data-open-question>Concluir leitura ${icon('arrow')}</button></div>
+      <div class="devotional-check"><span>${icon('heart')} <b>Reserve um minuto para conversar com Deus.</b></span><button class="primary-button" type="button" data-open-question>Concluir devocional ${icon('arrow')}</button></div>
     </article>
   `;
   stage.querySelector('[data-open-question]').addEventListener('click', () => renderQuestion(root, state));
