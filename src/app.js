@@ -6,7 +6,7 @@ import { renderCalendar } from './pages/CalendarPage.js?v=20260920-1';
 import { renderSundaySchool } from './pages/SundaySchoolPage.js?v=20260920-1';
 import { renderShirt } from './pages/ShirtPage.js?v=20260824-6';
 import { renderAdmin } from '../admin/AdminPage.js?v=20260830-1';
-import { renderQuiz } from './pages/QuizPage.js?v=20261001-1';
+import { renderQuiz } from './pages/QuizPage.js?v=20261001-2';
 import { initTheme } from './hooks/useTheme.js';
 import { registerServiceWorker } from './utils/pwa.js?v=20260713-3';
 import { initializeNotifications } from './services/notificationService.js?v=20260713-19';
@@ -20,6 +20,7 @@ const routes = {
   calendar: (root, navigate, route) => renderCalendar(root, navigate, route),
   shirt: renderShirt,
   admin: renderAdmin,
+  devotional: renderQuiz,
   quiz: renderQuiz,
 };
 

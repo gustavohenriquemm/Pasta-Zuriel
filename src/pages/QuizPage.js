@@ -74,6 +74,97 @@ const QUESTIONS = [
   },
 ];
 
+const DEVOTIONALS = [
+  {
+    lesson: 1,
+    title: 'A singularidade da visão bíblica do tempo e da história',
+    reference: 'Apocalipse 21:1; Romanos 8:18',
+    verse: '“Eis que faço novas todas as coisas.” (Ap 21:5)',
+    text: 'A Bíblia apresenta a História como uma jornada linear, conduzida pela soberania de Deus. Cristo é o centro dessa história, e o verdadeiro progresso aparece no crescimento espiritual, no conhecimento de Deus e na expansão do Seu Reino. A promessa de um novo céu e uma nova terra sustenta nossa esperança.',
+    practice: 'Hoje, escolha uma atitude de santidade e esperança que aponte para o futuro de Deus.',
+  },
+  {
+    lesson: 2,
+    title: 'A tecnologia no contexto bíblico',
+    reference: 'Provérbios 8:12',
+    verse: '“Eu, a sabedoria, habito com a prudência.” (Pv 8:12)',
+    text: 'As ferramentas do Antigo Testamento mostram que criatividade, agricultura, metalurgia e construção faziam parte da vida do povo. O Templo de Salomão exigiu planejamento e excelência. A escrita e a comunicação oral também preservaram a Palavra de Deus para as próximas gerações.',
+    practice: 'Use hoje uma habilidade ou ferramenta como um dom para servir alguém e glorificar a Deus.',
+  },
+  {
+    lesson: 3,
+    title: 'Ciência e fé: aliadas ou rivais?',
+    reference: 'Daniel 12:3-4',
+    verse: '“A criação testemunha a glória de Deus.” (Sl 19:1)',
+    text: 'Ciência e fé podem caminhar juntas. A Ciência investiga os mecanismos e responde principalmente “como”; a fé revela o propósito e ajuda a responder “por quê”. Quando o conhecimento é submetido à verdade e à ética, ele pode servir ao bem e reconhecer a sabedoria do Criador.',
+    practice: 'Ao aprender algo novo, agradeça a Deus e pense em como esse conhecimento pode beneficiar o próximo.',
+  },
+  {
+    lesson: 4,
+    title: 'A evolução das ferramentas',
+    reference: '1 Reis 7:9',
+    verse: '“Deus encheu Bezalel de sabedoria, entendimento e ciência em todo artifício.” (Êx 31:3)',
+    text: 'A capacidade de criar e inovar é uma expressão da imagem de Deus. Bezalel recebeu habilidade para construir o Tabernáculo, mostrando que arte e técnica podem ser graça comum. Entretanto, a tecnologia é ambígua: pode promover o bem ou ser usada para destruição, dependendo do caráter de quem a utiliza.',
+    practice: 'Antes de usar uma tecnologia, pergunte: isto edifica, serve ao bem comum e honra a Deus?',
+  },
+  {
+    lesson: 5,
+    title: 'Inteligência artificial e criação divina',
+    reference: 'Salmo 139:6',
+    verse: '“Criou Deus, pois, o homem à sua imagem.” (Gn 1:27)',
+    text: 'A inteligência artificial pode simular funções cognitivas e processar muitos dados, mas continua sendo uma ferramenta criada por pessoas. A dignidade humana é singular porque inclui racionalidade, criatividade, espiritualidade e relacionamento com Deus. Nenhuma máquina substitui o amor genuíno ou a Imago Dei.',
+    practice: 'Use a IA com honestidade, justiça e responsabilidade, sem diminuir o valor de nenhuma pessoa.',
+  },
+  {
+    lesson: 6,
+    title: 'Tecnologia e ética cristã',
+    reference: 'Romanos 14:21',
+    verse: '“Tudo quanto fizerdes, fazei-o de todo o coração, como para o Senhor.” (Cl 3:23)',
+    text: 'A tecnologia não é boa ou má por si só; o uso é orientado pelas motivações e pelos impactos. O amor ao próximo, a mordomia da criação, a busca da verdade e o bem comum devem guiar nossas escolhas. Isso inclui evitar difamação, cyberbullying, desinformação e dependência.',
+    practice: 'Revise uma atitude digital e troque uma reação impulsiva por uma resposta sábia e edificante.',
+  },
+  {
+    lesson: 7,
+    title: 'Comunicação digital e evangelização',
+    reference: 'Atos 1:8',
+    verse: '“Sereis minhas testemunhas [...] até aos confins da terra.” (At 1:8)',
+    text: 'As plataformas digitais ampliam o alcance da Igreja e podem levar o Evangelho a pessoas distantes. Porém, velocidade não deve produzir superficialidade. Conteúdo relevante, verdade, mansidão e relacionamento presencial continuam essenciais para uma comunicação cristã autêntica.',
+    practice: 'Compartilhe uma mensagem que edifique alguém e procure também fortalecer um relacionamento presencial.',
+  },
+  {
+    lesson: 8,
+    title: 'A biotecnologia e a santidade da vida',
+    reference: 'Salmo 139:13-16',
+    verse: '“Por modo assombrosamente maravilhoso me formaste.” (Sl 139:14)',
+    text: 'Avanços como terapias genéticas podem aliviar o sofrimento e cuidar da saúde. Ao mesmo tempo, manipulação genética, reprodução assistida e descarte de embriões exigem discernimento. A vida humana tem dignidade desde a concepção, e a Ciência deve ser praticada com sabedoria, humildade e respeito ao Criador.',
+    practice: 'Ore por sabedoria para defender a vida e tratar cada pessoa com compaixão e dignidade.',
+  },
+  {
+    lesson: 9,
+    title: 'Privacidade e controle no mundo digital',
+    reference: 'Levítico 19:16',
+    verse: '“Para onde me irei do teu Espírito?” (Sl 139:7)',
+    text: 'A vigilância tecnológica e a coleta massiva de dados podem invadir a intimidade e ameaçar a liberdade. O olhar de Deus é perfeito e amoroso; já o controle humano sem ética pode manipular e oprimir. Justiça, transparência, consentimento e respeito ao próximo são indispensáveis.',
+    practice: 'Confira as permissões de um aplicativo e escolha proteger seus dados e os dados de outras pessoas.',
+  },
+  {
+    lesson: 10,
+    title: 'Os perigos da idolatria tecnológica',
+    reference: '1 Coríntios 10:14',
+    verse: '“Portanto, meus amados, fugi da idolatria.” (1Co 10:14)',
+    text: 'A tecnologia se torna um ídolo quando ocupa o lugar de Deus, domina o tempo e promete uma realização que só Cristo pode oferecer. Consumo, validação por curtidas e dependência digital podem afastar a pessoa da comunhão e do propósito. A ferramenta deve servir à vida, e não escravizar o coração.',
+    practice: 'Separe um período sem telas para buscar a Deus e estar presente com sua família ou comunidade.',
+  },
+  {
+    lesson: 11,
+    title: 'As profecias apocalípticas e os avanços tecnológicos',
+    reference: 'Apocalipse 13:15-18',
+    verse: '“Eis que faço novas todas as coisas.” (Ap 21:5)',
+    text: 'As profecias devem ser estudadas com reverência, contexto e humildade. A tecnologia pode criar estruturas de comunicação, vigilância e controle que tornam certos cenários plausíveis, mas não determina o futuro. A mensagem central do Apocalipse é esperança: Deus conduz a História, Cristo vence e o povo é chamado a perseverar.',
+    practice: 'Troque o medo do futuro por uma ação fiel hoje: ore, sirva e viva com propósito.',
+  },
+];
+
 let scoresUnsubscribe;
 
 export function renderQuiz(root, navigate) {
@@ -82,9 +173,9 @@ export function renderQuiz(root, navigate) {
     <section class="quiz-page fade-in">
       <header class="quiz-hero">
         <div class="quiz-kicker">Escola Bíblica Dominical</div>
-        <h1>Quiz das Lições 1–11</h1>
-        <p>Revise o conteúdo da revista e participe do ranking da turma.</p>
-        <div class="quiz-meta"><span>${icon('book')} 11 perguntas</span><span>${icon('star')} 5 pontos por acerto</span></div>
+        <h1>Devocional + Quiz das Lições 1–11</h1>
+        <p>Leia o devocional de cada lição e responda às perguntas que serão liberadas em seguida.</p>
+        <div class="quiz-meta"><span>${icon('book')} 11 devocionais</span><span>${icon('star')} 5 pontos por acerto</span></div>
       </header>
       <div class="quiz-layout">
         <div class="quiz-stage" data-quiz-stage></div>
@@ -111,11 +202,11 @@ function showIntro(root) {
   stage.innerHTML = `
     <article class="quiz-card quiz-intro-card">
       <span class="quiz-card-icon">${icon('award')}</span>
-      <h2>Pronto para testar o que aprendeu?</h2>
-      <p>As perguntas passam pelas onze lições sobre tempo bíblico, tecnologia, ética, comunicação, biotecnologia, privacidade, idolatria e esperança cristã.</p>
+      <h2>Comece pelo devocional</h2>
+      <p>Você vai ler uma reflexão baseada em cada lição. Depois de concluir a leitura, a pergunta daquela lição será liberada. Ao final, sua pontuação entra no ranking da turma.</p>
       <label class="quiz-name-label" for="quiz-participant-name">Seu nome para o ranking</label>
       <input id="quiz-participant-name" class="quiz-name-input" type="text" maxlength="40" autocomplete="name" placeholder="Digite seu nome" />
-      <button class="primary-button quiz-start-button" type="button" data-start-quiz>Começar questionário ${icon('arrow')}</button>
+      <button class="primary-button quiz-start-button" type="button" data-start-quiz>Começar devocional ${icon('arrow')}</button>
       <p class="quiz-note">Seu nome e sua pontuação serão exibidos no ranking público.</p>
     </article>
   `;
@@ -129,7 +220,7 @@ function showIntro(root) {
       return;
     }
     input.setCustomValidity('');
-    startQuiz(root, name);
+    startDevotional(root, name);
   };
   stage.querySelector('[data-start-quiz]').addEventListener('click', start);
   input.addEventListener('keydown', (event) => {
@@ -137,20 +228,40 @@ function showIntro(root) {
   });
 }
 
-function startQuiz(root, displayName) {
+function startDevotional(root, displayName) {
   const state = { displayName, index: 0, answers: [], selected: null };
-  renderQuestion(root, state);
+  renderDevotional(root, state);
+}
+
+function renderDevotional(root, state) {
+  const devotional = DEVOTIONALS[state.index];
+  const stage = root.querySelector('[data-quiz-stage]');
+  const progress = Math.round((state.index / QUESTIONS.length) * 100);
+  stage.innerHTML = `
+    <article class="quiz-card devotional-card">
+      <div class="quiz-progress-row"><span>Devocional ${state.index + 1} de ${DEVOTIONALS.length}</span><strong>${progress}%</strong></div>
+      <div class="quiz-progress"><span style="width:${progress}%"></span></div>
+      <div class="quiz-question-label">Lição ${devotional.lesson}</div>
+      <h2>${escapeHtml(devotional.title)}</h2>
+      <p class="devotional-reference">${escapeHtml(devotional.reference)}</p>
+      <blockquote class="devotional-verse">${escapeHtml(devotional.verse)}</blockquote>
+      <p class="devotional-text">${escapeHtml(devotional.text)}</p>
+      <div class="devotional-practice"><strong>Para praticar hoje</strong><p>${escapeHtml(devotional.practice)}</p></div>
+      <div class="quiz-actions"><span class="quiz-points">Leia com calma</span><button class="primary-button" type="button" data-open-question>Concluir leitura ${icon('arrow')}</button></div>
+    </article>
+  `;
+  stage.querySelector('[data-open-question]').addEventListener('click', () => renderQuestion(root, state));
 }
 
 function renderQuestion(root, state) {
   const question = QUESTIONS[state.index];
   const stage = root.querySelector('[data-quiz-stage]');
-  const progress = Math.round((state.index / QUESTIONS.length) * 100);
+  const progress = Math.round(((state.index + 0.5) / QUESTIONS.length) * 100);
   stage.innerHTML = `
     <article class="quiz-card quiz-question-card">
       <div class="quiz-progress-row"><span>Questão ${state.index + 1} de ${QUESTIONS.length}</span><strong>${progress}%</strong></div>
       <div class="quiz-progress"><span style="width:${progress}%"></span></div>
-      <div class="quiz-question-label">Lição ${question.lesson}</div>
+      <div class="quiz-question-label">Lição ${question.lesson} · Pergunta liberada</div>
       <h2>${escapeHtml(question.text)}</h2>
       <div class="quiz-options" role="radiogroup" aria-label="Alternativas">
         ${question.options.map((option, index) => `<button class="quiz-option" type="button" role="radio" aria-checked="false" data-option="${index}"><span>${String.fromCharCode(65 + index)}</span>${escapeHtml(option)}</button>`).join('')}
@@ -177,7 +288,7 @@ function renderQuestion(root, state) {
     }
     state.index += 1;
     state.selected = null;
-    renderQuestion(root, state);
+    renderDevotional(root, state);
   });
 }
 
