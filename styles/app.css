@@ -5247,6 +5247,22 @@ body {
 .devotional-link { display: inline-flex; align-items: center; gap: 5px; }
 .devotional-link svg { width: 15px; height: 15px; }
 
+/* Escola Bíblica: cards claros precisam de texto escuro e ações preenchidas. */
+.sunday-school-panel .lesson-card { color: #4b0711; background: #fffaf3; box-shadow: 0 10px 24px rgba(75, 7, 17, .06); }
+.sunday-school-panel .lesson-content h2 { color: #4b0711; }
+.sunday-school-panel .lesson-date,
+.sunday-school-panel .private-notes-message,
+.sunday-school-panel .lesson-notes label,
+.sunday-school-panel .lesson-note-footer small { color: #6f4a42; }
+.sunday-school-panel .lesson-link { color: #650d1d; background: #fffaf3; }
+.sunday-school-panel .lesson-link.devotional-link { color: #fffaf3; background: #650d1d; border-color: #650d1d; }
+.sunday-school-panel .lesson-link.devotional-link:hover { color: #fffaf3; background: #7d1728; }
+.sunday-school-panel .lesson-pending { color: #8b6b61; border-color: rgba(117, 74, 51, .25); }
+.sunday-school-panel .lesson-notes { border-top-color: rgba(117, 74, 51, .16); }
+.sunday-school-panel .lesson-notes summary { color: #4b0711; }
+.sunday-school-panel .lesson-notes textarea { border-color: rgba(117, 74, 51, .25); background: #fff; color: #4b0711; }
+.sunday-school-panel .lesson-note-footer button { color: #8b3340; }
+
 @media (max-width: 600px) {
   .devotional-shell .quiz-page { padding-bottom: 12px; }
   .devotional-shell .quiz-hero { border-radius: 0 0 22px 22px; }
