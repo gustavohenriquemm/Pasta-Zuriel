@@ -40,7 +40,7 @@ function renderLesson(lesson) {
         <div class="lesson-actions">
           ${lesson.studyUrl
             ? `<a class="lesson-link primary" href="${lesson.studyUrl}" target="_blank" rel="noopener">Abrir lição</a>`
-            : '<span class="lesson-pending">Lição em breve</span>'}
+            : ''}
           ${devotionalAction}
           <a class="share-button whatsapp-button" href="${escapeAttr(getLessonWhatsAppUrl(lesson))}" target="_blank" rel="noopener" aria-label="Compartilhar lição no WhatsApp">${icon('whatsapp')}<span>WhatsApp</span></a>
         </div>
