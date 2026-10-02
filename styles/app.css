@@ -5241,6 +5241,28 @@ body {
 .devotional-shell .quiz-option span { color: var(--devotional-wine); background: #f1dfd5; }
 .devotional-shell .quiz-option.selected { border-color: #9a5e50; background: #f5e6dc; }
 .devotional-shell .quiz-score span { color: #896e67; }
+.devotional-shell .devotional-section { margin-top: 18px; padding: 18px 19px; border: 1px solid rgba(117, 74, 51, .12); border-radius: 16px; background: #fffaf3; }
+.devotional-shell .devotional-section-heading { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.devotional-shell .devotional-section-heading > span { display: grid; width: 34px; height: 34px; place-items: center; border-radius: 50%; color: #650d1d; background: #f3e0d5; }
+.devotional-shell .devotional-section-heading svg { width: 17px; height: 17px; }
+.devotional-shell .devotional-section-heading strong,
+.devotional-shell .devotional-section-heading small { display: block; }
+.devotional-shell .devotional-section-heading strong { color: #650d1d; font-family: Georgia, 'Times New Roman', serif; font-size: 1.04rem; }
+.devotional-shell .devotional-section-heading small { margin-top: 2px; color: #96766d; font-size: .72rem; }
+.devotional-shell .devotional-section p { margin: 0; color: #604944 !important; line-height: 1.72; }
+.devotional-shell .devotional-reflection { background: #fff; }
+.devotional-shell .devotional-reflection-highlight { margin-top: 13px !important; padding: 12px 14px; border-left: 3px solid #9a6a35; color: #694d42 !important; background: #f3edde; font-family: Georgia, 'Times New Roman', serif; }
+.devotional-shell .devotional-questions { background: #f7f0e7; }
+.devotional-shell .devotional-questions ol { display: grid; gap: 9px; margin: 0; padding-left: 23px; color: #604944; line-height: 1.55; }
+.devotional-shell .devotional-prayer { margin-top: 18px; padding: 18px 19px; border-radius: 16px; background: #edf2e7; }
+.devotional-shell .devotional-prayer .devotional-section-heading > span { color: #526d45; background: #dce8d5; }
+.devotional-shell .devotional-prayer .devotional-section-heading strong { color: #526d45; }
+.devotional-shell .devotional-journal { margin-top: 18px; padding: 18px 19px; border: 1px solid rgba(117, 74, 51, .14); border-radius: 16px; background: #fff; }
+.devotional-shell .devotional-journal label { display: flex; align-items: center; gap: 7px; margin-bottom: 9px; color: #650d1d; font-weight: 800; }
+.devotional-shell .devotional-journal label svg { width: 17px; height: 17px; }
+.devotional-shell .devotional-journal textarea { width: 100%; min-height: 90px; box-sizing: border-box; resize: vertical; border: 1px solid rgba(117, 74, 51, .24); border-radius: 12px; padding: 12px; color: #4b0711; background: #fffaf3; font: inherit; line-height: 1.5; }
+.devotional-shell .devotional-journal textarea:focus { outline: 2px solid #b17b5f; outline-offset: 1px; }
+.devotional-shell .devotional-journal > small { display: block; margin-top: 6px; color: #8b6b61; font-size: .72rem; }
 .devotional-shell .quiz-back-link { color: #8d6c65; }
 .devotional-shell .quiz-back-link:hover { color: var(--devotional-wine); }
 .ebd-devotional-note { margin: -4px 0 18px; padding: 12px 15px; border-left: 3px solid #9a5e50; border-radius: 0 10px 10px 0; color: #8a635d; background: #f8eee5; }

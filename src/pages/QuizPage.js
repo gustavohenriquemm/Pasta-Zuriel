@@ -166,6 +166,20 @@ const DEVOTIONALS = [
   },
 ];
 
+const DEVOTIONAL_DETAILS = {
+  1: { context: 'Hoje você vai olhar para a História com os olhos da esperança bíblica: Deus não abandonou a criação e conduz todas as coisas para a restauração em Cristo.', reflection: 'O progresso que Deus deseja começa dentro de nós: conhecer Sua Palavra, amadurecer na fé e viver de modo coerente com a esperança.', questions: ['Onde tenho procurado segurança para o futuro?', 'Que atitude de santidade posso praticar hoje?', 'Como minha esperança pode encorajar alguém?'], prayer: 'Senhor, firma meu coração na Tua promessa e ensina-me a viver o presente com esperança e fidelidade.' },
+  2: { context: 'A revista mostra que ferramentas, construção, escrita e comunicação já faziam parte da vida bíblica. A questão não é fugir da técnica, mas consagrá-la ao serviço.', reflection: 'Deus pode usar sua habilidade profissional, criatividade e ferramentas simples para abençoar pessoas e preservar a verdade.', questions: ['Que habilidade Deus me deu?', 'Como posso usá-la para servir?', 'Minha forma de comunicar transmite verdade?'], prayer: 'Deus, recebe minhas habilidades e guia minhas mãos para que tudo o que eu fizer sirva ao bem e glorifique o Teu nome.' },
+  3: { context: 'A Ciência observa a criação e investiga seus mecanismos. A fé reconhece o Criador, o propósito e a responsabilidade que acompanham o conhecimento.', reflection: 'Aprender não precisa diminuir a fé. A sabedoria nasce quando conhecimento e humildade caminham juntos.', questions: ['Tenho tratado perguntas com humildade?', 'Que conhecimento pode beneficiar alguém?', 'Onde preciso reconhecer meus limites?'], prayer: 'Senhor, dá-me uma mente aberta para aprender e um coração humilde para usar o conhecimento com amor.' },
+  4: { context: 'De ferramentas antigas às tecnologias atuais, a capacidade de criar revela parte da criatividade recebida de Deus. Toda inovação também exige discernimento.', reflection: 'Antes de perguntar se posso usar algo, pergunte se isso edifica, protege pessoas e honra a Deus.', questions: ['Que tecnologia facilita meu serviço?', 'Que uso precisa de limite?', 'Quem pode ser afetado pela minha escolha?'], prayer: 'Pai, dá-me criatividade com domínio próprio e ajuda-me a escolher aquilo que promove vida e justiça.' },
+  5: { context: 'A inteligência artificial pode acelerar tarefas, mas não possui a dignidade, a consciência moral e o relacionamento com Deus que pertencem ao ser humano.', reflection: 'Nenhum algoritmo define o valor de uma pessoa. A Imago Dei não pode ser automatizada, copiada ou substituída.', questions: ['Tenho tratado pessoas como números?', 'Onde preciso ser mais transparente ao usar IA?', 'Como posso proteger quem é mais vulnerável?'], prayer: 'Senhor, preserva em mim o respeito pela dignidade humana e dá-me honestidade para usar a tecnologia.' },
+  6: { context: 'A ética cristã olha para motivações e consequências. Verdade, justiça, amor ao próximo e domínio próprio devem acompanhar cada escolha digital.', reflection: 'Liberdade não é fazer tudo o que uma ferramenta permite; é escolher o que edifica mesmo quando ninguém está observando.', questions: ['Minha fala digital edifica?', 'Que hábito precisa ser interrompido?', 'Como posso reparar um dano causado?'], prayer: 'Deus, guarda minhas palavras e escolhas. Que minha presença digital seja marcada por verdade, graça e responsabilidade.' },
+  7: { context: 'A Igreja pode alcançar pessoas distantes pela comunicação digital, mas o Evangelho continua sendo relacionamento, cuidado, discipulado e presença.', reflection: 'Alcance é uma ponte, não o destino. A mensagem precisa ser verdadeira e levar a uma vida transformada.', questions: ['O que tenho compartilhado?', 'Tenho ouvido antes de responder?', 'Quem precisa de uma conversa cuidadosa hoje?'], prayer: 'Senhor, usa minhas palavras para alcançar e acolher. Ensina-me a comunicar o Evangelho com verdade e mansidão.' },
+  8: { context: 'A biotecnologia pode aliviar sofrimento, mas os limites da manipulação genética e da reprodução assistida exigem respeito à santidade da vida.', reflection: 'Cuidar da vida é diferente de controlar o valor da vida. A ciência precisa caminhar com humildade, compaixão e ética.', questions: ['Como posso defender os vulneráveis?', 'Tenho reduzido alguém às suas limitações?', 'Onde preciso agir com mais compaixão?'], prayer: 'Senhor, ensina-me a valorizar cada vida e a buscar sabedoria para unir conhecimento, cuidado e dignidade.' },
+  9: { context: 'Dados revelam muito sobre uma pessoa. A privacidade protege liberdade, intimidade e confiança; por isso, transparência e consentimento são deveres de amor.', reflection: 'Proteger dados também é proteger histórias, famílias e pessoas que confiaram em nós.', questions: ['Quais permissões meus aplicativos têm?', 'Tenho compartilhado informações de outras pessoas?', 'Como posso ser mais transparente?'], prayer: 'Deus, dá-me responsabilidade para cuidar da intimidade do próximo e sabedoria para proteger o que foi confiado a mim.' },
+  10: { context: 'Uma ferramenta ocupa o lugar de Deus quando domina atenção, tempo e desejos. A idolatria tecnológica pode parecer normal, mas escraviza silenciosamente.', reflection: 'O que recebe meu primeiro olhar, meu melhor tempo e minha ansiedade revela muito sobre o que governa meu coração.', questions: ['O que mais interrompe minha comunhão?', 'Consigo ficar em silêncio sem uma tela?', 'Que limite pode devolver presença à minha família?'], prayer: 'Jesus, liberta meu coração de toda dependência e ensina-me a usar a tecnologia sem ser usado por ela.' },
+  11: { context: 'As profecias pedem reverência e contexto. A tecnologia pode levantar possibilidades, mas não controla o futuro: Deus continua no trono.', reflection: 'A esperança cristã não nega os desafios; ela nos dá coragem para permanecer fiéis enquanto esperamos a vitória de Cristo.', questions: ['O medo do futuro tem guiado minhas decisões?', 'Que fidelidade Deus pede hoje?', 'Como posso testemunhar esperança?'], prayer: 'Senhor, livra-me do medo e da especulação. Faz-me perseverante, fiel e cheio de esperança até a volta de Cristo.' },
+};
+
 let scoresUnsubscribe;
 
 export function renderQuiz(root, navigate, route = 'devotional') {
@@ -274,20 +288,32 @@ function startDevotional(root, displayName, availableIndexes = getAvailableIndex
 
 function renderDevotional(root, state) {
   const devotional = DEVOTIONALS[state.index];
+  const detail = DEVOTIONAL_DETAILS[devotional.lesson] || { context: devotional.text, reflection: devotional.practice, questions: ['O que Deus está me ensinando?', 'Como praticarei isso hoje?'], prayer: 'Senhor, ajuda-me a viver a Tua Palavra.' };
   const stage = root.querySelector('[data-quiz-stage]');
   const progress = Math.round((state.position / state.availableIndexes.length) * 100);
+  const noteKey = getDevotionalNoteKey(devotional.lesson);
   stage.innerHTML = `
     <article class="quiz-card devotional-card">
       <div class="devotional-topline"><span class="devotional-day">DIA ${String(devotional.lesson).padStart(2, '0')}</span><span>${state.position + 1} de ${state.availableIndexes.length} disponíveis</span><strong>${progress}% concluído</strong></div>
       <div class="quiz-progress"><span style="width:${progress}%"></span></div>
       <div class="devotional-heading"><div class="devotional-lesson-number">${devotional.lesson}</div><div><div class="quiz-question-label">Lição ${devotional.lesson}</div><h2>${escapeHtml(devotional.title)}</h2></div></div>
-      <div class="devotional-reading-time"><span>${icon('book')} Leitura de hoje</span><span>~ 10 min</span></div>
+      <div class="devotional-reading-time"><span>${icon('book')} Leitura de hoje</span><span>~ 10 min · leia, medite e ore</span></div>
       <div class="devotional-scripture"><div class="devotional-scripture-label">Texto para guardar</div><blockquote>${escapeHtml(devotional.verse)}</blockquote><small>${escapeHtml(devotional.reference)}</small></div>
-      <p class="devotional-text">${escapeHtml(devotional.text)}</p>
+      <section class="devotional-section devotional-context"><div class="devotional-section-heading"><span>${icon('book')}</span><div><strong>Contexto</strong><small>Entenda o tema da lição</small></div></div><p>${escapeHtml(detail.context)}</p></section>
+      <section class="devotional-section devotional-reflection"><div class="devotional-section-heading"><span>${icon('heart')}</span><div><strong>Medite na Palavra</strong><small>Traga o texto para a sua vida</small></div></div><p>${escapeHtml(devotional.text)}</p><p class="devotional-reflection-highlight">${escapeHtml(detail.reflection)}</p></section>
+      <section class="devotional-section devotional-questions"><div class="devotional-section-heading"><span>${icon('award')}</span><div><strong>Perguntas para refletir</strong><small>Responda com sinceridade diante de Deus</small></div></div><ol>${detail.questions.map((question) => `<li>${escapeHtml(question)}</li>`).join('')}</ol></section>
       <div class="devotional-practice"><strong>Para praticar hoje</strong><p>${escapeHtml(devotional.practice)}</p></div>
-      <div class="devotional-check"><span>${icon('heart')} <b>Reserve um minuto para conversar com Deus.</b></span><button class="primary-button" type="button" data-open-question>Concluir devocional ${icon('arrow')}</button></div>
+      <section class="devotional-prayer"><div class="devotional-section-heading"><span>${icon('heart')}</span><div><strong>Oração</strong><small>Converse com Deus</small></div></div><p>${escapeHtml(detail.prayer)}</p></section>
+      <section class="devotional-journal"><label for="devotional-note-${devotional.lesson}">${icon('book')} O que Deus falou com você?</label><textarea id="devotional-note-${devotional.lesson}" data-devotional-note data-note-key="${noteKey}" maxlength="1200" placeholder="Escreva uma frase, uma decisão ou um pedido de oração...">${escapeHtml(readDevotionalNote(devotional.lesson))}</textarea><small data-devotional-note-status>Salvo neste aparelho</small></section>
+      <div class="devotional-check"><span>${icon('heart')} <b>Reserve um minuto para conversar com Deus.</b></span><button class="primary-button" type="button" data-open-question>Continuar para a pergunta ${icon('arrow')}</button></div>
     </article>
   `;
+  const note = stage.querySelector('[data-devotional-note]');
+  const noteStatus = stage.querySelector('[data-devotional-note-status]');
+  note.addEventListener('input', () => {
+    writeDevotionalNote(devotional.lesson, note.value);
+    noteStatus.textContent = 'Anotação salva neste aparelho';
+  });
   stage.querySelector('[data-open-question]').addEventListener('click', () => renderQuestion(root, state));
 }
 
@@ -392,6 +418,18 @@ function readLocalScores() {
   } catch {
     return [];
   }
+}
+
+function getDevotionalNoteKey(lessonNumber) {
+  return `zuriel:devotional-note:v1:${lessonNumber}`;
+}
+
+function readDevotionalNote(lessonNumber) {
+  try { return localStorage.getItem(getDevotionalNoteKey(lessonNumber)) || ''; } catch { return ''; }
+}
+
+function writeDevotionalNote(lessonNumber, value) {
+  try { localStorage.setItem(getDevotionalNoteKey(lessonNumber), String(value || '').slice(0, 1200)); } catch { /* storage unavailable */ }
 }
 
 function writeLocalScores(scores) {
