@@ -1,6 +1,6 @@
 import { icon } from '../components/icons.js?v=20261001-1';
 import { SUNDAY_SCHOOL_LESSONS, isLessonReleased } from '../data/sundaySchoolLessons.js?v=20261007-1';
-import { SUNDAY_SCHOOL_CONTENT } from '../data/sundaySchoolContent.js?v=20261007-2';
+import { SUNDAY_SCHOOL_CONTENT } from '../data/sundaySchoolContent.js?v=20261007-3';
 
 export function renderLessonPage(root, navigate, route = 'lesson:1') {
   const number = Number(String(route).match(/lesson:(\d+)/)?.[1] || 1);

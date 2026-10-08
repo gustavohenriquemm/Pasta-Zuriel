@@ -98,7 +98,7 @@ const DEVOTIONALS = [
     lesson: 3,
     title: 'Ciência e fé: aliadas ou rivais?',
     reference: 'Daniel 12:3-4',
-    verse: '“A criação testemunha a glória de Deus.” (Sl 19:1)',
+    verse: '“Pela fé, entendemos que os mundos pela palavra de Deus foram criados.” (Hb 11:3)',
     text: 'Ciência e fé podem caminhar juntas. A Ciência investiga os mecanismos e responde principalmente “como”; a fé revela o propósito e ajuda a responder “por quê”. Quando o conhecimento é submetido à verdade e à ética, ele pode servir ao bem e reconhecer a sabedoria do Criador.',
     practice: 'Ao aprender algo novo, agradeça a Deus e pense em como esse conhecimento pode beneficiar o próximo.',
   },
@@ -106,7 +106,7 @@ const DEVOTIONALS = [
     lesson: 4,
     title: 'A evolução das ferramentas',
     reference: '1 Reis 7:9',
-    verse: '“Deus encheu Bezalel de sabedoria, entendimento e ciência em todo artifício.” (Êx 31:3)',
+    verse: '“Tudo quanto fizerdes, fazei-o para a glória de Deus.” (1Co 10:31)',
     text: 'A capacidade de criar e inovar é uma expressão da imagem de Deus. Bezalel recebeu habilidade para construir o Tabernáculo, mostrando que arte e técnica podem ser graça comum. Entretanto, a tecnologia é ambígua: pode promover o bem ou ser usada para destruição, dependendo do caráter de quem a utiliza.',
     practice: 'Antes de usar uma tecnologia, pergunte: isto edifica, serve ao bem comum e honra a Deus?',
   },
@@ -185,8 +185,8 @@ const DEVOTIONAL_DETAILS = {
 const WEEKLY_READINGS = {
   1: [['Seg', 'Gn 1.1-5', 'O ponto de partida da História.', 'GEN:1:1'], ['Ter', 'Ec 3.1-8', 'A soberania de Deus no tempo.', 'ECC:3:1'], ['Qua', '1Co 1.18-22', 'Cristo, o centro e o cumprimento da História.', '1CO:1:18'], ['Qui', 'Mt 28.16-20', 'A missão da Igreja na expansão do Reino.', 'MAT:28:16'], ['Sex', 'Hb 1.1-2', 'A revelação progressiva de Deus.', 'HEB:1:1'], ['Sáb', 'Ap 21.1-5', 'A esperança na restauração final.', 'REV:21:1']],
   2: [['Seg', 'Êx 31.1-6', 'Sabedoria para criar e servir.', 'EXO:31:1'], ['Ter', '1Rs 7.13-14', 'Habilidade e excelência no trabalho.', '1KI:7:13'], ['Qua', '1Rs 8.22-30', 'A construção como testemunho da glória.', '1KI:8:22'], ['Qui', 'Dt 6.6-9', 'A Palavra transmitida entre gerações.', 'DEU:6:6'], ['Sex', 'Sl 78.1-7', 'Memória, ensino e fidelidade.', 'PSA:78:1'], ['Sáb', 'Pv 8.12-14', 'Sabedoria para usar ferramentas.', 'PRO:8:12']],
-  3: [['Seg', 'Sl 19.1-4', 'A criação anuncia a glória de Deus.', 'PSA:19:1'], ['Ter', 'Pv 1.7', 'O princípio do conhecimento.', 'PRO:1:7'], ['Qua', 'Dn 1.17-20', 'Conhecimento com discernimento.', 'DAN:1:17'], ['Qui', 'Rm 1.19-20', 'O Criador revelado na criação.', 'ROM:1:19'], ['Sex', 'Cl 1.15-17', 'Cristo sustenta todas as coisas.', 'COL:1:15'], ['Sáb', 'Tg 1.5-8', 'Pedindo sabedoria ao Senhor.', 'JAS:1:5']],
-  4: [['Seg', 'Gn 1.26-28', 'Criados para cultivar e cuidar.', 'GEN:1:26'], ['Ter', 'Êx 31.1-5', 'Bezalel e a criatividade consagrada.', 'EXO:31:1'], ['Qua', '1Rs 6.1-14', 'Planejamento e excelência na construção.', '1KI:6:1'], ['Qui', 'Pv 22.29', 'Habilidade colocada a serviço.', 'PRO:22:29'], ['Sex', 'Ec 9.10', 'Fazer com dedicação.', 'ECC:9:10'], ['Sáb', '1Co 10.31', 'Tudo para a glória de Deus.', '1CO:10:31']],
+  3: [['Seg', 'Sl 19.1-4', 'A natureza declara a Glória de Deus.', 'PSA:19:1'], ['Ter', 'Rm 1.20', 'A revelação de Deus na Criação.', 'ROM:1:20'], ['Qua', 'Hb 11.1-3', 'Fé: o fundamento das coisas que não se veem.', 'HEB:11:1'], ['Qui', '2Pe 1.5-6', 'Acrescentando Ciência à fé.', '2PE:1:5'], ['Sex', 'Cl 2.8', 'Advertência contra filosofias vazias.', 'COL:2:8'], ['Sáb', 'Mt 22.39', 'O princípio ético do amor ao próximo.', 'MAT:22:39']],
+  4: [['Seg', 'Gn 1.28', 'O mandato cultural: domínio da terra.', 'GEN:1:28'], ['Ter', 'Êx 31.5', 'Bezalel: dom divino para a criação.', 'EXO:31:5'], ['Qua', 'Cl 1.17', 'Tudo subsiste em Cristo.', 'COL:1:17'], ['Qui', 'Gn 4.22-23', 'A ambiguidade da tecnologia e seu mau uso.', 'GEN:4:22'], ['Sex', 'Mt 22.39', 'Amor ao próximo: o fundamento da ética cristã.', 'MAT:22:39'], ['Sáb', '1Co 10.31', 'Façamos tudo para a Glória de Deus.', '1CO:10:31']],
   5: [['Seg', 'Gn 1.26-27', 'A singularidade da imagem de Deus.', 'GEN:1:26'], ['Ter', 'Sl 8.3-6', 'Dignidade e responsabilidade humana.', 'PSA:8:3'], ['Qua', 'Sl 139.13-18', 'Conhecidos e formados por Deus.', 'PSA:139:13'], ['Qui', 'Pv 11.3', 'Integridade nas decisões.', 'PRO:11:3'], ['Sex', 'Cl 3.9-10', 'Verdade e nova humanidade.', 'COL:3:9'], ['Sáb', 'Fp 4.8-9', 'Pensar no que é justo e bom.', 'PHP:4:8']],
   6: [['Seg', 'Mq 6.8', 'Justiça, misericórdia e humildade.', 'MIC:6:8'], ['Ter', 'Mt 7.12', 'Tratar o outro como gostaria de ser tratado.', 'MAT:7:12'], ['Qua', 'Ef 4.25-32', 'Verdade e cuidado nas palavras.', 'EPH:4:25'], ['Qui', 'Fp 4.8', 'Filtrar o que ocupa a mente.', 'PHP:4:8'], ['Sex', '1Co 6.12', 'Liberdade com domínio próprio.', '1CO:6:12'], ['Sáb', 'Cl 3.17', 'Fazer tudo em nome de Jesus.', 'COL:3:17']],
   7: [['Seg', 'At 1.8', 'Testemunhas até os confins.', 'ACT:1:8'], ['Ter', 'Mt 5.13-16', 'Luz visível no mundo.', 'MAT:5:13'], ['Qua', 'Cl 4.5-6', 'Palavras com graça e sabedoria.', 'COL:4:5'], ['Qui', '1Pe 3.15-16', 'Responder com mansidão.', '1PE:3:15'], ['Sex', 'Rm 10.13-15', 'A mensagem que alcança pessoas.', 'ROM:10:13'], ['Sáb', 'Hb 10.24-25', 'A comunhão que nenhuma tela substitui.', 'HEB:10:24']],
@@ -196,7 +196,7 @@ const WEEKLY_READINGS = {
   11: [['Seg', 'Ap 1.1-8', 'A revelação de Jesus Cristo.', 'REV:1:1'], ['Ter', 'Mt 24.4-14', 'Perseverar sem medo.', 'MAT:24:4'], ['Qua', 'Dn 7.13-14', 'O reino eterno do Filho.', 'DAN:7:13'], ['Qui', 'Ap 13.15-18', 'Discernimento diante do poder.', 'REV:13:15'], ['Sex', 'Ap 14.6-13', 'Fidelidade até o fim.', 'REV:14:6'], ['Sáb', 'Ap 21.1-5', 'Deus faz novas todas as coisas.', 'REV:21:1']],
 };
 
-const FULL_PASSAGE_ROUTES = { 1: 'REV:21:1', 2: 'PRO:8:12', 3: 'PSA:19:1', 4: 'EXO:31:3', 5: 'GEN:1:27', 6: 'COL:3:23', 7: 'ACT:1:8', 8: 'PSA:139:13', 9: 'PSA:139:7', 10: '1CO:10:14', 11: 'REV:21:1' };
+const FULL_PASSAGE_ROUTES = { 1: 'REV:21:1', 2: 'PRO:8:12', 3: 'HEB:11:1', 4: '1CO:10:31', 5: 'GEN:1:27', 6: 'COL:3:23', 7: 'ACT:1:8', 8: 'PSA:139:13', 9: 'PSA:139:7', 10: '1CO:10:14', 11: 'REV:21:1' };
 
 let scoresUnsubscribe;
 
