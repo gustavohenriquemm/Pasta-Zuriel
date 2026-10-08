@@ -1,6 +1,7 @@
 import { icon } from '../components/icons.js?v=20261001-1';
 import { loadPublicQuizScores, saveQuizScore } from '../../database/firestore.js?v=20261001-1';
 import { SUNDAY_SCHOOL_LESSONS, getLessonReleaseDate, isLessonReleased } from '../data/sundaySchoolLessons.js?v=20261002-1';
+import { getBibleBook } from '../services/bibleService.js?v=20261002-1';
 
 export const QUIZ_ID = 'licoes-1-11';
 const POINTS_PER_QUESTION = 5;
@@ -301,33 +302,61 @@ function showIntro(root, requestedLesson = 0) {
 function startDevotional(root, displayName, availableIndexes = getAvailableIndexes(), position = 0) {
   const safeIndexes = availableIndexes.length ? availableIndexes : [0];
   const safePosition = Math.min(Math.max(position, 0), safeIndexes.length - 1);
-  const state = { displayName, availableIndexes: safeIndexes, position: safePosition, index: safeIndexes[safePosition], answers: {}, selected: null };
+  const state = { displayName, availableIndexes: safeIndexes, position: safePosition, index: safeIndexes[safePosition], readingDay: 0, answers: {}, selected: null };
   renderDevotional(root, state);
+}
+
+function getDailyDevotional(devotional, detail, reading) {
+  const [day, reference, focus] = reading;
+  return {
+    context: `A leitura de ${day}-feira é ${reference}. Leia o capítulo inteiro, observando o que ele revela sobre ${focus.toLowerCase()} Esse texto faz parte da caminhada da Lição ${devotional.lesson}.`,
+    reflection: `Depois de ler ${reference}, volte ao tema da lição: ${focus} Pergunte ao Senhor como essa verdade aparece na sua história e qual resposta de fé o capítulo pede de você hoje.`,
+    questions: [`O que o capítulo de ${reference} revela sobre Deus?`, `Que atitude a leitura de hoje convida você a praticar?`, `Como essa passagem se conecta ao tema “${devotional.title}”?`],
+    prayer: detail.prayer,
+  };
+}
+
+async function loadFullChapter(target, reading) {
+  const route = String(reading?.[3] || '').split(':');
+  const [bookCode, chapterNumber] = route;
+  if (!bookCode || !chapterNumber) return;
+  try {
+    const book = await getBibleBook(bookCode);
+    const chapter = book.chapters.find((item) => item.number === Number(chapterNumber));
+    if (!chapter || !target.isConnected) return;
+    target.innerHTML = `<div class="devotional-chapter-heading"><strong>${escapeHtml(book.name || bookCode)} ${chapter.number}</strong><small>Capítulo completo · ARC</small></div><div class="devotional-chapter-verses">${chapter.verses.map((verse) => `<p><b>${verse.number}</b><span>${escapeHtml(verse.text)}</span></p>`).join('')}</div>`;
+  } catch {
+    if (target.isConnected) target.innerHTML = '<p class="devotional-chapter-error">Não foi possível carregar o capítulo agora. Você pode tentar novamente tocando em “Ver passagem na Bíblia”.</p>';
+  }
 }
 
 function renderDevotional(root, state) {
   const devotional = DEVOTIONALS[state.index];
   const detail = DEVOTIONAL_DETAILS[devotional.lesson] || { context: devotional.text, reflection: devotional.practice, questions: ['O que Deus está me ensinando?', 'Como praticarei isso hoje?'], prayer: 'Senhor, ajuda-me a viver a Tua Palavra.' };
   const weekly = WEEKLY_READINGS[devotional.lesson] || [];
-  const passageRoute = FULL_PASSAGE_ROUTES[devotional.lesson] || weekly[weekly.length - 1]?.[3] || '';
+  const reading = weekly[state.readingDay] || weekly[0];
+  const daily = getDailyDevotional(devotional, detail, reading);
+  const passageRoute = reading?.[3] || FULL_PASSAGE_ROUTES[devotional.lesson] || '';
   const stage = root.querySelector('[data-quiz-stage]');
   const progress = Math.round((state.position / state.availableIndexes.length) * 100);
   const noteKey = getDevotionalNoteKey(devotional.lesson);
+  const isLastReading = state.readingDay >= weekly.length - 1;
   stage.innerHTML = `
     <article class="quiz-card devotional-card">
       <div class="devotional-topline"><span class="devotional-day">DIA ${String(devotional.lesson).padStart(2, '0')}</span><span>${state.position + 1} de ${state.availableIndexes.length} disponíveis</span><strong>${progress}% concluído</strong></div>
       <div class="quiz-progress"><span style="width:${progress}%"></span></div>
       <div class="devotional-heading"><div class="devotional-lesson-number">${devotional.lesson}</div><div><div class="quiz-question-label">Lição ${devotional.lesson}</div><h2>${escapeHtml(devotional.title)}</h2></div></div>
       <div class="devotional-reading-time"><span>${icon('book')} Leitura de hoje</span><span>~ 10 min · leia, medite e ore</span></div>
-      <div class="devotional-scripture"><div class="devotional-scripture-label">Texto para guardar</div><blockquote>${escapeHtml(devotional.verse)}</blockquote><small>${escapeHtml(devotional.reference)}</small>${passageRoute ? `<a class="devotional-passage-link" href="/#bible:${passageRoute}">${icon('book')} Ver a passagem completa na Bíblia</a>` : ''}</div>
-      <details class="devotional-collapsible devotional-context"><summary><span>${icon('book')}</span><strong>Contexto da lição</strong><small>Toque para abrir o contexto completo</small><b>+</b></summary><div class="devotional-collapsible-content"><p>${escapeHtml(detail.context)}</p></div></details>
-      <section class="devotional-section devotional-reflection devotional-reflection-large"><div class="devotional-section-heading"><span>${icon('heart')}</span><div><strong>Medite na Palavra</strong><small>Leia com calma e perceba o que Deus está ensinando</small></div></div><p>${escapeHtml(devotional.text)}</p><p class="devotional-reflection-highlight">${escapeHtml(detail.reflection)}</p><div class="devotional-reading-bridge"><strong>Leia a semana toda</strong><span>As seis leituras abaixo ajudam você a enxergar o tema da lição por inteiro.</span></div></section>
-      <section class="devotional-weekly-reading"><div class="devotional-section-heading"><span>${icon('calendar')}</span><div><strong>Leitura semanal</strong><small>Uma passagem por dia até a aula</small></div></div><div class="devotional-week-grid">${weekly.map(([day, reference, label, route]) => `<a class="devotional-week-item" href="/#bible:${route}"><b>${day}</b><strong>${reference}</strong><span>${label}</span><em>Ver passagem ${icon('arrow')}</em></a>`).join('')}</div></section>
-      <section class="devotional-section devotional-questions"><div class="devotional-section-heading"><span>${icon('award')}</span><div><strong>Perguntas para refletir</strong><small>Responda com sinceridade diante de Deus</small></div></div><ol>${detail.questions.map((question) => `<li>${escapeHtml(question)}</li>`).join('')}</ol></section>
+      <div class="devotional-scripture"><div class="devotional-scripture-label">Texto para guardar · ${escapeHtml(reading?.[1] || devotional.reference)}</div><blockquote>${escapeHtml(devotional.verse)}</blockquote><small>${escapeHtml(devotional.reference)}</small>${passageRoute ? `<a class="devotional-passage-link" href="/#bible:${passageRoute}">${icon('book')} Ver a passagem na Bíblia</a>` : ''}</div>
+      <details class="devotional-collapsible devotional-context"><summary><span>${icon('book')}</span><strong>Contexto da leitura de ${escapeHtml(reading?.[0] || '')}</strong><small>Toque para abrir o contexto completo</small><b>+</b></summary><div class="devotional-collapsible-content"><p>${escapeHtml(daily.context)}</p><p class="devotional-context-lesson">${escapeHtml(detail.context)}</p></div></details>
+      <section class="devotional-section devotional-reflection devotional-reflection-large"><div class="devotional-section-heading"><span>${icon('heart')}</span><div><strong>Medite na Palavra</strong><small>${escapeHtml(reading?.[1] || '')} · ${escapeHtml(reading?.[2] || '')}</small></div></div><p>${escapeHtml(daily.reflection)}</p><p class="devotional-reflection-highlight">${escapeHtml(detail.reflection)}</p><div class="devotional-reading-bridge"><strong>Leitura do dia</strong><span>Leia primeiro o capítulo completo; depois volte para esta meditação.</span></div></section>
+      <section class="devotional-chapter-card"><div class="devotional-section-heading"><span>${icon('book')}</span><div><strong>Capítulo completo</strong><small>${escapeHtml(reading?.[1] || '')} · leitura semanal de ${escapeHtml(reading?.[0] || '')}</small></div></div><div class="devotional-chapter-content" data-full-chapter><p class="devotional-chapter-loading">Carregando o capítulo completo...</p></div></section>
+      <section class="devotional-weekly-reading"><div class="devotional-section-heading"><span>${icon('calendar')}</span><div><strong>Leitura semanal</strong><small>Escolha o dia e leia o capítulo inteiro</small></div></div><div class="devotional-week-grid">${weekly.map(([day, reference, label, route], index) => `<button class="devotional-week-item ${index === state.readingDay ? 'active' : ''}" type="button" data-reading-day="${index}"><b>${day}</b><strong>${reference}</strong><span>${label}</span><em>${index === state.readingDay ? 'Lendo agora' : 'Abrir leitura'} ${icon('arrow')}</em></button>`).join('')}</div></section>
+      <section class="devotional-section devotional-questions"><div class="devotional-section-heading"><span>${icon('award')}</span><div><strong>Perguntas para refletir</strong><small>Responda com sinceridade diante de Deus</small></div></div><ol>${daily.questions.map((question) => `<li>${escapeHtml(question)}</li>`).join('')}</ol></section>
       <div class="devotional-practice"><strong>Para praticar hoje</strong><p>${escapeHtml(devotional.practice)}</p></div>
-      <section class="devotional-prayer"><div class="devotional-section-heading"><span>${icon('heart')}</span><div><strong>Oração</strong><small>Converse com Deus</small></div></div><p>${escapeHtml(detail.prayer)}</p></section>
+      <section class="devotional-prayer"><div class="devotional-section-heading"><span>${icon('heart')}</span><div><strong>Oração</strong><small>Converse com Deus</small></div></div><p>${escapeHtml(daily.prayer)}</p></section>
       <section class="devotional-journal"><label for="devotional-note-${devotional.lesson}">${icon('book')} O que Deus falou com você?</label><textarea id="devotional-note-${devotional.lesson}" data-devotional-note data-note-key="${noteKey}" maxlength="1200" placeholder="Escreva uma frase, uma decisão ou um pedido de oração...">${escapeHtml(readDevotionalNote(devotional.lesson))}</textarea><small data-devotional-note-status>Salvo neste aparelho</small></section>
-      <div class="devotional-check"><span>${icon('heart')} <b>Reserve um minuto para conversar com Deus.</b></span><button class="primary-button" type="button" data-open-question>Continuar para a pergunta ${icon('arrow')}</button></div>
+      <div class="devotional-check"><span>${icon('heart')} <b>Reserve um minuto para conversar com Deus.</b></span><button class="primary-button" type="button" data-open-question>${isLastReading ? 'Concluir semana e responder' : `Concluir leitura de ${escapeHtml(reading?.[0] || '')} e continuar`} ${icon('arrow')}</button></div>
     </article>
   `;
   const note = stage.querySelector('[data-devotional-note]');
@@ -336,7 +365,19 @@ function renderDevotional(root, state) {
     writeDevotionalNote(devotional.lesson, note.value);
     noteStatus.textContent = 'Anotação salva neste aparelho';
   });
-  stage.querySelector('[data-open-question]').addEventListener('click', () => renderQuestion(root, state));
+  stage.querySelectorAll('[data-reading-day]').forEach((button) => button.addEventListener('click', () => {
+    state.readingDay = Number(button.dataset.readingDay);
+    renderDevotional(root, state);
+  }));
+  loadFullChapter(stage.querySelector('[data-full-chapter]'), reading);
+  stage.querySelector('[data-open-question]').addEventListener('click', () => {
+    if (!isLastReading) {
+      state.readingDay += 1;
+      renderDevotional(root, state);
+      return;
+    }
+    renderQuestion(root, state);
+  });
 }
 
 function renderQuestion(root, state) {
@@ -374,6 +415,7 @@ function renderQuestion(root, state) {
     }
     state.position += 1;
     state.index = state.availableIndexes[state.position];
+    state.readingDay = 0;
     state.selected = null;
     renderDevotional(root, state);
   });
