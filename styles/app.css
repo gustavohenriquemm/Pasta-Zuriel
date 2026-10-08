@@ -5347,6 +5347,16 @@ body {
 .lesson-reader-sections { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .lesson-application { border-color: rgba(100, 135, 82, .25); background: #edf2e7; }
 .lesson-application h2 { color: #526d45; }
+.lesson-verse { border-color: rgba(154, 106, 53, .2); background: #f7f1df; }
+.lesson-verse h2 { color: #80602f; }
+.lesson-applied-truth { border-color: rgba(100, 135, 82, .25); background: #edf2e7; }
+.lesson-applied-truth h2 { color: #526d45; }
+.lesson-conclusion { background: #fbf8f1; }
+.lesson-learned { border-color: rgba(61, 104, 156, .2); background: #edf2f8; }
+.lesson-learned h2 { color: #315f8f; }
+.lesson-reader-subsections { display: grid; gap: 14px; margin-top: 18px; padding-left: 16px; border-left: 2px solid rgba(154, 106, 53, .22); }
+.lesson-reader-subsection h3 { margin: 0 0 6px; color: #75452f; font-size: 1rem; line-height: 1.35; }
+.lesson-reader-subsection p { font-size: .95rem; }
 .lesson-reader-source { margin: 20px 0 0; color: #8b6b61; font-size: .78rem; line-height: 1.55; }
 .lesson-reader-locked { padding: 70px 20px; text-align: center; }
 .lesson-reader-locked span { color: #8b6b61; }

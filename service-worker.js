@@ -1,17 +1,17 @@
 const CACHE_PREFIX = 'igreja-zuriel-';
-const CACHE_NAME = `${CACHE_PREFIX}v114`;
+const CACHE_NAME = `${CACHE_PREFIX}v115`;
 const APP_SHELL = [
   '/index.html',
   '/manifest.json',
-  '/css/style.css?v=20261007-1',
-  '/styles/app.css?v=20261007-1',
-  '/js/script.js?v=20261007-1',
-  '/src/app.js?v=20261007-1',
+  '/css/style.css?v=20261007-2',
+  '/styles/app.css?v=20261007-2',
+  '/js/script.js?v=20261007-2',
+  '/src/app.js?v=20261007-2',
   '/src/pages/SundaySchoolPage.js?v=20261007-1',
-  '/src/pages/LessonPage.js?v=20261007-1',
+  '/src/pages/LessonPage.js?v=20261007-2',
   '/src/pages/QuizPage.js?v=20261007-1',
   '/src/data/sundaySchoolLessons.js?v=20261007-1',
-  '/src/data/sundaySchoolContent.js?v=20261002-1',
+  '/src/data/sundaySchoolContent.js?v=20261007-2',
   '/src/components/icons.js?v=20261001-1',
   '/data/hymns/mocidade.seed.json',
   '/src/data/mocidadeOfflineHymns.js?v=20260926-1',
