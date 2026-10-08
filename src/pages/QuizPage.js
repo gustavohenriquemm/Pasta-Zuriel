@@ -1,6 +1,6 @@
 import { icon } from '../components/icons.js?v=20261001-1';
 import { loadPublicQuizScores, saveQuizScore } from '../../database/firestore.js?v=20261001-1';
-import { SUNDAY_SCHOOL_LESSONS, getLessonReleaseDate, isLessonReleased } from '../data/sundaySchoolLessons.js?v=20261002-1';
+import { SUNDAY_SCHOOL_LESSONS, getLessonReleaseDate, isLessonReleased } from '../data/sundaySchoolLessons.js?v=20261007-1';
 import { getBibleBook } from '../services/bibleService.js?v=20261002-1';
 
 export const QUIZ_ID = 'licoes-1-11';

@@ -1,5 +1,5 @@
 import { loadPublicCalendarEvents } from '../../database/firestore.js?v=20260824-7';
-import { SUNDAY_SCHOOL_LESSONS } from '../data/sundaySchoolLessons.js?v=20261002-1';
+import { SUNDAY_SCHOOL_LESSONS } from '../data/sundaySchoolLessons.js?v=20261007-1';
 
 const SUNDAY_EVENTS = [
   {

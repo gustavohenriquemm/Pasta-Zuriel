@@ -1,5 +1,5 @@
 import { icon } from '../components/icons.js?v=20260713-8';
-import { SUNDAY_SCHOOL_LESSONS as lessons, formatLessonReleaseDate, isLessonReleased } from '../data/sundaySchoolLessons.js?v=20261002-1';
+import { SUNDAY_SCHOOL_LESSONS as lessons, formatLessonReleaseDate, isLessonReleased } from '../data/sundaySchoolLessons.js?v=20261007-1';
 
 const NOTE_KEY_PREFIX = 'ebd:2026:4-trimestre:licao:';
 
@@ -13,7 +13,7 @@ export function renderSundaySchool(root, navigate) {
           <p>Fé, tecnologia e propósito — acompanhe a lição e o devocional da semana.</p>
         </div>
       </div>
-      <p class="ebd-devotional-note">O devocional abre na segunda-feira da semana da lição e traz a pergunta da própria aula.</p>
+      <p class="ebd-devotional-note">As 11 lições da revista ficam listadas abaixo. A leitura e o devocional de cada aula são liberados na segunda-feira da semana da lição.</p>
       <p class="private-notes-message">Suas anotações ficam salvas somente neste aparelho e não são compartilhadas.</p>
       <div class="lesson-grid" aria-label="Lista de lições da Escola Bíblica Dominical">
         ${lessons.map((lesson) => renderLesson(lesson)).join('')}
